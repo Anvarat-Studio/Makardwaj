@@ -1,6 +1,9 @@
+using Makardwaj.Characters.Enemy.Base;
+using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 using Makardwaj.Common;
-using Makardwaj.Common.StateMachine;
+using Makardwaj.Common.FiniteStateMachine;
 using Makardwaj.Projectiles.Bubble.Data;
+using Makardwaj.Projectiles.Bubble.States;
 using UnityEngine;
 
 namespace Makardwaj.Projectiles.Bubble
@@ -8,56 +11,61 @@ namespace Makardwaj.Projectiles.Bubble
     public class Bubble : Controller
     {
         [SerializeField] private BubbleData m_data;
-        
-        private StateMachine _stateMachine;
-        private Rigidbody2D _rigidbody;
 
-        public Vector2 CurrentVelocity { get; private set; }
         private Vector2 workspace;
 
         public int FacingDirection { get; set; } = 1;
+        public bool IsDamaged { get; set; }
+        public EnemyController CapturedEnemy { get; private set; }
 
-        private void Awake()
+        private void OnEnable()
         {
-            _rigidbody = GetComponent<Rigidbody2D>();
+            MakardwajController.bubbleCreated?.Invoke();
+        }
 
+        protected override void Awake()
+        {
+            base.Awake();
             InitializeStateMachine();
         }
 
-        private void Update()
+        private void OnDisable()
         {
-            CurrentVelocity = _rigidbody.velocity;
-            _stateMachine.CurrentState?.LogicUpdate();
+            MakardwajController.bubbleDestroyed?.Invoke();
         }
 
         public BubbleMoveState MoveState { get; private set; }
+        public BubbleBurstState BurstState { get; private set; }
 
         private void InitializeStateMachine()
         {
             _stateMachine = new StateMachine();
 
             MoveState = new BubbleMoveState(this, _stateMachine, m_data, "move");
+            BurstState = new BubbleBurstState(this, _stateMachine, m_data, "burst");
 
             _stateMachine.Initialize(MoveState);
         }
 
-        public void SetSpeedZero()
+        public void Initialize(int facingDir)
         {
-            _rigidbody.velocity = Vector2.zero;
+            FacingDirection = facingDir;
         }
 
-        public void SetVelocityX(float xVelocity)
+        public void OnCollisionEnter2D(Collision2D collision)
         {
-            workspace.Set(xVelocity, CurrentVelocity.y);
-            _rigidbody.velocity = workspace;
-            CurrentVelocity = workspace;
+            CapturedEnemy = collision.collider.GetComponent<EnemyController>();
+            if (CapturedEnemy)
+            {
+                CapturedEnemy.Capture(transform);
+            }
+            else
+            {
+                IsDamaged = true;
+            }
         }
 
-        public void SetVelocityY(float yVelocity)
-        {
-            workspace.Set(CurrentVelocity.x, yVelocity);
-            _rigidbody.velocity = workspace;
-            CurrentVelocity = workspace;
-        }
+        private void AnimationFinishTrigger() => _stateMachine.CurrentState.AnimationFinishTrigger();
+        private void AnimationTrigger() => _stateMachine.CurrentState.AnimationTrigger();
     }
 }

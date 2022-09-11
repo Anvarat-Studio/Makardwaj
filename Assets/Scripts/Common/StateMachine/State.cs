@@ -1,6 +1,6 @@
 using UnityEngine;
 
- namespace Makardwaj.Common.StateMachine
+ namespace Makardwaj.Common.FiniteStateMachine
 {
     public class State
     {
@@ -28,7 +28,6 @@ using UnityEngine;
             DoChecks();
             controller.Anim.SetBool(animBoolName, true);
             startTime = Time.time;
-            Debug.Log(animBoolName);
             isAnimationFinished = false;
             isExitingState = false;
         }

@@ -8,10 +8,17 @@ namespace Makardwaj.Characters.Makardwaj.Data
         [Header("Locomotion")]
         public float walkSpeed = 5f;
         public float jumpSpeed = 7f;
-        public int maxBubbleCount = 1;
 
         [Header("Ground Check")]
         public LayerMask groundLayer;
         public float groundCheckRadius = 1f;
+
+        [Header("In Air State")]
+        public int amountOfJumps = 1;
+        public float coyoteTime = 0.2f;
+
+        [Header("Bubble")]
+        public int maxBubbleCount = 1;
+        public int bubblePoolStartingCount = 2;
     }
 }

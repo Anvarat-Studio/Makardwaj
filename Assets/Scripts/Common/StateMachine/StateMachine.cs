@@ -1,7 +1,6 @@
 ﻿using System;
-using Makardwaj.Common.StateMachine;
 
-namespace Makardwaj.Common.StateMachine
+namespace Makardwaj.Common.FiniteStateMachine
 {
     public class StateMachine
     {

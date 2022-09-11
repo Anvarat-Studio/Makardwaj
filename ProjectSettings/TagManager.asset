@@ -14,9 +14,9 @@ TagManager:
   - Wall
   - Player
   - Bubble
-  - 
-  - 
-  - 
+  - BubblePlayer
+  - Enemy
+  - EnemyObstacle
   - 
   - 
   - 
@@ -46,4 +46,16 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 4008655267
+    locked: 0
+  - name: Enemies
+    uniqueID: 3865269141
+    locked: 0
+  - name: Bubble
+    uniqueID: 562933537
+    locked: 0
+  - name: Foreground
+    uniqueID: 2233114411
+    locked: 0
+  - name: UI
+    uniqueID: 4004472943
     locked: 0

@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca912a0f38de54cfd85edfc372b4e56b, type: 3}
   m_Name: BubbleData
   m_EditorClassIdentifier: 
-  movementSpeed: 1
+  movementSpeed: 2
+  highSpeedDuration: 0.5
+  highSpeed: 10

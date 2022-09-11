@@ -1,5 +1,6 @@
 using Makardwaj.Characters.Makardwaj.Data;
 using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
+using UnityEngine;
 
 namespace Makardwaj.Characters.Makardwaj.States
 {
@@ -26,7 +27,7 @@ namespace Makardwaj.Characters.Makardwaj.States
         {
             base.Enter();
 
-            //player.JumpState.ResetAmountOfJumpsLeft();
+            player.JumpState.ResetAmountOfJumpsLeft();
 
             player.SetFriction(1f);
         }
@@ -45,19 +46,18 @@ namespace Makardwaj.Characters.Makardwaj.States
             yInput = player.InputHandler.NormInputY;
             JumpInput = player.InputHandler.JumpInput;
 
-            if (player.InputHandler.PrimaryAttackInput /*&& !isTouchingCeiling*/)
+            if (player.InputHandler.PrimaryAttackInput && player.ShootState.CanShootBubble())
             {
-                //stateMachine.ChangeState(player.PrimaryAttackState);
+                stateMachine.ChangeState(player.ShootState);
             }
-            else if (JumpInput /*&& player.JumpState.CanJump()*/)
+            else if (JumpInput && player.JumpState.CanJump())
             {
-                //if (player.playerCollider.enabled)
-                //    stateMachine.ChangeState(player.JumpState);
+                stateMachine.ChangeState(player.JumpState);
             }
             else if (!isGrounded)
             {
-                //player.InAirState.StartCoyoteTime();
-                //stateMachine.ChangeState(player.InAirState);
+                player.InAirState.StartCoyoteTime();
+                stateMachine.ChangeState(player.InAirState);
             }
         }
 

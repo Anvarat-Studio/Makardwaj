@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b678abecf0bff49e08a47eef153b1a8f, type: 3}
   m_Name: MakardwajData
   m_EditorClassIdentifier: 
-  walkSpeed: 5
-  jumpSpeed: 7
-  maxBubbleCount: 1
+  walkSpeed: 4
+  jumpSpeed: 10
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   groundCheckRadius: 0.5
+  amountOfJumps: 1
+  coyoteTime: 0.2
+  maxBubbleCount: 1
+  bubblePoolStartingCount: 2

@@ -7,6 +7,8 @@ using Makardwaj.Projectiles.Bubble;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Events;
+using Makardwaj.Characters.Enemy.Base;
+using Makardwaj.Collectibles;
 
 namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 {
@@ -60,6 +62,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public Vector2 CurrentVelocity { get; private set; }
         public int FacingDirection { get; private set; }
         public int CurrentActiveBubbles { get; set; } = 0;
+        public bool IsDead { get; set; }
 
         private Vector2 workspace;
         #endregion
@@ -102,6 +105,21 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         {
             _stateMachine.CurrentState?.PhysicsUpdate();
         }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        { 
+            if (collision.collider.GetComponent<EnemyController>())
+            {
+                IsDead = true;
+            }else
+            {
+                var collectible = collision.collider.GetComponent<Collectible>();
+                if (collectible)
+                {
+                    Destroy(collectible.gameObject, 0);
+                }
+            }
+        }
         #endregion
 
         #region StateMachine
@@ -111,6 +129,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public MakarInAirState InAirState { get; private set; }
         public MakarJumpState JumpState { get; set; }
         public MakarShootState ShootState { get; set; }
+        public MakarDeadState DeadState { get; set; }
 
         private void SetupStateMachine()
         {
@@ -122,6 +141,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             InAirState = new MakarInAirState(this, _stateMachine, m_data, "inAir");
             JumpState = new MakarJumpState(this, _stateMachine, m_data, "inAir");
             ShootState = new MakarShootState(this, _stateMachine, m_data, "shoot");
+            DeadState = new MakarDeadState(this, _stateMachine, m_data, "dead");
 
             _stateMachine.Initialize(IdleState);
         }
@@ -192,6 +212,16 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
                 _collider.enabled = false;
                 _collider.enabled = true;
             }
+        }
+
+        public void SetStatic()
+        {
+            _rigidbody.bodyType = RigidbodyType2D.Static;
+        }
+
+        public void SetDynamic()
+        {
+            _rigidbody.bodyType = RigidbodyType2D.Dynamic;
         }
 
         private void Flip()

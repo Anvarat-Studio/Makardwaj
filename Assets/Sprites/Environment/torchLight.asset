@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: torchLight
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 1970795096, guid: 84c2966628082824595beb588cdfccca, type: 3}
-  - {fileID: -1817322488, guid: 84c2966628082824595beb588cdfccca, type: 3}
-  - {fileID: 947315746, guid: 84c2966628082824595beb588cdfccca, type: 3}
-  - {fileID: -1723545850, guid: 84c2966628082824595beb588cdfccca, type: 3}
-  - {fileID: -2070474543, guid: 84c2966628082824595beb588cdfccca, type: 3}
-  m_MinSpeed: 12
+  - {fileID: -550436913, guid: 17d154124aa92db43ab609a6236bb19a, type: 3}
+  - {fileID: 929315322, guid: 17d154124aa92db43ab609a6236bb19a, type: 3}
+  - {fileID: 1403195578, guid: 17d154124aa92db43ab609a6236bb19a, type: 3}
+  - {fileID: 1060385993, guid: 17d154124aa92db43ab609a6236bb19a, type: 3}
+  - {fileID: -912150172, guid: 17d154124aa92db43ab609a6236bb19a, type: 3}
+  m_MinSpeed: 8
   m_MaxSpeed: 12
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0

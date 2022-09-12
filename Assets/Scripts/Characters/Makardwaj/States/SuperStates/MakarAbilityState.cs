@@ -30,6 +30,11 @@ namespace Makardwaj.Characters.Makardwaj.States
         {
             base.LogicUpdate();
 
+            if(player.IsDead)
+            {
+                    stateMachine.ChangeState(player.DeadState);
+            }
+
             if (isAbilityDone)
             {
                 if (dontSwitchToAnotherState)

@@ -9,5 +9,6 @@ namespace Makardwaj.Projectiles.Bubble.Data
         [Header("Bubble")]
         public float highSpeedDuration = 1f;
         public float highSpeed = 10f;
+        public float burstTimeWithEnemyCaptured = 5f;
     }
 }

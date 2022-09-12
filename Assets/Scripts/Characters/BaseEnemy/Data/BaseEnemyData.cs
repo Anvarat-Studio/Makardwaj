@@ -6,4 +6,6 @@ public class BaseEnemyData : BaseData
 {
     public LayerMask enemyObstacleLayerMask;
     public float visionDistance = 1f;
+    public LayerMask groundLayer;
+    public float groundCheckRadius = 1f;
 }

@@ -55,6 +55,9 @@ namespace Makardwaj.Projectiles.Bubble.States
                 if (bubbleController.IsDamaged)
                 {
                     stateMachine.ChangeState(bubbleController.BurstState);
+                }else if (bubbleController.CapturedEnemy)
+                {
+                    stateMachine.ChangeState(bubbleController.CaptureState);
                 }
             }
         }

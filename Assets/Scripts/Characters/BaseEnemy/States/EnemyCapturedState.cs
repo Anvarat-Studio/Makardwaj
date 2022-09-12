@@ -1,8 +1,5 @@
 using Makardwaj.Common;
 using Makardwaj.Common.FiniteStateMachine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Makardwaj.Characters.Enemy.States
 {
@@ -15,6 +12,14 @@ namespace Makardwaj.Characters.Enemy.States
         public override void LogicUpdate()
         {
             base.LogicUpdate();
+
+            if (!isExitingState)
+            {
+                if (!_enemyController.IsCaptured)
+                {
+                    stateMachine.ChangeState(_enemyController.PatrolState);
+                }
+            }
         }
     }
 }

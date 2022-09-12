@@ -45,12 +45,15 @@ namespace Makardwaj.Characters.Makardwaj.States
             xInput = player.InputHandler.NormInputX;
             yInput = player.InputHandler.NormInputY;
             JumpInput = player.InputHandler.JumpInput;
-
-            if (player.InputHandler.PrimaryAttackInput && player.ShootState.CanShootBubble())
+            if (player.IsDead)
+            {
+                stateMachine.ChangeState(player.DeadState);
+            }
+            else if (player.InputHandler.PrimaryAttackInput && player.ShootState.CanShootBubble())
             {
                 stateMachine.ChangeState(player.ShootState);
             }
-            else if (JumpInput && player.JumpState.CanJump())
+            else if (JumpInput && player.JumpState.CanJump() && isGrounded)
             {
                 stateMachine.ChangeState(player.JumpState);
             }

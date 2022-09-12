@@ -42,10 +42,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 
         public virtual void LogicUpdate()
         {
-            //if (player.health.isDead && player.StateMachine.CurrentState != player.DeathState)
-            //{
-            //    player.StateMachine.ChangeState(player.DeathState);
-            //}
+            
         }
 
         public virtual void PhysicsUpdate()

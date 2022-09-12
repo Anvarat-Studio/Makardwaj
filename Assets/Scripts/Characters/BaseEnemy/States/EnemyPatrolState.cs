@@ -1,5 +1,6 @@
 using Makardwaj.Common;
 using Makardwaj.Common.FiniteStateMachine;
+using UnityEngine;
 
 namespace Makardwaj.Characters.Enemy.States
 {
@@ -23,6 +24,7 @@ namespace Makardwaj.Characters.Enemy.States
             {
                 _enemyController.SetSpeedZero();
                 _enemyController.Flip();
+                Debug.Log("Flipped");
             }
             _enemyController.SetVelocityX(_enemyController.FacingDirection * _baseEnemyData.movementSpeed);
 
@@ -31,6 +33,9 @@ namespace Makardwaj.Characters.Enemy.States
                 if (_enemyController.IsCaptured)
                 {
                     stateMachine.ChangeState(_enemyController.CapturedState);
+                }else if (!_isGrounded)
+                {
+                    stateMachine.ChangeState(_enemyController.InAirState);
                 }
             }
         }

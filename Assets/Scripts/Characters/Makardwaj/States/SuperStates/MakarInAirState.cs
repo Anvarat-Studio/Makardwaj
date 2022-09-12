@@ -40,8 +40,11 @@ namespace Makardwaj.Characters.Makardwaj.States.SuperStates
 
 
             CheckJumpMultiplier();
-
-            if (player.InputHandler.PrimaryAttackInput && player.ShootState.CanShootBubble())
+            if (player.IsDead)
+            {
+                stateMachine.ChangeState(player.DeadState);
+            }
+            else if (player.InputHandler.PrimaryAttackInput && player.ShootState.CanShootBubble())
             {
                 stateMachine.ChangeState(player.ShootState);
             }
@@ -49,7 +52,7 @@ namespace Makardwaj.Characters.Makardwaj.States.SuperStates
             {
                 stateMachine.ChangeState(player.IdleState);
             }
-            else if (jumpInput && player.JumpState.CanJump())
+            else if (jumpInput && player.JumpState.CanJump() && isGrounded)
             {
                 stateMachine.ChangeState(player.JumpState);
             }else

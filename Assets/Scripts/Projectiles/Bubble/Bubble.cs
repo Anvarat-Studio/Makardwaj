@@ -36,6 +36,7 @@ namespace Makardwaj.Projectiles.Bubble
 
         public BubbleMoveState MoveState { get; private set; }
         public BubbleBurstState BurstState { get; private set; }
+        public BubbleCaptureState CaptureState { get; private set; }
 
         private void InitializeStateMachine()
         {
@@ -43,6 +44,7 @@ namespace Makardwaj.Projectiles.Bubble
 
             MoveState = new BubbleMoveState(this, _stateMachine, m_data, "move");
             BurstState = new BubbleBurstState(this, _stateMachine, m_data, "burst");
+            CaptureState = new BubbleCaptureState(this, _stateMachine, m_data, "move");
 
             _stateMachine.Initialize(MoveState);
         }
@@ -54,7 +56,13 @@ namespace Makardwaj.Projectiles.Bubble
 
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            CapturedEnemy = collision.collider.GetComponent<EnemyController>();
+            if (collision.collider.GetComponent<MakardwajController>())
+            {
+                IsDamaged = true;
+            }
+
+            if (!CapturedEnemy)
+                CapturedEnemy = collision.collider.GetComponent<EnemyController>();
             if (CapturedEnemy)
             {
                 CapturedEnemy.Capture(transform);
@@ -63,6 +71,13 @@ namespace Makardwaj.Projectiles.Bubble
             {
                 IsDamaged = true;
             }
+        }
+
+        public void SetCapturedEnemyFree()
+        {
+            IsDamaged = true;
+            CapturedEnemy.SetFree();
+            CapturedEnemy = null;
         }
 
         private void AnimationFinishTrigger() => _stateMachine.CurrentState.AnimationFinishTrigger();

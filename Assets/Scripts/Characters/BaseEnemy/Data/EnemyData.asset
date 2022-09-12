@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af487ecfc5b1cc04f9d184a2d0d33e50, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
-  movementSpeed: 3
+  movementSpeed: 2
   enemyObstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 2112
   visionDistance: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundCheckRadius: 0.51

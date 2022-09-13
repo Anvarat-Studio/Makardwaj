@@ -1,3 +1,4 @@
+using CCS.SoundPlayer;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,5 +8,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = m_targetFrameRate;
+    }
+
+    private void Start()
+    {
+        SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
     }
 }

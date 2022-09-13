@@ -15,7 +15,7 @@ MonoBehaviour:
   movementSpeed: 2
   enemyObstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 2112
+    m_Bits: 3136
   visionDistance: 0.2
   groundLayer:
     serializedVersion: 2

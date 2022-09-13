@@ -12,7 +12,7 @@ namespace Makardwaj.Characters.Makardwaj.States
         private bool JumpInput;
         private bool isGrounded;
 
-        public MakarGroundedState(MakardwajController player, PlayerStateMachine stateMachine, MakardwajData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+        public MakarGroundedState(MakardwajController player, PlayerStateMachine stateMachine, MakardwajData playerData, string animBoolName, string sfxName) : base(player, stateMachine, playerData, animBoolName, sfxName)
         {
         }
 

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c6c32ae972f940efba6ebf791cd3b58, type: 3}
+  m_Name: sfxCollection
+  m_EditorClassIdentifier: 
+  audioCollection:
+  - assetName: jump
+    asset: {fileID: 8300000, guid: 179af428b842947b98335dce32850d29, type: 3}
+  - assetName: shoot
+    asset: {fileID: 8300000, guid: 7496567e4fd0b42399ad311b5d68bffe, type: 3}
+  - assetName: bubblePop
+    asset: {fileID: 8300000, guid: 8e0171c157f2f45cc8c963dc24461aa8, type: 3}
+  - assetName: die
+    asset: {fileID: 8300000, guid: a683d964cdd55474e840fbfe3d1c030e, type: 3}
+  - assetName: collect
+    asset: {fileID: 8300000, guid: 538fa87a1790545358cfe1b3439d089a, type: 3}
+  - assetName: enemyCapture
+    asset: {fileID: 8300000, guid: 179af428b842947b98335dce32850d29, type: 3}
+  - assetName: bubbleBurst
+    asset: {fileID: 8300000, guid: 8e0171c157f2f45cc8c963dc24461aa8, type: 3}

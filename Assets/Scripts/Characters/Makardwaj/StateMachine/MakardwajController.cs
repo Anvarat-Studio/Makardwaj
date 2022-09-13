@@ -9,6 +9,7 @@ using System.Linq;
 using UnityEngine.Events;
 using Makardwaj.Characters.Enemy.Base;
 using Makardwaj.Collectibles;
+using CCS.SoundPlayer;
 
 namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 {
@@ -117,6 +118,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
                 if (collectible)
                 {
                     Destroy(collectible.gameObject, 0);
+                    SoundManager.Instance.PlaySFX(MixerPlayer.Movement, "collect", 1, false);
                 }
             }
         }
@@ -136,12 +138,12 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             _stateMachine = new PlayerStateMachine();
 
 
-            IdleState = new MakarIdleState(this, _stateMachine, m_data, "idle");
-            MoveState = new MakarMoveState(this, _stateMachine, m_data, "move");
-            InAirState = new MakarInAirState(this, _stateMachine, m_data, "inAir");
-            JumpState = new MakarJumpState(this, _stateMachine, m_data, "inAir");
-            ShootState = new MakarShootState(this, _stateMachine, m_data, "shoot");
-            DeadState = new MakarDeadState(this, _stateMachine, m_data, "dead");
+            IdleState = new MakarIdleState(this, _stateMachine, m_data, "idle", "");
+            MoveState = new MakarMoveState(this, _stateMachine, m_data, "move", "");
+            InAirState = new MakarInAirState(this, _stateMachine, m_data, "inAir", "");
+            JumpState = new MakarJumpState(this, _stateMachine, m_data, "inAir", "jump");
+            ShootState = new MakarShootState(this, _stateMachine, m_data, "shoot", "shoot");
+            DeadState = new MakarDeadState(this, _stateMachine, m_data, "dead", "die");
 
             _stateMachine.Initialize(IdleState);
         }

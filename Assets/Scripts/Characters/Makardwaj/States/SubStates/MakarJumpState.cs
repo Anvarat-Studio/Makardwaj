@@ -8,7 +8,7 @@ namespace Makardwaj.Characters.Makardwaj.States
     {
         private int amountOfJumpsLeft;
 
-        public MakarJumpState(MakardwajController player, PlayerStateMachine stateMachine, MakardwajData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+        public MakarJumpState(MakardwajController player, PlayerStateMachine stateMachine, MakardwajData playerData, string animBoolName, string sfxName) : base(player, stateMachine, playerData, animBoolName, sfxName)
         {
         }
 

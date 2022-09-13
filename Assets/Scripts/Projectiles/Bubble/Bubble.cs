@@ -43,8 +43,8 @@ namespace Makardwaj.Projectiles.Bubble
             _stateMachine = new StateMachine();
 
             MoveState = new BubbleMoveState(this, _stateMachine, m_data, "move");
-            BurstState = new BubbleBurstState(this, _stateMachine, m_data, "burst");
-            CaptureState = new BubbleCaptureState(this, _stateMachine, m_data, "move");
+            BurstState = new BubbleBurstState(this, _stateMachine, m_data, "burst", "bubbleBurst");
+            CaptureState = new BubbleCaptureState(this, _stateMachine, m_data, "move", "enemyCapture");
 
             _stateMachine.Initialize(MoveState);
         }

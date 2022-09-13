@@ -12,7 +12,7 @@ namespace Makardwaj.Projectiles.Bubble.States
         private Vector3 bubblePos;
         private float enemyCaptureTime;
 
-        public BubbleCaptureState(Controller controller, StateMachine stateMachine, BaseData playerData, string animBoolName) : base(controller, stateMachine, playerData, animBoolName)
+        public BubbleCaptureState(Controller controller, StateMachine stateMachine, BaseData playerData, string animBoolName, string sfxName) : base(controller, stateMachine, playerData, animBoolName, sfxName)
         {
             bubbleData = playerData as BubbleData;
             bubbleController = controller as Bubble;

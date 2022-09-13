@@ -16,7 +16,7 @@ namespace Makardwaj.Characters.Makardwaj.States.SuperStates
         private bool coyoteTime;
         private bool isJumping;
 
-        public MakarInAirState(MakardwajController player, PlayerStateMachine stateMachine, MakardwajData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+        public MakarInAirState(MakardwajController player, PlayerStateMachine stateMachine, MakardwajData playerData, string animBoolName, string sfxName) : base(player, stateMachine, playerData, animBoolName, sfxName)
         {
         }
 

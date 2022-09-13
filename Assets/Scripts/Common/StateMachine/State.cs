@@ -1,3 +1,4 @@
+using CCS.SoundPlayer;
 using UnityEngine;
 
  namespace Makardwaj.Common.FiniteStateMachine
@@ -14,19 +15,25 @@ using UnityEngine;
         protected float startTime;
 
         protected string animBoolName;
+        protected string sfxName;
 
-        public State(Controller controller, StateMachine stateMachine, BaseData playerData, string animBoolName)
+        public State(Controller controller, StateMachine stateMachine, BaseData playerData, string animBoolName, string sfxName = "")
         {
             this.controller = controller;
             this.stateMachine = stateMachine;
             this.playerData = playerData;
             this.animBoolName = animBoolName;
+            this.sfxName = sfxName;
         }
 
         public virtual void Enter()
         {
             DoChecks();
             controller.Anim.SetBool(animBoolName, true);
+            if (!string.IsNullOrEmpty(sfxName))
+            {
+                SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, sfxName, 1, false);
+            }
             startTime = Time.time;
             isAnimationFinished = false;
             isExitingState = false;

@@ -5,7 +5,7 @@ namespace Makardwaj.Characters.Makardwaj.States
 {
     public class MakarShootState : MakarAbilityState
     {
-        public MakarShootState(MakardwajController player, PlayerStateMachine stateMachine, MakardwajData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+        public MakarShootState(MakardwajController player, PlayerStateMachine stateMachine, MakardwajData playerData, string animBoolName, string sfxName) : base(player, stateMachine, playerData, animBoolName, sfxName)
         {
         }
 

@@ -7,7 +7,7 @@ namespace Makardwaj.Projectiles.Bubble.States
     {
         protected Bubble bubbleController;
 
-        public BubbleBurstState(Controller controller, StateMachine stateMachine, BaseData playerData, string animBoolName) : base(controller, stateMachine, playerData, animBoolName)
+        public BubbleBurstState(Controller controller, StateMachine stateMachine, BaseData playerData, string animBoolName, string sfxName) : base(controller, stateMachine, playerData, animBoolName, sfxName)
         {
             bubbleController = controller as Bubble;
         }

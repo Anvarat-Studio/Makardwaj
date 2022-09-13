@@ -24,7 +24,6 @@ namespace Makardwaj.Characters.Enemy.States
             {
                 _enemyController.SetSpeedZero();
                 _enemyController.Flip();
-                Debug.Log("Flipped");
             }
             _enemyController.SetVelocityX(_enemyController.FacingDirection * _baseEnemyData.movementSpeed);
 

@@ -21,7 +21,6 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         [SerializeField] private Transform m_groundCheck;
         [SerializeField] private Transform m_mouthPosition;
         [SerializeField] private Bubble m_bubblePrefab;
-        [SerializeField] private Transform m_bubbleParent;
         #endregion
 
         #region PrivateFields
@@ -64,6 +63,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public int FacingDirection { get; private set; }
         public int CurrentActiveBubbles { get; set; } = 0;
         public bool IsDead { get; set; }
+        public Transform BubbleParent { get; set; }
 
         private Vector2 workspace;
         #endregion
@@ -82,6 +82,10 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             FacingDirection = 1;
 
             SetupStateMachine();
+        }
+
+        private void Start()
+        {
             GenerateBubblePool();
         }
 
@@ -276,7 +280,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 
         private Bubble AddNewBubble()
         {
-            var bubble = Instantiate(m_bubblePrefab, m_bubbleParent);
+            var bubble = Instantiate(m_bubblePrefab, BubbleParent);
             bubble?.gameObject.SetActive(false);
             _bubblePool.Add(bubble);
             return bubble;

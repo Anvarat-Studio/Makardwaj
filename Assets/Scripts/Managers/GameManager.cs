@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int m_targetFrameRate = 120;
     [SerializeField] private GameData m_gameData;
     [SerializeField] private Transform m_playerStartPosition;
+    [SerializeField] private Transform m_bubbleParent;
 
     private MakardwajController m_player;
     private int _remainingLives;
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
     private void StartGame()
     {
         m_player = Instantiate(m_gameData.player, m_playerStartPosition.position, Quaternion.identity);
+        m_player.BubbleParent = m_bubbleParent;
         GameStart?.Invoke(_remainingLives);
         m_player.lifeLost += OnPlayerLifeLost;
     }

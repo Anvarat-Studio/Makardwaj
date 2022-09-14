@@ -71,6 +71,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         #region UnityActions
         public static UnityAction bubbleCreated;
         public static UnityAction bubbleDestroyed;
+        public UnityAction lifeLost;
         #endregion
 
         #region UnityBuiltInMethods
@@ -108,10 +109,15 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
-        { 
+        {
+            if (IsDead)
+            {
+                return;
+            }
             if (collision.collider.GetComponent<EnemyController>())
             {
                 IsDead = true;
+                lifeLost?.Invoke();
             }else
             {
                 var collectible = collision.collider.GetComponent<Collectible>();
@@ -232,6 +238,12 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             transform.Rotate(0.0f, 180.0f, 0.0f);
         }
         #endregion
+
+        public void RespawnAt(Vector3 position)
+        {
+            transform.position = position;
+            IsDead = false;
+        }
 
         #region BubblePool
         private void GenerateBubblePool()

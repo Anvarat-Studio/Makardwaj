@@ -16,7 +16,7 @@ MonoBehaviour:
   jumpSpeed: 10
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   groundCheckRadius: 0.5
   amountOfJumps: 1
   coyoteTime: 0.2

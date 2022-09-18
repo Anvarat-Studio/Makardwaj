@@ -49,15 +49,15 @@ namespace Makardwaj.Projectiles.Bubble.States
             {
                 if(Time.time - enemyCaptureTime > bubbleData.burstTimeWithEnemyCaptured)
                 {
-                    bubbleController.SetCapturedEnemyFree();
-                    stateMachine.ChangeState(bubbleController.BurstState);
+                    if(bubblePos.y < bubbleData.maxYPosition && bubblePos.y > bubbleData.minYPosition)
+                    {
+                        bubbleController.SetCapturedEnemyFree();
+                        stateMachine.ChangeState(bubbleController.BurstState);
+                    }
                 }
                 else if (bubbleController.IsDamaged)
                 {
-                    //if (bubbleController.CapturedEnemy)
-                    {
-                        bubbleController.CapturedEnemy.Die();
-                    }
+                    bubbleController.CapturedEnemy.Die();
                     stateMachine.ChangeState(bubbleController.BurstState);
                 }
             }

@@ -11,7 +11,8 @@ namespace Makardwaj.Characters.Enemy.Base
         [SerializeField] private BaseEnemyData m_enemyData;
         [SerializeField] private Transform m_eyePosition;
         [SerializeField] private Transform m_groundCheck;
-        [SerializeField] private Collectible m_collectible;
+
+        private CollectibleFactory _collectibleFactory;
 
         public int FacingDirection { get; private set; }
         public bool IsCaptured { get; private set; }
@@ -20,6 +21,7 @@ namespace Makardwaj.Characters.Enemy.Base
         {
             base.Awake();
             FacingDirection = 1;
+            _collectibleFactory = FindObjectOfType<CollectibleFactory>();
             InitializeStateMachine();
         }
 
@@ -75,7 +77,7 @@ namespace Makardwaj.Characters.Enemy.Base
 
         public void Die()
         {
-            Instantiate(m_collectible).transform.position = transform.position;
+            _collectibleFactory.Instantiate(transform.position, Quaternion.identity);
             Destroy(gameObject, 0);
         }
 

@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     public static UnityAction GameEnd;
     public static UnityAction<int> PlayerLiveLost;
     public static UnityAction PlayerRespawn;
+    public static UnityAction<int> collectibleCollected;
+
+    public static int Score { get; set; }
 
 
     private void Awake()

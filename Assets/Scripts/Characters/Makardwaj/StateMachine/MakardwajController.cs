@@ -127,9 +127,26 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
                 var collectible = collision.collider.GetComponent<Collectible>();
                 if (collectible)
                 {
-                    Destroy(collectible.gameObject, 0);
+                    //Destroy(collectible.gameObject, 0);
+                    collectible.Collect();
                     SoundManager.Instance.PlaySFX(MixerPlayer.Movement, "collect", 1, false);
                 }
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (IsDead)
+            {
+                return;
+            }
+
+            var collectible = collision.GetComponent<Collectible>();
+            if (collectible)
+            {
+                //Destroy(collectible.gameObject, 0);
+                collectible.Collect();
+                SoundManager.Instance.PlaySFX(MixerPlayer.Movement, "collect", 1, false);
             }
         }
         #endregion

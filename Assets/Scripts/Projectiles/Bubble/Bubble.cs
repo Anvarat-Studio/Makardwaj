@@ -80,6 +80,11 @@ namespace Makardwaj.Projectiles.Bubble
             CapturedEnemy = null;
         }
 
+        public void ResetCapturedEnemy()
+        {
+            CapturedEnemy = null;
+        }
+
         private void AnimationFinishTrigger() => _stateMachine.CurrentState.AnimationFinishTrigger();
         private void AnimationTrigger() => _stateMachine.CurrentState.AnimationTrigger();
     }

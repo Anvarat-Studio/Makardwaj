@@ -18,6 +18,9 @@ namespace Makardwaj.Characters.Enemy.States
                 if (!_enemyController.IsCaptured)
                 {
                     stateMachine.ChangeState(_enemyController.PatrolState);
+                }else if (_enemyController.IsDead)
+                {
+                    stateMachine.ChangeState(_enemyController.DeadState);
                 }
             }
         }

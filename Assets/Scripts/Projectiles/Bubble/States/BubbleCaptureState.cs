@@ -57,7 +57,8 @@ namespace Makardwaj.Projectiles.Bubble.States
                 }
                 else if (bubbleController.IsDamaged)
                 {
-                    bubbleController.CapturedEnemy.Die();
+                    bubbleController.CapturedEnemy.SpawnBody();
+                    bubbleController.ResetCapturedEnemy();
                     stateMachine.ChangeState(bubbleController.BurstState);
                 }
             }

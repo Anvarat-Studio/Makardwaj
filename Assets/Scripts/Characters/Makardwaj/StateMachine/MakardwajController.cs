@@ -214,6 +214,10 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 
         public void SetVelocity(float velocity, Vector2 direction)
         {
+            if (_rigidbody.bodyType != RigidbodyType2D.Dynamic)
+            {
+                return;
+            }
             workspace = direction * velocity;
             _rigidbody.velocity = workspace;
             CurrentVelocity = workspace;
@@ -221,6 +225,10 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 
         public void SetVelocityX(float velocity)
         {
+            if(_rigidbody.bodyType != RigidbodyType2D.Dynamic)
+            {
+                return;
+            }
             workspace.Set(velocity, CurrentVelocity.y);
             _rigidbody.velocity = workspace;
             CurrentVelocity = workspace;
@@ -228,6 +236,10 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 
         public void SetVelocityY(float velocity)
         {
+            if (_rigidbody.bodyType != RigidbodyType2D.Dynamic)
+            {
+                return;
+            }
             workspace.Set(CurrentVelocity.x, velocity);
             _rigidbody.velocity = workspace;
             CurrentVelocity = workspace;

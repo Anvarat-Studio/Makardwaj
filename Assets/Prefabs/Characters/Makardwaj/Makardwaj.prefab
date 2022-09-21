@@ -199,14 +199,14 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &7812557466160827627
 MonoBehaviour:
@@ -224,7 +224,6 @@ MonoBehaviour:
   m_groundCheck: {fileID: 7812557465188015486}
   m_mouthPosition: {fileID: 776782350}
   m_bubblePrefab: {fileID: 5707360755860281818, guid: 050290a86a9e84f038d255fca8dd9c43, type: 3}
-  m_bubbleParent: {fileID: 0}
 --- !u!114 &7812557466160827624
 MonoBehaviour:
   m_ObjectHideFlags: 0

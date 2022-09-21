@@ -21,11 +21,17 @@ namespace Makardwaj.Environment
             _portalOpenTimer = new WaitForSeconds(m_portalOpenTime);
         }
 
-        public void SpawnPortal(Vector2 position, Action spawnPlayer)
+        public void SpawnPortalAndClose(Vector2 position, Action spawnPlayer)
         {
             gameObject.SetActive(true);
             transform.position = position;
             ClosePortal(spawnPlayer);
+        }
+
+        public void SpawnPortal(Vector2 position)
+        {
+            transform.position = position;
+            gameObject.SetActive(true);
         }
 
         public void ClosePortal(Action spawnPlayer)

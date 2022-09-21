@@ -91,6 +91,7 @@ namespace Makardwaj.Characters.Enemy.Base
         public void Die()
         {
             _collectibleFactory.Instantiate(transform.position, Quaternion.identity);
+            GameManager.EnemyKilled?.Invoke();
             Destroy(gameObject, 0);
         }
 

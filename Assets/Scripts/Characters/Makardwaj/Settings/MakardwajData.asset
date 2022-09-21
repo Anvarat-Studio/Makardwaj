@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b678abecf0bff49e08a47eef153b1a8f, type: 3}
   m_Name: MakardwajData
   m_EditorClassIdentifier: 
-  walkSpeed: 4
-  jumpSpeed: 10
+  walkSpeed: 6
+  jumpSpeed: 20
   groundLayer:
     serializedVersion: 2
     m_Bits: 320

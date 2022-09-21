@@ -49,6 +49,10 @@ namespace Makardwaj.Characters.Makardwaj.States
             {
                 stateMachine.ChangeState(player.DeadState);
             }
+            else if (player.InputHandler.PrimaryAttackInput && player.CanEnterPortal)
+            {
+                stateMachine.ChangeState(player.EnterPortalState);
+            }
             else if (player.InputHandler.PrimaryAttackInput && player.ShootState.CanShootBubble())
             {
                 stateMachine.ChangeState(player.ShootState);

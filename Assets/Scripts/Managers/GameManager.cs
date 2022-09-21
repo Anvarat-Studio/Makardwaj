@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         _remainingEnemies--;
         if(_remainingEnemies < 1)
         {
-            _portal.SpawnPortal(_portalEndPosition);
+            _portal.SpawnPortal(_portalEndPosition, true);
             AllEnemiesKilled?.Invoke(); 
         }
     }

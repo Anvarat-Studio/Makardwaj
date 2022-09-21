@@ -11,6 +11,8 @@ namespace Makardwaj.Environment
         [SerializeField] private Transform m_playerSpawnMarker;
 
         public Vector2 PlayerSpawnPosition { get => m_playerSpawnMarker.position; }
+        private Collider2D _collider;
+
         private WaitForSeconds _portalOpenTimer;
         private WaitForSeconds _playerSpawnTimer;
         private Coroutine _coroutinePortalClose;
@@ -19,6 +21,7 @@ namespace Makardwaj.Environment
         {
             _playerSpawnTimer = new WaitForSeconds(m_playerSpawnTime);
             _portalOpenTimer = new WaitForSeconds(m_portalOpenTime);
+            _collider = GetComponent<Collider2D>();
         }
 
         public void SpawnPortalAndClose(Vector2 position, Action spawnPlayer)
@@ -28,9 +31,10 @@ namespace Makardwaj.Environment
             ClosePortal(spawnPlayer);
         }
 
-        public void SpawnPortal(Vector2 position)
+        public void SpawnPortal(Vector2 position, bool isEnter = false)
         {
             transform.position = position;
+            _collider.enabled = isEnter;
             gameObject.SetActive(true);
         }
 

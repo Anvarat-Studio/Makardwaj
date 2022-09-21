@@ -10,6 +10,7 @@ using UnityEngine.Events;
 using Makardwaj.Characters.Enemy.Base;
 using Makardwaj.Collectibles;
 using CCS.SoundPlayer;
+using Makardwaj.Environment;
 
 namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 {
@@ -64,6 +65,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public int CurrentActiveBubbles { get; set; } = 0;
         public bool IsDead { get; set; }
         public Transform BubbleParent { get; set; }
+        public bool CanEnterPortal;
 
         private Vector2 workspace;
         #endregion
@@ -148,6 +150,28 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
                 collectible.Collect();
                 SoundManager.Instance.PlaySFX(MixerPlayer.Movement, "collect", 1, false);
             }
+            else
+            {
+                var portal = collision.GetComponent<Portal>();
+                if (portal)
+                {
+                    CanEnterPortal = true;
+                }
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (IsDead)
+            {
+                return;
+            }
+
+            var portal = collision.GetComponent<Portal>();
+            if (portal)
+            {
+                CanEnterPortal = false;
+            }
         }
         #endregion
 
@@ -156,9 +180,11 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public MakarIdleState IdleState { get; private set; }
         public MakarMoveState MoveState { get; private set; }
         public MakarInAirState InAirState { get; private set; }
-        public MakarJumpState JumpState { get; set; }
-        public MakarShootState ShootState { get; set; }
-        public MakarDeadState DeadState { get; set; }
+        public MakarJumpState JumpState { get; private set; }
+        public MakarShootState ShootState { get; private set; }
+        public MakarDeadState DeadState { get; private set; }
+        public MakarEnterPortalState EnterPortalState { get; private set; }
+        public MakarExitPortalState ExitPortalState { get; private set; }
 
         private void SetupStateMachine()
         {
@@ -171,6 +197,8 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             JumpState = new MakarJumpState(this, _stateMachine, m_data, "inAir", "jump");
             ShootState = new MakarShootState(this, _stateMachine, m_data, "shoot", "shoot");
             DeadState = new MakarDeadState(this, _stateMachine, m_data, "dead", "die");
+            EnterPortalState = new MakarEnterPortalState(this, _stateMachine, m_data, "enterPortal", "");
+            ExitPortalState = new MakarExitPortalState(this, _stateMachine, m_data, "exitPortal", "");
 
             _stateMachine.Initialize(IdleState);
         }

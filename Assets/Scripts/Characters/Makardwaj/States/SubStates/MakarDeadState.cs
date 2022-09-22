@@ -12,7 +12,6 @@ namespace Makardwaj.Characters.Makardwaj.States
         public override void Enter()
         {
             base.Enter();
-            //player.SetStatic();
         }
 
         public override void Exit()
@@ -30,7 +29,6 @@ namespace Makardwaj.Characters.Makardwaj.States
             {
                 if (!player.IsDead)
                 {
-                    //player.SetDynamic();
                     stateMachine.ChangeState(player.IdleState);
                 }
             }

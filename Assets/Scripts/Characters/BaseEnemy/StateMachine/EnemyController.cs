@@ -2,6 +2,7 @@ using Makardwaj.Characters.Enemy.States;
 using Makardwaj.Collectibles;
 using Makardwaj.Common;
 using Makardwaj.Common.FiniteStateMachine;
+using Makardwaj.Managers;
 using UnityEngine;
 
 namespace Makardwaj.Characters.Enemy.Base
@@ -91,7 +92,7 @@ namespace Makardwaj.Characters.Enemy.Base
         public void Die()
         {
             _collectibleFactory.Instantiate(transform.position, Quaternion.identity);
-            GameManager.EnemyKilled?.Invoke();
+            EventHandler.EnemyKilled?.Invoke();
             Destroy(gameObject, 0);
         }
 

@@ -11,6 +11,7 @@ namespace Makardwaj.Characters.Makardwaj.States
 
         public override void LogicUpdate()
         {
+            player.SetVelocityZero();
             base.LogicUpdate();
         }
     }

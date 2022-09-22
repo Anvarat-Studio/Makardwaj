@@ -5,8 +5,8 @@ using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 using Makardwaj.Data;
 using Makardwaj.Environment;
 using Makardwaj.Levels;
+using Makardwaj.Managers;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,14 +28,6 @@ public class GameManager : MonoBehaviour
     private Vector2 _portalEndPosition;
     private Vector2 _playerSpawnPosition;
 
-    public static UnityAction<int> GameStart;
-    public static UnityAction GameEnd;
-    public static UnityAction<int> PlayerLiveLost;
-    public static UnityAction PlayerRespawn;
-    public static UnityAction<int> collectibleCollected;
-    public static UnityAction EnemyKilled;
-    public static UnityAction AllEnemiesKilled;
-
     public static int Score { get; set; }
 
 
@@ -53,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EnemyKilled += OnEnemyKilled;
+        EventHandler.EnemyKilled += OnEnemyKilled;
     }
 
     private void Start()
@@ -66,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        EnemyKilled -= OnEnemyKilled;
+        EventHandler.EnemyKilled -= OnEnemyKilled;
         m_player.lifeLost -= OnPlayerLifeLost;
     }
 
@@ -82,17 +74,17 @@ public class GameManager : MonoBehaviour
     {
         m_player = Instantiate(m_gameData.player, _playerSpawnPosition, Quaternion.identity);
         m_player.BubbleParent = m_bubbleParent;
-        GameStart?.Invoke(_remainingLives);
+        EventHandler.GameStart?.Invoke(_remainingLives);
         m_player.lifeLost += OnPlayerLifeLost;
     }
 
     private void OnPlayerLifeLost()
     {
         _remainingLives--;
-        PlayerLiveLost?.Invoke(_remainingLives);
+        EventHandler.PlayerLiveLost?.Invoke(_remainingLives);
         if (_remainingLives <= 0)
         {
-            GameEnd?.Invoke();
+            EventHandler.GameEnd?.Invoke();
         }
         else
         {
@@ -107,7 +99,7 @@ public class GameManager : MonoBehaviour
         if(_remainingEnemies < 1)
         {
             _portal.SpawnPortal(_portalEndPosition, true);
-            AllEnemiesKilled?.Invoke(); 
+            EventHandler.AllEnemiesKilled?.Invoke(); 
         }
     }
 
@@ -125,6 +117,6 @@ public class GameManager : MonoBehaviour
     {
         yield return _respawnTime;
         m_player.RespawnAt(_playerSpawnPosition);
-        PlayerRespawn?.Invoke();
+        EventHandler.PlayerRespawn?.Invoke();
     }
 }

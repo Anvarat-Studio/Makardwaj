@@ -1,3 +1,4 @@
+using Makardwaj.Managers;
 using Makardwaj.UI;
 using UnityEngine;
 
@@ -40,7 +41,7 @@ namespace Makardwaj.Collectibles
                 SetActive(false);
                 m_animation.gameObject.SetActive(true);
                 GameManager.Score += m_points;
-                GameManager.collectibleCollected?.Invoke(GameManager.Score);
+                EventHandler.collectibleCollected?.Invoke(GameManager.Score);
             }
         }
 

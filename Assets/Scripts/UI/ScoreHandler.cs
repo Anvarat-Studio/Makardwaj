@@ -1,3 +1,4 @@
+using Makardwaj.Managers;
 using Makardwaj.UI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class ScoreHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.collectibleCollected += UpdateScore;
+        EventHandler.collectibleCollected += UpdateScore;
     }
 
     // Start is called before the first frame update
@@ -22,7 +23,7 @@ public class ScoreHandler : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.collectibleCollected -= UpdateScore;
+        EventHandler.collectibleCollected -= UpdateScore;
     }
 
     private void UpdateScore(int currentScore)

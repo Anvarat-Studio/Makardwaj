@@ -28,6 +28,7 @@ namespace Makardwaj.Environment
         {
             gameObject.SetActive(true);
             transform.position = position;
+            _collider.enabled = false;
             ClosePortal(spawnPlayer);
         }
 

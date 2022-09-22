@@ -1,3 +1,4 @@
+using Makardwaj.Managers;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,14 +13,14 @@ namespace Makardwaj.UI
 
         private void OnEnable()
         {
-            GameManager.GameStart += OnGameStart;
-            GameManager.PlayerLiveLost += OnLifeLost;
+            EventHandler.GameStart += OnGameStart;
+            EventHandler.PlayerLiveLost += OnLifeLost;
         }
 
         private void OnDisable()
         {
-            GameManager.GameStart -= OnGameStart;
-            GameManager.PlayerLiveLost -= OnLifeLost;
+            EventHandler.GameStart -= OnGameStart;
+            EventHandler.PlayerLiveLost -= OnLifeLost;
         }
 
         private void InstantiateLives(int lives)

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Linq;
 using CCS.SoundPlayer;
 using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 using Makardwaj.Data;
@@ -23,6 +22,7 @@ public class GameManager : MonoBehaviour
     private Coroutine _respawnCoroutine;
     private int _totalEnemies;
     private int _remainingEnemies;
+    private bool _areAllEnemiesDead;
 
     private Vector2 _portalInitialPosition;
     private Vector2 _portalEndPosition;
@@ -50,16 +50,22 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _portal = Instantiate(m_portalPrefab, null);
-        _portal.SpawnPortalAndClose(_portalInitialPosition, StartGame);
-        _playerSpawnPosition = _portal.PlayerSpawnPosition;
+        _portal = Instantiate(m_portalPrefab, _portalInitialPosition, Quaternion.identity);
+        _portal.doorOpened += OnDoorOpen;
+        _portal.doorClosed += OnDoorClose;
+        _playerSpawnPosition = _portal.PlayerPosition;
         _remainingEnemies = _totalEnemies;
+        _portal.OpenAndCloseDoor();
+
+        StartGame();
     }
 
     private void OnDisable()
     {
         EventHandler.EnemyKilled -= OnEnemyKilled;
         m_player.lifeLost -= OnPlayerLifeLost;
+        _portal.doorOpened -= OnDoorOpen;
+        _portal.doorClosed -= OnDoorClose;
     }
 
     private void Initialize()
@@ -76,6 +82,8 @@ public class GameManager : MonoBehaviour
         m_player.BubbleParent = m_bubbleParent;
         EventHandler.GameStart?.Invoke(_remainingLives);
         m_player.lifeLost += OnPlayerLifeLost;
+        m_player.HidePlayer();
+        _areAllEnemiesDead = false;
     }
 
     private void OnPlayerLifeLost()
@@ -98,7 +106,9 @@ public class GameManager : MonoBehaviour
         _remainingEnemies--;
         if(_remainingEnemies < 1)
         {
-            _portal.SpawnPortal(_portalEndPosition, true);
+            _areAllEnemiesDead = true;
+            _portal.Teleport(_portalEndPosition);
+            _portal.OpenDoor();
             EventHandler.AllEnemiesKilled?.Invoke(); 
         }
     }
@@ -116,7 +126,27 @@ public class GameManager : MonoBehaviour
     private IEnumerator IE_RespawnPlayer()
     {
         yield return _respawnTime;
-        m_player.RespawnAt(_playerSpawnPosition);
+        m_player.HidePlayer();
+        m_player.ResetDirection();
+
+        _portal.Teleport(_portalInitialPosition);
+        _portal.OpenAndCloseDoor();
+
         EventHandler.PlayerRespawn?.Invoke();
+    }
+
+    private void OnDoorOpen()
+    {
+        if (!_areAllEnemiesDead)
+        {
+            m_player.ShowPlayer();
+            m_player.RespawnAt(_playerSpawnPosition);
+        }
+        
+    }
+
+    private void OnDoorClose()
+    {
+
     }
 }

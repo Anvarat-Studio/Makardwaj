@@ -1,5 +1,6 @@
 ﻿using Makardwaj.Characters.Makardwaj.Data;
 using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
+using UnityEngine;
 
 namespace Makardwaj.Characters.Makardwaj.States
 {
@@ -7,6 +8,17 @@ namespace Makardwaj.Characters.Makardwaj.States
     {
         public MakarExitPortalState(MakardwajController player, PlayerStateMachine stateMachine, MakardwajData playerData, string animBoolName, string sfxName) : base(player, stateMachine, playerData, animBoolName, sfxName)
         {
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+        }
+
+        public override void AnimationFinishTrigger()
+        {
+            base.AnimationFinishTrigger();
+            isAbilityDone = true;
         }
 
         public override void LogicUpdate()

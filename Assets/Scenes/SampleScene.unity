@@ -434,9 +434,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6165195d2b770f4096790c82ece8c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_prefab: {fileID: 8294994825400297358, guid: f4e715d4f20234b4caec1608796841e9, type: 3}
-  m_poolParent: {fileID: 51168559}
-  m_initialPoolCount: 2
+  m_collectibles:
+  - {fileID: 11400000, guid: 8f4ea94aee0066e428fa1cbfb4e1b5ff, type: 2}
+  - {fileID: 11400000, guid: 3ca343786632d7c4ba7ed153e99703e7, type: 2}
+  - {fileID: 11400000, guid: a2cbab935972c284f87ec4a8c53e0451, type: 2}
+  - {fileID: 11400000, guid: 8aabadd8e068f2e42bd4ad9f486746d9, type: 2}
+  m_initialCollectibleCount: 2
+  m_collectiblesParent: {fileID: 51168559}
 --- !u!4 &583225421
 Transform:
   m_ObjectHideFlags: 0

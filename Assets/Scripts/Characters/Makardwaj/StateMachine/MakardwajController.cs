@@ -298,12 +298,29 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             FacingDirection *= -1;
             transform.Rotate(0.0f, 180.0f, 0.0f);
         }
+
+        public void ResetDirection()
+        {
+            FacingDirection = 1;
+            transform.rotation = Quaternion.identity;
+        }
         #endregion
+
+        public void HidePlayer()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void ShowPlayer()
+        {
+            gameObject.SetActive(true);
+        }    
 
         public void RespawnAt(Vector3 position)
         {
             transform.position = position;
             IsDead = false;
+            _stateMachine.ChangeState(ExitPortalState);
         }
 
         #region BubblePool

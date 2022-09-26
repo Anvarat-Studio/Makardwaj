@@ -4,57 +4,71 @@ using UnityEngine;
 
 namespace Makardwaj.Collectibles
 {
-    public class CollectibleFactory : ObjectPool<Collectible>
+    public class CollectibleFactory : MonoBehaviour
     {
+        [SerializeField] private List<CollectibleData> m_collectibles;
+        [SerializeField] private int m_initialCollectibleCount = 2;
 
-    }
-}
+        [SerializeField] private Transform m_collectiblesParent;
 
-public class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
-{
-    [SerializeField] private GameObject m_prefab;
-    [SerializeField] private Transform m_poolParent;
-    [SerializeField] private int m_initialPoolCount = 2;
+        private List<Collectible> _collectibles;
 
-    protected List<T> _pool;
 
-    virtual protected void Awake()
-    {
-        GeneratePool();
-    }
+        private List<CollectibleType> _collectibleNames;
+        private int _collectibleCount;
 
-    private void GeneratePool()
-    {
-        if (_pool == null)
+        private void Awake()
         {
-            _pool = new List<T>();
-        }
-        else
-        {
-            _pool.Clear();
+            _collectibleNames = System.Enum.GetValues(typeof(CollectibleType)).Cast<CollectibleType>().ToList();
+            _collectibleCount = _collectibleNames.Count;
+
+            InitializePool();
         }
 
-        for (int i =0; i < m_initialPoolCount; i++)
+        public void InitializePool()
         {
-            var poolElement = Instantiate(m_prefab, m_poolParent);
-            poolElement.SetActive(false);
-            _pool.Add(poolElement.GetComponent<T>());
-        }
-    }
+            _collectibles = new List<Collectible>();
 
-    virtual public T Instantiate(Vector3 position, Quaternion rotation)
-    {
-        var element = _pool.FirstOrDefault(e => !e.gameObject.activeInHierarchy);
-        if(element == null)
-        {
-            element = Instantiate(m_prefab, m_poolParent).GetComponent<T>();
-            _pool.Add(element);
+            for(int i = 0; i < m_collectibles.Count; i++)
+            {
+                for(int j = 0; j < m_initialCollectibleCount; j++)
+                {
+                    var collectibleData = m_collectibles[i] ;
+                    SpawnCollectible(collectibleData);
+                }
+            }
         }
 
-        element.transform.position = position;
-        element.transform.rotation = rotation;
-        element.gameObject.SetActive(true);
+        private Collectible SpawnCollectible(CollectibleData collectibleData)
+        {
+            var collectible = Instantiate(collectibleData.collectiblePrefab, m_collectiblesParent);
+            collectible.Initialize(collectibleData.points, collectibleData.type);
+            collectible.gameObject.SetActive(false);
+            _collectibles.Add(collectible);
 
-        return element;
+            return collectible;
+        }
+
+
+        public Collectible Instantiate(Vector3 position, Quaternion rotation)
+        {
+            int collectibleIndex = Random.Range(0, _collectibleCount);
+            var collectibleType = _collectibleNames[collectibleIndex];
+
+            var collectible = _collectibles.FirstOrDefault(c => c.Type == collectibleType && !c.gameObject.activeInHierarchy);
+
+            if(collectible == null)
+            {
+                var collectibleData = m_collectibles.FirstOrDefault(cd => cd.type == collectibleType);
+                collectible = SpawnCollectible(collectibleData);
+            }
+
+            collectible.transform.position = position;
+            collectible.transform.rotation = rotation;
+            collectible.gameObject.SetActive(true);
+
+            return collectible;
+        }
+        
     }
 }

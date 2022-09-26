@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace Makardwaj.Collectibles
 {
-    public class Collectible : MonoBehaviour, ICollectible
+    public class Collectible : MonoBehaviour
     {
-        [SerializeField] private int m_points = 1;
         [SerializeField] private float m_collectionTime = 1f;
         [SerializeField] private SpriteRenderer m_animation;
 
@@ -15,6 +14,9 @@ namespace Makardwaj.Collectibles
         private SpriteRenderer _sr;
         private Collider2D _collider;
         private Rigidbody2D _rigidbody;
+        private int _points = 1;
+
+        public CollectibleType Type;
 
         private void OnEnable()
         {
@@ -32,15 +34,21 @@ namespace Makardwaj.Collectibles
             _rigidbody = GetComponent<Rigidbody2D>();
         }
 
+        public void Initialize(int points, CollectibleType type)
+        {
+            _points = points;
+            Type = type;
+        }
+
         public void Collect()
         {
             if (m_numberHandler)
             {
 
-                m_animation.sprite = m_numberHandler.GetNumberImage(m_points);
+                m_animation.sprite = m_numberHandler.GetNumberImage(_points);
                 SetActive(false);
                 m_animation.gameObject.SetActive(true);
-                GameManager.Score += m_points;
+                GameManager.Score += _points;
                 EventHandler.collectibleCollected?.Invoke(GameManager.Score);
             }
         }

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c2d189c068480a438808ac0acc24715, type: 3}
-  m_Name: Banana
+  m_Name: Apple
   m_EditorClassIdentifier: 
-  type: 0
-  points: 1
-  collectiblePrefab: {fileID: 3898204720246448699, guid: aca9243d43e31a348ab4a5bbb26221ed, type: 3}
+  type: 1
+  points: 2
+  collectiblePrefab: {fileID: 8518375642185208840, guid: bc9f7346bc1df6e449d74a2a9d3f3b39, type: 3}

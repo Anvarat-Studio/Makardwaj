@@ -1,61 +1,78 @@
-using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Makardwaj.Environment
 {
     public class Portal : MonoBehaviour
     {
-        [SerializeField] private float m_portalOpenTime = 2f;
-        [SerializeField] private float m_playerSpawnTime = 1f;
         [SerializeField] private Transform m_playerSpawnMarker;
 
-        public Vector2 PlayerSpawnPosition { get => m_playerSpawnMarker.position; }
-        private Collider2D _collider;
+        private bool _isDoorOpen = false;
+        public Vector2 PlayerPosition { get => m_playerSpawnMarker.position; }
 
-        private WaitForSeconds _portalOpenTimer;
-        private WaitForSeconds _playerSpawnTimer;
-        private Coroutine _coroutinePortalClose;
+        private Animator _animator;
+        private Collider2D _collider;
+        private Coroutine _coroutineCloseDoor;
+
+        public UnityAction doorOpened;
+        public UnityAction doorClosed;
 
         private void Awake()
         {
-            _playerSpawnTimer = new WaitForSeconds(m_playerSpawnTime);
-            _portalOpenTimer = new WaitForSeconds(m_portalOpenTime);
+            _animator = GetComponentInChildren<Animator>();
             _collider = GetComponent<Collider2D>();
-        }
-
-        public void SpawnPortalAndClose(Vector2 position, Action spawnPlayer)
-        {
-            gameObject.SetActive(true);
-            transform.position = position;
             _collider.enabled = false;
-            ClosePortal(spawnPlayer);
         }
 
-        public void SpawnPortal(Vector2 position, bool isEnter = false)
+        public void Teleport(Vector2 position)
         {
             transform.position = position;
-            _collider.enabled = isEnter;
-            gameObject.SetActive(true);
         }
 
-        public void ClosePortal(Action spawnPlayer)
+        public void OpenAndCloseDoor()
         {
-            if(_coroutinePortalClose != null)
+            OpenDoor();
+
+            if(_coroutineCloseDoor != null)
             {
-                StopCoroutine(_coroutinePortalClose);
+                StopCoroutine(_coroutineCloseDoor);
             }
 
-            _coroutinePortalClose = StartCoroutine(IE_ClosePortal(spawnPlayer));
+            StartCoroutine(IE_CloseDoor());
         }
 
-        private IEnumerator IE_ClosePortal(Action spawnPlayer)
+        private IEnumerator IE_CloseDoor()
         {
-            yield return _playerSpawnTimer;
-            spawnPlayer?.Invoke();
+            yield return new WaitWhile(() => !_isDoorOpen);
+            CloseDoor();
+        }
 
-            yield return _portalOpenTimer;
-            gameObject.SetActive(false);
+
+        public void OpenDoor()
+        {
+            _animator.SetBool("open", true);
+            _animator.SetBool("close", false);
+            _collider.enabled = false;
+        }
+
+        public void CloseDoor()
+        {
+            _animator.SetBool("open", false);
+            _animator.SetBool("close", true);
+            _collider.enabled = false;
+        }
+
+        public void DoorOpenTrigger()
+        {
+            _isDoorOpen = true;
+            doorOpened?.Invoke();
+        }
+
+        public void DoorCloseTrigger()
+        {
+            _isDoorOpen = false;
+            doorClosed?.Invoke();
         }
     }
 }

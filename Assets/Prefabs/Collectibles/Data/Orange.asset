@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c2d189c068480a438808ac0acc24715, type: 3}
-  m_Name: Banana
+  m_Name: Orange
   m_EditorClassIdentifier: 
-  type: 0
-  points: 1
-  collectiblePrefab: {fileID: 3898204720246448699, guid: aca9243d43e31a348ab4a5bbb26221ed, type: 3}
+  type: 2
+  points: 3
+  collectiblePrefab: {fileID: 4806446415687944811, guid: cd3d74dd19c824042b87adcd39e9ce0b, type: 3}

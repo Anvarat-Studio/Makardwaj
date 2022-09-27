@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
         m_player.BubbleParent = m_bubbleParent;
         EventHandler.GameStart?.Invoke(_remainingLives);
         m_player.lifeLost += OnPlayerLifeLost;
+        m_player.playerEnteredPortal += OnPlayerEnterPortal;
         m_player.HidePlayer();
         _areAllEnemiesDead = false;
     }
@@ -108,7 +109,7 @@ public class GameManager : MonoBehaviour
         {
             _areAllEnemiesDead = true;
             _portal.Teleport(_portalEndPosition);
-            _portal.OpenDoor();
+            _portal.OpenDoor(true);
             EventHandler.AllEnemiesKilled?.Invoke(); 
         }
     }
@@ -147,6 +148,14 @@ public class GameManager : MonoBehaviour
 
     private void OnDoorClose()
     {
+        if (_areAllEnemiesDead)
+        {
+            m_levelManager.ChangeLevel();
+        }
+    }
 
+    private void OnPlayerEnterPortal()
+    {
+        _portal.CloseDoor();
     }
 }

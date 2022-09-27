@@ -73,6 +73,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         #region UnityActions
         public static UnityAction bubbleCreated;
         public static UnityAction bubbleDestroyed;
+        public UnityAction playerEnteredPortal;
         public UnityAction lifeLost;
         #endregion
 

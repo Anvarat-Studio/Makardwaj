@@ -9,6 +9,14 @@ namespace Makardwaj.Characters.Makardwaj.States
         {
         }
 
+        public override void AnimationFinishTrigger()
+        {
+            base.AnimationFinishTrigger();
+            player.playerEnteredPortal?.Invoke();
+            isAbilityDone = true;
+            player.HidePlayer();
+        }
+
         public override void LogicUpdate()
         {
             player.SetVelocityZero();

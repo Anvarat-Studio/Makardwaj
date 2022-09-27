@@ -18,6 +18,8 @@ namespace Makardwaj.Environment
         public UnityAction doorOpened;
         public UnityAction doorClosed;
 
+        public bool _enableEntering;
+
         private void Awake()
         {
             _animator = GetComponentInChildren<Animator>();
@@ -49,11 +51,12 @@ namespace Makardwaj.Environment
         }
 
 
-        public void OpenDoor()
+        public void OpenDoor(bool enableEntering = false)
         {
             _animator.SetBool("open", true);
             _animator.SetBool("close", false);
             _collider.enabled = false;
+            _enableEntering = enableEntering;
         }
 
         public void CloseDoor()
@@ -66,6 +69,7 @@ namespace Makardwaj.Environment
         public void DoorOpenTrigger()
         {
             _isDoorOpen = true;
+            _collider.enabled = _enableEntering;
             doorOpened?.Invoke();
         }
 

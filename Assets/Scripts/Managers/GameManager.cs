@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         EventHandler.EnemyKilled += OnEnemyKilled;
+        m_levelManager.nextLevelLoaded += OnLevelLoaded;
     }
 
     private void Start()
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
         m_player.lifeLost -= OnPlayerLifeLost;
         _portal.doorOpened -= OnDoorOpen;
         _portal.doorClosed -= OnDoorClose;
+        m_levelManager.nextLevelLoaded -= OnLevelLoaded;
     }
 
     private void Initialize()
@@ -157,5 +159,21 @@ public class GameManager : MonoBehaviour
     private void OnPlayerEnterPortal()
     {
         _portal.CloseDoor();
+    }
+
+    private void OnLevelLoaded()
+    {
+        InitializeLevelData();
+
+        _portal.Teleport(_portalInitialPosition);
+        _portal.OpenAndCloseDoor();
+    }
+
+    private void InitializeLevelData()
+    {
+        _portalInitialPosition = m_levelManager.CurrentLevelData.m_portalInitialPosition.position;
+        _portalEndPosition = m_levelManager.CurrentLevelData.m_portalEndPosition.position;
+        _areAllEnemiesDead = false;
+        _remainingEnemies = m_levelManager.CurrentLevelData.m_enemies.Count;
     }
 }

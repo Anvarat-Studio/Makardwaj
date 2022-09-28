@@ -21,6 +21,7 @@ namespace Makardwaj.Characters.Makardwaj.States
         {
             player.SetVelocityZero();
             base.LogicUpdate();
+            
         }
     }
 }

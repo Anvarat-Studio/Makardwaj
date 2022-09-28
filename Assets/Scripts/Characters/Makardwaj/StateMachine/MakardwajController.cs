@@ -65,6 +65,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public int CurrentActiveBubbles { get; set; } = 0;
         public bool IsDead { get; set; }
         public Transform BubbleParent { get; set; }
+        public bool IsUInsidePortal { get; set; }
         public bool CanEnterPortal;
 
         private Vector2 workspace;
@@ -316,6 +317,11 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         {
             gameObject.SetActive(true);
         }    
+
+        public void ExitPortal()
+        {
+
+        }
 
         public void RespawnAt(Vector3 position)
         {

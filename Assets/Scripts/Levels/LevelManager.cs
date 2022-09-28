@@ -7,8 +7,8 @@ namespace Makardwaj.Levels
     public class LevelManager : MonoBehaviour
     {
         [SerializeField] private LevelCollection m_collection;
+        [SerializeField] private int _currentLevel = 2;
 
-        private int _currentLevel = 2;
         public LevelData CurrentLevelData { get; private set; }
         public LevelData NextLevelData { get; private set; }
 
@@ -59,6 +59,12 @@ namespace Makardwaj.Levels
 
             CurrentLevelData.transform.position = _previousLevelPosition;
             NextLevelData.transform.position = _currentLevelPosition;
+
+            Destroy(CurrentLevelData.gameObject, 0);
+
+            CurrentLevelData = NextLevelData;
+            NextLevelData = LoadNextLevel();
+            
             nextLevelLoaded?.Invoke();
         }
 

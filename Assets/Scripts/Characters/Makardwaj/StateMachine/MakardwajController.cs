@@ -30,6 +30,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         private Rigidbody2D _rigidbody;
         private Collider2D _collider;
         private PlayerStateMachine _stateMachine;
+        private SpriteRenderer _sr;
         [SerializeField]private HashSet<Bubble> _bubblePool;
         #endregion
 
@@ -83,6 +84,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         {
             _collider = GetComponent<Collider2D>();
             _rigidbody = GetComponent<Rigidbody2D>();
+            _sr = GetComponent<SpriteRenderer>();
             FacingDirection = 1;
 
             SetupStateMachine();
@@ -310,12 +312,12 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 
         public void HidePlayer()
         {
-            gameObject.SetActive(false);
+            _sr.enabled = false;
         }
 
         public void ShowPlayer()
         {
-            gameObject.SetActive(true);
+            _sr.enabled = true;
         }    
 
         public void ExitPortal()
@@ -327,6 +329,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         {
             transform.position = position;
             IsDead = false;
+            ResetDirection();
             _stateMachine.ChangeState(ExitPortalState);
         }
 

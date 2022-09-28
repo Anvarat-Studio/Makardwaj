@@ -26,11 +26,12 @@ namespace Makardwaj.Levels
         
         public LevelData LoadNextLevel()
         {
+            Debug.Log("Current Level: " + _currentLevel);
             if(m_collection.collection.Count < _currentLevel  + 2)
             {
                 return null;
             }
-
+            Debug.Log("Loading Next Level...");
             NextLevelData = Instantiate(m_collection.collection[_currentLevel + 1], m_collection.nextLevelPosition, Quaternion.identity);
             NextLevelData.gameObject.SetActive(false);
             return NextLevelData;
@@ -61,6 +62,9 @@ namespace Makardwaj.Levels
             NextLevelData.transform.position = _currentLevelPosition;
 
             Destroy(CurrentLevelData.gameObject, 0);
+
+            _currentLevel++;
+            _currentLevel = Mathf.Clamp(_currentLevel, 0, m_collection.collection.Count - 1);
 
             CurrentLevelData = NextLevelData;
             NextLevelData = LoadNextLevel();

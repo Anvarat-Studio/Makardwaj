@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioCollection:
   - assetName: bgMusic
-    asset: {fileID: 8300000, guid: c6350d2ffa8a740bda7f15dfd688314e, type: 3}
+    asset: {fileID: 8300000, guid: f82f9d2e4ca094d8f99bd17c0c1ec5f5, type: 3}

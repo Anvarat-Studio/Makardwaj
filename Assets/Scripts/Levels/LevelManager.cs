@@ -8,7 +8,7 @@ namespace Makardwaj.Levels
     {
         [SerializeField] private LevelCollection m_collection;
 
-        private int _currentLevel;
+        private int _currentLevel = 2;
         public LevelData CurrentLevelData { get; private set; }
         public LevelData NextLevelData { get; private set; }
 

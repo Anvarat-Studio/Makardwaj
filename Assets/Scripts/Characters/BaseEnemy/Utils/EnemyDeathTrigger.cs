@@ -5,10 +5,11 @@ namespace Makardwaj.Characters.Enemy.Utils
 {
     public class EnemyDeathTrigger : MonoBehaviour
     {
-        private EnemyController _enemyController;
+        private BaseEnemyController _enemyController;
+
         private void Awake()
         {
-            _enemyController = GetComponentInParent<EnemyController>();
+            _enemyController = GetComponentInParent<BaseEnemyController>();
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

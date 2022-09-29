@@ -16,7 +16,7 @@ namespace Makardwaj.Projectiles.Bubble
 
         public int FacingDirection { get; set; } = 1;
         public bool IsDamaged { get; set; }
-        public EnemyController CapturedEnemy { get; private set; }
+        public BaseEnemyController CapturedEnemy { get; private set; }
 
         private void OnEnable()
         {
@@ -62,7 +62,7 @@ namespace Makardwaj.Projectiles.Bubble
             }
 
             if (!CapturedEnemy)
-                CapturedEnemy = collision.collider.GetComponent<EnemyController>();
+                CapturedEnemy = collision.collider.GetComponent<BaseEnemyController>();
             if (CapturedEnemy)
             {
                 CapturedEnemy.Capture(transform);

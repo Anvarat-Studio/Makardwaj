@@ -50,10 +50,10 @@ namespace Makardwaj.Collectibles
         }
 
 
-        public Collectible Instantiate(Vector3 position, Quaternion rotation)
+        public Collectible Instantiate(Vector3 position, Quaternion rotation, CollectibleColor colorNotAllowed)
         {
-            int collectibleIndex = Random.Range(0, _collectibleCount);
-            var collectibleType = _collectibleNames[collectibleIndex];
+            var collectiblesCollection = m_collectibles.Where(c => c.color != colorNotAllowed).ToList();
+            var collectibleType = collectiblesCollection[Random.Range(0, collectiblesCollection.Count)].type;
 
             var collectible = _collectibles.FirstOrDefault(c => c.Type == collectibleType && !c.gameObject.activeInHierarchy);
 

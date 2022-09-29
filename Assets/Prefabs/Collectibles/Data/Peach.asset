@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Peach
   m_EditorClassIdentifier: 
   type: 3
-  points: 5
+  points: 1
+  color: 1
   collectiblePrefab: {fileID: 6746851065206805208, guid: 0f64cfe6319ec5a469229912d8b144ce, type: 3}

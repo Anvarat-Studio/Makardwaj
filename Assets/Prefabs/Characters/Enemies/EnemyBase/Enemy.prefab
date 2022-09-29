@@ -224,6 +224,7 @@ MonoBehaviour:
   m_enemyData: {fileID: 11400000, guid: a810d047ccd39a449a0595787061a153, type: 2}
   m_eyePosition: {fileID: 130292184152635004}
   m_groundCheck: {fileID: 4676735214979490266}
+  collectibleColorsNotAllowed: 00000000
 --- !u!95 &4942229261470747499
 Animator:
   serializedVersion: 4

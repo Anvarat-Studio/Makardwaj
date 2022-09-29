@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   type: 1
-  points: 2
+  points: 1
+  color: 0
   collectiblePrefab: {fileID: 8518375642185208840, guid: bc9f7346bc1df6e449d74a2a9d3f3b39, type: 3}

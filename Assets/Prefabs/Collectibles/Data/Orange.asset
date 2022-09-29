@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Orange
   m_EditorClassIdentifier: 
   type: 2
-  points: 3
+  points: 1
+  color: 0
   collectiblePrefab: {fileID: 4806446415687944811, guid: cd3d74dd19c824042b87adcd39e9ce0b, type: 3}

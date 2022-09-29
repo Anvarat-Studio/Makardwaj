@@ -12,6 +12,7 @@ namespace Makardwaj.Characters.Enemy.Base
         [SerializeField] protected BaseEnemyData m_enemyData;
         [SerializeField] protected Transform m_eyePosition;
         [SerializeField] protected Transform m_groundCheck;
+        [SerializeField] protected CollectibleColor collectibleColorNotAllowed = CollectibleColor.Red;
 
         protected CollectibleFactory _collectibleFactory;
         protected Transform _initialParent;
@@ -90,7 +91,7 @@ namespace Makardwaj.Characters.Enemy.Base
 
         public virtual void Die()
         {
-            _collectibleFactory.Instantiate(transform.position, Quaternion.identity);
+            _collectibleFactory.Instantiate(transform.position, Quaternion.identity, collectibleColorNotAllowed);
             EventHandler.EnemyKilled?.Invoke();
             Destroy(gameObject, 0);
         }

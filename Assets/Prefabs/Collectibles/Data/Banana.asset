@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   points: 1
+  color: 2
   collectiblePrefab: {fileID: 3898204720246448699, guid: aca9243d43e31a348ab4a5bbb26221ed, type: 3}

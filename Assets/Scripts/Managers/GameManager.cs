@@ -163,6 +163,7 @@ public class GameManager : MonoBehaviour
         InitializeLevelData();
 
         _portal.Teleport(_portalInitialPosition);
+        _playerSpawnPosition = _portal.PlayerPosition;
         _portal.OpenAndCloseDoor();
     }
 

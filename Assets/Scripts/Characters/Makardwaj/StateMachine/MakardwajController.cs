@@ -313,11 +313,13 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public void HidePlayer()
         {
             _sr.enabled = false;
+            _collider.enabled = false;
         }
 
         public void ShowPlayer()
         {
             _sr.enabled = true;
+            _collider.enabled = true;
         }    
 
         public void ExitPortal()

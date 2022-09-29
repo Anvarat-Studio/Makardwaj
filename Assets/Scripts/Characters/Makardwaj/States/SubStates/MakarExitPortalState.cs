@@ -13,6 +13,7 @@ namespace Makardwaj.Characters.Makardwaj.States
         public override void Enter()
         {
             base.Enter();
+            player.InputHandler.UsePrimaryAttackInput();
         }
 
         public override void AnimationFinishTrigger()

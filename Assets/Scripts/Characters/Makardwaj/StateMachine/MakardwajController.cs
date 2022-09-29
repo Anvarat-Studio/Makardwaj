@@ -31,7 +31,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         private Collider2D _collider;
         private PlayerStateMachine _stateMachine;
         private SpriteRenderer _sr;
-        [SerializeField]private HashSet<Bubble> _bubblePool;
+        private HashSet<Bubble> _bubblePool;
         #endregion
 
         #region PublicProperties
@@ -66,10 +66,10 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public int CurrentActiveBubbles { get; set; } = 0;
         public bool IsDead { get; set; }
         public Transform BubbleParent { get; set; }
-        public bool IsUInsidePortal { get; set; }
         public bool CanEnterPortal;
+        public bool IsInsidePortal { get; private set; }
 
-        private Vector2 workspace;
+        private Vector2 _workspace;
         #endregion
 
         #region UnityActions
@@ -86,6 +86,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             _rigidbody = GetComponent<Rigidbody2D>();
             _sr = GetComponent<SpriteRenderer>();
             FacingDirection = 1;
+            HidePlayer();
 
             SetupStateMachine();
         }
@@ -239,9 +240,9 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public void SetVelocity(float velocity, Vector2 angle, int direction)
         {
             angle.Normalize();
-            workspace.Set(angle.x * velocity * direction, angle.y * velocity);
-            _rigidbody.velocity = workspace;
-            CurrentVelocity = workspace;
+            _workspace.Set(angle.x * velocity * direction, angle.y * velocity);
+            _rigidbody.velocity = _workspace;
+            CurrentVelocity = _workspace;
         }
 
         public void SetVelocity(float velocity, Vector2 direction)
@@ -250,9 +251,9 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             {
                 return;
             }
-            workspace = direction * velocity;
-            _rigidbody.velocity = workspace;
-            CurrentVelocity = workspace;
+            _workspace = direction * velocity;
+            _rigidbody.velocity = _workspace;
+            CurrentVelocity = _workspace;
         }
 
         public void SetVelocityX(float velocity)
@@ -261,9 +262,9 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             {
                 return;
             }
-            workspace.Set(velocity, CurrentVelocity.y);
-            _rigidbody.velocity = workspace;
-            CurrentVelocity = workspace;
+            _workspace.Set(velocity, CurrentVelocity.y);
+            _rigidbody.velocity = _workspace;
+            CurrentVelocity = _workspace;
         }
 
         public void SetVelocityY(float velocity)
@@ -272,9 +273,9 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             {
                 return;
             }
-            workspace.Set(CurrentVelocity.x, velocity);
-            _rigidbody.velocity = workspace;
-            CurrentVelocity = workspace;
+            _workspace.Set(CurrentVelocity.x, velocity);
+            _rigidbody.velocity = _workspace;
+            CurrentVelocity = _workspace;
         }
 
         public void SetFriction(float friction)
@@ -314,17 +315,24 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         {
             _sr.enabled = false;
             _collider.enabled = false;
+            _rigidbody.isKinematic = true;
         }
 
         public void ShowPlayer()
         {
             _sr.enabled = true;
             _collider.enabled = true;
-        }    
+            _rigidbody.isKinematic = false;
+        }
+
+        public void EnterPortal()
+        {
+            IsInsidePortal = true;
+        }
 
         public void ExitPortal()
         {
-
+            IsInsidePortal = false;
         }
 
         public void RespawnAt(Vector3 position)
@@ -332,6 +340,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             transform.position = position;
             IsDead = false;
             ResetDirection();
+            IsInsidePortal = false;
             _stateMachine.ChangeState(ExitPortalState);
         }
 
@@ -387,7 +396,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         #region Projectiles
         public void Shoot()
         {
-            var bubble = InstantiateBubble(m_mouthPosition.position, Quaternion.identity, FacingDirection);
+            InstantiateBubble(m_mouthPosition.position, Quaternion.identity, FacingDirection);
         }
         #endregion
 

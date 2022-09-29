@@ -13,22 +13,29 @@ namespace Makardwaj.Characters.Makardwaj.States
         public override void Enter()
         {
             base.Enter();
+            player.EnterPortal();
             player.InputHandler.UsePrimaryAttackInput();
         }
 
         public override void AnimationFinishTrigger()
         {
             base.AnimationFinishTrigger();
-            player.playerEnteredPortal?.Invoke();
-            isAbilityDone = true;
             player.HidePlayer();
+            player.playerEnteredPortal?.Invoke();
         }
 
         public override void LogicUpdate()
         {
             player.SetVelocityZero();
             base.LogicUpdate();
-            
+
+            if (!isExitingState)
+            {
+                if (!player.IsInsidePortal)
+                {
+                    isAbilityDone = true;
+                }
+            }
         }
     }
 }

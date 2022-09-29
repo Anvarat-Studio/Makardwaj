@@ -1,6 +1,5 @@
 ﻿using Makardwaj.Characters.Makardwaj.Data;
 using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
-using UnityEngine;
 
 namespace Makardwaj.Characters.Makardwaj.States
 {
@@ -13,6 +12,7 @@ namespace Makardwaj.Characters.Makardwaj.States
         public override void Enter()
         {
             base.Enter();
+            player.ShowPlayer();
             player.InputHandler.UsePrimaryAttackInput();
         }
 

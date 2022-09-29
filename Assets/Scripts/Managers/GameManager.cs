@@ -85,7 +85,6 @@ public class GameManager : MonoBehaviour
         EventHandler.GameStart?.Invoke(_remainingLives);
         m_player.lifeLost += OnPlayerLifeLost;
         m_player.playerEnteredPortal += OnPlayerEnterPortal;
-        m_player.HidePlayer();
         _areAllEnemiesDead = false;
     }
 
@@ -129,7 +128,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator IE_RespawnPlayer()
     {
         yield return _respawnTime;
-        m_player.HidePlayer();
         m_player.ResetDirection();
 
         _portal.Teleport(_portalInitialPosition);
@@ -142,7 +140,6 @@ public class GameManager : MonoBehaviour
     {
         if (!_areAllEnemiesDead)
         {
-            m_player.ShowPlayer();
             m_player.RespawnAt(_playerSpawnPosition);
         }
         

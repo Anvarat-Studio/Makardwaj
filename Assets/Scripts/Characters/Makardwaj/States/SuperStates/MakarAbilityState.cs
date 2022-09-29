@@ -6,7 +6,6 @@ namespace Makardwaj.Characters.Makardwaj.States
     public class MakarAbilityState : PlayerState
     {
         protected bool isAbilityDone;
-        protected bool dontSwitchToAnotherState;
 
         private bool isGrounded;
 
@@ -30,27 +29,20 @@ namespace Makardwaj.Characters.Makardwaj.States
         {
             base.LogicUpdate();
 
-            if(player.IsDead)
+            if (player.IsDead)
             {
-                    stateMachine.ChangeState(player.DeadState);
+                stateMachine.ChangeState(player.DeadState);
             }
 
             if (isAbilityDone)
             {
-                if (dontSwitchToAnotherState)
+                if (isGrounded && player.CurrentVelocity.y < 0.01f)
                 {
-                    stateMachine.ChangeState(stateMachine.CurrentState);
+                    stateMachine.ChangeState(player.IdleState);
                 }
                 else
                 {
-                    if (isGrounded && player.CurrentVelocity.y < 0.01f)
-                    {
-                        stateMachine.ChangeState(player.IdleState);
-                    }
-                    else
-                    {
-                        stateMachine.ChangeState(player.InAirState);
-                    }
+                    stateMachine.ChangeState(player.InAirState);
                 }
             }
         }

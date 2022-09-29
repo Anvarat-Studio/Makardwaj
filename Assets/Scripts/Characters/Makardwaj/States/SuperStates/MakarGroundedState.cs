@@ -1,6 +1,5 @@
 using Makardwaj.Characters.Makardwaj.Data;
 using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
-using UnityEngine;
 
 namespace Makardwaj.Characters.Makardwaj.States
 {
@@ -45,6 +44,12 @@ namespace Makardwaj.Characters.Makardwaj.States
             xInput = player.InputHandler.NormInputX;
             yInput = player.InputHandler.NormInputY;
             JumpInput = player.InputHandler.JumpInput;
+
+            if (player.IsInsidePortal)
+            {
+                return;
+            }
+
             if (player.IsDead)
             {
                 stateMachine.ChangeState(player.DeadState);

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 7782418179213286831}
   - component: {fileID: 8853011460722814435}
   - component: {fileID: 5012968308900587685}
-  m_Layer: 0
+  - component: {fileID: -3350114249822604143}
+  m_Layer: 15
   m_Name: poison
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -429698155
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.5803922, g: 0.73333335, b: 0.21568629, a: 1}
@@ -133,3 +134,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-3350114249822604143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665771304224691707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c13f1191669b3841980fe818f9d63cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_spillVFXPrefab: {fileID: 6454895417020577259, guid: f983bb9a42fc34a6fb8aa18a9dfbeece, type: 3}

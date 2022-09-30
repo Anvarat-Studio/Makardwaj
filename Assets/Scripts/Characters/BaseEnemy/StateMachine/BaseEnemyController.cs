@@ -96,6 +96,11 @@ namespace Makardwaj.Characters.Enemy.Base
             Destroy(gameObject, 0);
         }
 
+        #region Triggers
+        public void AnimationFinishTrigger() => _stateMachine.CurrentState.AnimationFinishTrigger();
+        public void AnimationTrigger() => _stateMachine.CurrentState.AnimationTrigger();
+        #endregion
+
         #region Gizmos
         protected virtual void OnDrawGizmos()
         {

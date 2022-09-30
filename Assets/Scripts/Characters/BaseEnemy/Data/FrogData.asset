@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af487ecfc5b1cc04f9d184a2d0d33e50, type: 3}
+  m_Script: {fileID: 11500000, guid: 450eff8aba63c2547bfa7c3f019a39d8, type: 3}
   m_Name: FrogData
   m_EditorClassIdentifier: 
   movementSpeed: 1.5
@@ -21,3 +21,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheckRadius: 0.51
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  attackDistance: 4
+  attackCooldownTime: 3
+  posionSpeed: 8

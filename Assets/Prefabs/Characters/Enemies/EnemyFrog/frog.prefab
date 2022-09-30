@@ -169,6 +169,7 @@ Transform:
   - {fileID: 1411233190}
   - {fileID: 564996123}
   - {fileID: 206932440}
+  - {fileID: 391794785502599599}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -213,7 +214,7 @@ SpriteRenderer:
   m_SortingLayerID: -429698155
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -445359466, guid: a644d3f946cd17d45bb1f85f2e726325, type: 3}
+  m_Sprite: {fileID: -953574847, guid: a644d3f946cd17d45bb1f85f2e726325, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -282,10 +283,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9afdf235d76d48deb38b9b49351be90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_enemyData: {fileID: 11400000, guid: 8b50a63341c634487a210f069f29a2c1, type: 2}
+  m_enemyData: {fileID: 11400000, guid: 52b86fafb3cdd414fa9f703d1cc05dc6, type: 2}
   m_eyePosition: {fileID: 1411233190}
   m_groundCheck: {fileID: 206932440}
   collectibleColorNotAllowed: 1
+  m_poisonPrefab: {fileID: -3350114249822604143, guid: 8b8c3dc41ec02447fb943f66b4210c45, type: 3}
+  m_mouthPosition: {fileID: 391794785502599599}
 --- !u!50 &6052142340734338525
 Rigidbody2D:
   serializedVersion: 4
@@ -307,3 +310,34 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!1 &8920700655450744511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 391794785502599599}
+  m_Layer: 7
+  m_Name: mouth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &391794785502599599
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920700655450744511}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.002, y: -0.282, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5092993449463172440}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

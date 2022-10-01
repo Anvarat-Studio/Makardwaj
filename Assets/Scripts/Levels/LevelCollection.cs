@@ -8,6 +8,7 @@ namespace Makardwaj.Levels
     public class LevelCollection : ScriptableObject
     {
         public List<LevelData> collection;
+        public LevelData heaven;
         public Vector2 nextLevelPosition;
     }
 }

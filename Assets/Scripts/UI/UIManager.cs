@@ -1,5 +1,6 @@
 using Makardwaj.Managers;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Makardwaj.UI
@@ -15,12 +16,14 @@ namespace Makardwaj.UI
         {
             EventHandler.GameStart += OnGameStart;
             EventHandler.PlayerLiveLost += OnLifeLost;
+            EventHandler.ResetLives += ResetLives;
         }
 
         private void OnDisable()
         {
             EventHandler.GameStart -= OnGameStart;
             EventHandler.PlayerLiveLost -= OnLifeLost;
+            EventHandler.ResetLives = ResetLives;
         }
 
         private void InstantiateLives(int lives)
@@ -48,6 +51,14 @@ namespace Makardwaj.UI
         private void OnLifeLost(int remainingLives)
         {
             m_lifeIcons[remainingLives].SetActive(false);
+        }
+
+        private void ResetLives(int lives)
+        {
+            foreach(var i in m_lifeIcons)
+            {
+                i.SetActive(true);
+            }
         }
     }
 }

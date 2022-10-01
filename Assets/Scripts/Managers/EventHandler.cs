@@ -11,5 +11,6 @@ namespace Makardwaj.Managers
         public static UnityAction<int> collectibleCollected;
         public static UnityAction EnemyKilled;
         public static UnityAction AllEnemiesKilled;
+        public static UnityAction<int> ResetLives;
     }
 }

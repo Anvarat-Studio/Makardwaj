@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private int _remainingLives;
     private WaitForSeconds _respawnTime;
     private Coroutine _respawnCoroutine;
+    private Coroutine _sendPlayerToHeavenCoroutine;
     private int _totalEnemies;
     private int _remainingEnemies;
     private bool _areAllEnemiesDead;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     private Vector2 _portalInitialPosition;
     private Vector2 _portalEndPosition;
     private Vector2 _playerSpawnPosition;
+    private bool _isHeavenActivated;
 
     public static int Score { get; set; }
 
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour
         EventHandler.PlayerLiveLost?.Invoke(_remainingLives);
         if (_remainingLives <= 0)
         {
+            SendPlayerToHeaven();
             EventHandler.GameEnd?.Invoke();
         }
         else
@@ -134,9 +137,30 @@ public class GameManager : MonoBehaviour
         EventHandler.PlayerRespawn?.Invoke();
     }
 
+    private void SendPlayerToHeaven()
+    {
+        if(_sendPlayerToHeavenCoroutine != null)
+        {
+            StopCoroutine(_sendPlayerToHeavenCoroutine);
+        }
+
+        _sendPlayerToHeavenCoroutine = StartCoroutine(IE_SendPlayerToHeaven());
+    }
+
+    private IEnumerator IE_SendPlayerToHeaven()
+    {
+        yield return _respawnTime;
+        m_levelManager.ActivateHeaven((playerPos, doorPos)=> {
+            m_player.RespawnAt(playerPos);
+            _portal.Teleport(doorPos);
+            _portal.OpenDoor(true);
+            _isHeavenActivated = true;
+        });
+    }
+
     private void OnDoorOpen()
     {
-        if (!_areAllEnemiesDead)
+        if (!_areAllEnemiesDead && !_isHeavenActivated)
         {
             m_player.RespawnAt(_playerSpawnPosition);
         }
@@ -148,6 +172,21 @@ public class GameManager : MonoBehaviour
         if (_areAllEnemiesDead)
         {
             m_levelManager.ChangeLevel();
+        }
+        else if (_isHeavenActivated)
+        {
+            m_levelManager.DeactivateHeaven(() => {
+                _remainingLives = m_gameData.maxLives;
+                _isHeavenActivated = false;
+                EventHandler.ResetLives?.Invoke(_remainingLives);
+                _portalInitialPosition = m_levelManager.CurrentLevelData.m_portalInitialPosition.position;
+                _portalEndPosition = m_levelManager.CurrentLevelData.m_portalEndPosition.position;
+                _portal.Teleport(_portalInitialPosition);
+                _remainingEnemies = m_levelManager.CurrentLevelData.m_enemies.Count;
+                Score = 0;
+                EventHandler.collectibleCollected?.Invoke(Score);
+                _portal.OpenAndCloseDoor();
+            });
         }
     }
 

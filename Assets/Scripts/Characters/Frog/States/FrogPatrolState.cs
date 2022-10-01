@@ -7,7 +7,6 @@ namespace Makardwaj.Characters.Enemy.Frog
 {
     public class FrogPatrolState : EnemyPatrolState
     {
-        private EnemyFrogData _frogData;
         private EnemyFrogController _frogController;
 
         private bool _canShootPoision;
@@ -15,7 +14,6 @@ namespace Makardwaj.Characters.Enemy.Frog
 
         public FrogPatrolState(Controller controller, StateMachine stateMachine, BaseData playerData, string animBoolName) : base(controller, stateMachine, playerData, animBoolName)
         {
-            _frogData = playerData as EnemyFrogData;
             _frogController = controller as EnemyFrogController;
         }
 

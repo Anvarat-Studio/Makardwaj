@@ -20,14 +20,16 @@ namespace Makardwaj.Characters.Enemy.States
             }
             else if (_isGrounded)
             {
-                if(_enemyController.GetType() == typeof(EnemyController))
+                var controller = _enemyController as EnemyFrogController;
+                if (controller)
                 {
-                    stateMachine.ChangeState((_enemyController as EnemyController).PatrolState);
+                    stateMachine.ChangeState(controller.PatrolState);
                 }
                 else
                 {
-                    stateMachine.ChangeState((_enemyController as EnemyFrogController).PatrolState);
+                    stateMachine.ChangeState(_enemyController.PatrolState);
                 }
+                
                 
             }
         }

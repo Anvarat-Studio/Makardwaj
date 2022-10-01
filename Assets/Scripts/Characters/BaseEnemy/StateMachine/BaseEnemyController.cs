@@ -23,6 +23,7 @@ namespace Makardwaj.Characters.Enemy.Base
         public bool IsDead { get; private set; }
 
         #region StateMachine
+        public virtual EnemyPatrolState PatrolState { get; private set; }
         public EnemyCapturedState CapturedState { get; private set; }
         public EnemyInAirState InAirState { get; private set; }
         public EnemyDeadState DeadState { get; private set; }
@@ -52,6 +53,7 @@ namespace Makardwaj.Characters.Enemy.Base
             CapturedState = new EnemyCapturedState(this, _stateMachine, m_enemyData, "captured");
             InAirState = new EnemyInAirState(this, _stateMachine, m_enemyData, "inAir");
             DeadState = new EnemyDeadState(this, _stateMachine, m_enemyData, "dead");
+            PatrolState = new EnemyPatrolState(this, _stateMachine, m_enemyData, "patrol");
         }
 
         public void Flip()

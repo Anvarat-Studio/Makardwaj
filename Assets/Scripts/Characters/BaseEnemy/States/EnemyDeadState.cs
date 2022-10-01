@@ -1,4 +1,5 @@
-﻿using Makardwaj.Common;
+﻿using Makardwaj.Characters.Enemy.Base;
+using Makardwaj.Common;
 using Makardwaj.Common.FiniteStateMachine;
 using UnityEngine;
 
@@ -6,8 +7,11 @@ namespace Makardwaj.Characters.Enemy.States
 {
     public class EnemyDeadState : BaseEnemyState
     {
+        private EnemyController _controller;
+
         public EnemyDeadState(Controller controller, StateMachine stateMachine, BaseData playerData, string animBoolName) : base(controller, stateMachine, playerData, animBoolName)
         {
+            _controller = controller as EnemyController;
         }
 
 
@@ -27,7 +31,7 @@ namespace Makardwaj.Characters.Enemy.States
             {
                 if (!_enemyController.IsDead)
                 {
-                    stateMachine.ChangeState(_enemyController.PatrolState);
+                    stateMachine.ChangeState(_controller.PatrolState);
                 }
             }
         }

@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_collectionTime: 0.5
   m_animation: {fileID: 313616362077234918}
+  Type: 0
 --- !u!61 &4761529580520595084
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -113,7 +114,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.05, y: -0.3}

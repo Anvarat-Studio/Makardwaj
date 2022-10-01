@@ -3,7 +3,9 @@ guid: 5c13f1191669b3841980fe818f9d63cd
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_spillVFXPrefab: {instanceID: 0}
+  - m_vfxParticles: {fileID: 3275004501576734892, guid: 68ac62eb0051744e0911cb8ef8224f76, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

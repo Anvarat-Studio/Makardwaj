@@ -35,6 +35,11 @@ namespace Makardwaj.Characters.Enemy.Base
         }
         #endregion
 
+        protected override void FixedUpdate()
+        {
+            base.FixedUpdate();
+        }
+
         public bool CanShootPoision()
         {
             return (_frogData != null) && (Time.time - LastShotTime > _frogData.attackCooldownTime);

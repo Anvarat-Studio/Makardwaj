@@ -1,4 +1,5 @@
 using Assets.Scripts.Projectiles.PoisionDrop;
+using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 using UnityEngine;
 
 namespace Makardwaj.Projectiles
@@ -9,8 +10,10 @@ namespace Makardwaj.Projectiles
 
         private Rigidbody2D _rigidbody;
         private PoisonSpillVfx _spillVFX;
+        [SerializeField] private GameObject m_vfxParticles;
 
         private Vector2 _workbench;
+        private GameObject _vfxParticles;
 
         private void Awake()
         {
@@ -29,10 +32,25 @@ namespace Makardwaj.Projectiles
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            var player = collision.collider.GetComponent<MakardwajController>();
             var collisionPoint = collision.GetContact(0);
+            Vector2 point = collisionPoint.point;
+            if (player)
+            {
+                point = player.FeetPosition;
+                _vfxParticles = Instantiate(m_vfxParticles, player.transform.position, Quaternion.identity);
+                Invoke(nameof(DestroyParticles), 1);
+            }
+
+            
 
             gameObject.SetActive(false);
-            _spillVFX.Activate(collisionPoint.point);
+            _spillVFX.Activate(point);
+        }
+
+        private void DestroyParticles()
+        {
+            Destroy(_vfxParticles, 0);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Makardwaj.Common;
+﻿using Makardwaj.Characters.Enemy.Base;
+using Makardwaj.Common;
 using Makardwaj.Common.FiniteStateMachine;
 
 namespace Makardwaj.Characters.Enemy.States
@@ -19,7 +20,15 @@ namespace Makardwaj.Characters.Enemy.States
             }
             else if (_isGrounded)
             {
-                stateMachine.ChangeState(_enemyController.PatrolState);
+                if(_enemyController.GetType() == typeof(EnemyController))
+                {
+                    stateMachine.ChangeState((_enemyController as EnemyController).PatrolState);
+                }
+                else
+                {
+                    stateMachine.ChangeState((_enemyController as EnemyFrogController).PatrolState);
+                }
+                
             }
         }
     }

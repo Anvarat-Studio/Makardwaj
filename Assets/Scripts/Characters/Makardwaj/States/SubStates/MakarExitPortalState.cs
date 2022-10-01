@@ -13,6 +13,7 @@ namespace Makardwaj.Characters.Makardwaj.States
         {
             base.Enter();
             player.ShowPlayer();
+            player.ResetDirection();
             player.InputHandler.UsePrimaryAttackInput();
         }
 

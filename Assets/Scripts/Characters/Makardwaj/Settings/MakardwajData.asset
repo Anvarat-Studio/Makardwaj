@@ -22,3 +22,5 @@ MonoBehaviour:
   coyoteTime: 0.2
   maxBubbleCount: 1
   bubblePoolStartingCount: 2
+  debuffTime: 6
+  debuffColor: {r: 0.5803922, g: 0.73333335, b: 0.21568628, a: 1}

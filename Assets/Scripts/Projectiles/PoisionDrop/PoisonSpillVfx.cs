@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 using UnityEngine;
 
 namespace Assets.Scripts.Projectiles.PoisionDrop
@@ -37,6 +38,26 @@ namespace Assets.Scripts.Projectiles.PoisionDrop
         {
             yield return _deactivateTime;
             gameObject.SetActive(false);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            var player = collision.GetComponent<MakardwajController>();
+
+            if (player)
+            {
+                player.StartDebuff();
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            var player = collision.GetComponent<MakardwajController>();
+
+            if (player)
+            {
+                player.StopDebuff();
+            }
         }
     }
 }

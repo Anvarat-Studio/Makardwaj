@@ -5,9 +5,9 @@ using Makardwaj.Characters.Makardwaj.States;
 using Makardwaj.Characters.Makardwaj.States.SuperStates;
 using Makardwaj.Projectiles.Bubble;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine.Events;
-using Makardwaj.Characters.Enemy.Base;
 using Makardwaj.Collectibles;
 using CCS.SoundPlayer;
 using Makardwaj.Environment;
@@ -68,6 +68,10 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public Transform BubbleParent { get; set; }
         public bool CanEnterPortal;
         public bool IsInsidePortal { get; private set; }
+        private bool _isGettingDebuffed { get; set; }
+        private int _debuffAmount;
+
+        public Vector2 FeetPosition { get => _sr.bounds.min; }
 
         private Vector2 _workspace;
         #endregion
@@ -86,6 +90,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             _rigidbody = GetComponent<Rigidbody2D>();
             _sr = GetComponent<SpriteRenderer>();
             FacingDirection = 1;
+            _debuffAmount = 0;
             HidePlayer();
 
             SetupStateMachine();
@@ -117,28 +122,6 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         private void FixedUpdate()
         {
             _stateMachine.CurrentState?.PhysicsUpdate();
-        }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (IsDead)
-            {
-                return;
-            }
-            if (collision.collider.GetComponent<EnemyController>())
-            {
-                IsDead = true;
-                lifeLost?.Invoke();
-            }else
-            {
-                var collectible = collision.collider.GetComponent<Collectible>();
-                if (collectible)
-                {
-                    //Destroy(collectible.gameObject, 0);
-                    collectible.Collect();
-                    SoundManager.Instance.PlaySFX(MixerPlayer.Movement, "collect", 1, false);
-                }
-            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -341,6 +324,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             IsDead = false;
             ResetDirection();
             IsInsidePortal = false;
+            _debuffAmount = 0;
             _stateMachine.ChangeState(ExitPortalState);
         }
 
@@ -389,6 +373,72 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         private void OnBubbleDestroyed()
         {
             CurrentActiveBubbles--;
+        }
+
+        #endregion
+
+        public void Die()
+        {
+            if(IsDead)
+            {
+                return;
+            }
+            _sr.color = Color.white;
+            _isGettingDebuffed = false;
+            IsDead = true;
+            lifeLost?.Invoke();
+        }
+
+        #region Debuff
+        private Coroutine _coroutineDebuff;
+        public void StartDebuff()
+        {
+            if(_isGettingDebuffed || IsDead)
+            {
+                return;
+            }
+
+            _isGettingDebuffed = true;
+            _sr.color = m_data.debuffColor;
+
+            if(_coroutineDebuff != null)
+            {
+                StopCoroutine(_coroutineDebuff);
+            }
+
+            _coroutineDebuff = StartCoroutine(IE_Debuff());
+        }
+
+        public void StopDebuff()
+        {
+            _isGettingDebuffed = false;
+        }
+
+        private IEnumerator IE_Debuff()
+        {
+            while (_isGettingDebuffed)
+            {
+                _debuffAmount++;
+                if(_debuffAmount >= m_data.debuffTime)
+                {
+                    Die();
+                    yield break;
+                }
+                yield return new WaitForSeconds(1);
+            }
+
+            for(int i = 0; i < 2; i++)
+            {
+                _debuffAmount++;
+                if (_debuffAmount >= m_data.debuffTime)
+                {
+                    Die();
+                    yield break;
+                }
+                yield return new WaitForSeconds(1);
+            }
+
+            _sr.color = Color.white;
         }
 
         #endregion

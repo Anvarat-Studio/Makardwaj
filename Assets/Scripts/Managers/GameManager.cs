@@ -128,8 +128,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator IE_RespawnPlayer()
     {
         yield return _respawnTime;
-        m_player.ResetDirection();
-
         _portal.Teleport(_portalInitialPosition);
         _portal.OpenAndCloseDoor();
 

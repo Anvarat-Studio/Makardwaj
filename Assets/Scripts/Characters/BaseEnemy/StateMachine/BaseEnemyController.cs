@@ -4,6 +4,7 @@ using Makardwaj.Common.FiniteStateMachine;
 using Makardwaj.Collectibles;
 using Makardwaj.Common;
 using Makardwaj.Managers;
+using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 
 namespace Makardwaj.Characters.Enemy.Base
 {
@@ -25,7 +26,6 @@ namespace Makardwaj.Characters.Enemy.Base
         public EnemyCapturedState CapturedState { get; private set; }
         public EnemyInAirState InAirState { get; private set; }
         public EnemyDeadState DeadState { get; private set; }
-        public EnemyPatrolState PatrolState { get; private set; }
 
         protected override void Awake()
         {
@@ -36,13 +36,22 @@ namespace Makardwaj.Characters.Enemy.Base
             InitializeStateMachine();
         }
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            var player = collision.collider.GetComponent<MakardwajController>();
+
+            if (player)
+            {
+                player.Die();
+            }
+        }
+
         protected virtual void InitializeStateMachine()
         {
             _stateMachine = new StateMachine();
             CapturedState = new EnemyCapturedState(this, _stateMachine, m_enemyData, "captured");
             InAirState = new EnemyInAirState(this, _stateMachine, m_enemyData, "inAir");
             DeadState = new EnemyDeadState(this, _stateMachine, m_enemyData, "dead");
-            PatrolState = new EnemyPatrolState(this, _stateMachine, m_enemyData, "patrol");
         }
 
         public void Flip()

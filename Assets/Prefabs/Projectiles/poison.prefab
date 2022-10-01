@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_spillVFXPrefab: {fileID: 6454895417020577259, guid: f983bb9a42fc34a6fb8aa18a9dfbeece, type: 3}
+  m_vfxParticles: {fileID: 3275004501576734892, guid: 68ac62eb0051744e0911cb8ef8224f76, type: 3}

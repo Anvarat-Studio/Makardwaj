@@ -20,5 +20,9 @@ namespace Makardwaj.Characters.Makardwaj.Data
         [Header("Bubble")]
         public int maxBubbleCount = 1;
         public int bubblePoolStartingCount = 2;
+
+        [Header("Debuff")]
+        public int debuffTime = 6;
+        public Color debuffColor;
     }
 }

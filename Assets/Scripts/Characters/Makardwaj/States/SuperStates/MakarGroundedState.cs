@@ -53,6 +53,9 @@ namespace Makardwaj.Characters.Makardwaj.States
             if (player.IsDead)
             {
                 stateMachine.ChangeState(player.DeadState);
+            }else if(player.InputHandler.PrimaryAttackInput && player.CanInteract)
+            {
+                stateMachine.ChangeState(player.InteractiveState);
             }
             else if (player.InputHandler.PrimaryAttackInput && player.CanEnterPortal)
             {

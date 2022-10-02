@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   player: {fileID: 7812557466160827627, guid: bc6d078332c1f499c8e97dbf62748cb2, type: 3}
-  maxLives: 3
+  maxLives: 1
+  respawnTime: 3

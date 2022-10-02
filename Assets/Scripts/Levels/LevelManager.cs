@@ -60,7 +60,15 @@ namespace Makardwaj.Levels
 
         public IEnumerator IE_ChangeLevel()
         {
-            NextLevelData.gameObject.SetActive(true);
+            if(NextLevelData != null)
+            {
+                NextLevelData.gameObject.SetActive(true);
+            }
+            else
+            {
+                yield break;
+            }
+            
             while (Vector2.Distance(CurrentLevelData.transform.position, _previousLevelPosition) > 0.01f ||
                 Vector2.Distance(NextLevelData.transform.position, _currentLevelPosition) > 0.01f)
             {

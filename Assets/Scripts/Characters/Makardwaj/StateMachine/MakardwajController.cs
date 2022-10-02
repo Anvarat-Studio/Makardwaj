@@ -11,7 +11,6 @@ using UnityEngine.Events;
 using Makardwaj.Collectibles;
 using CCS.SoundPlayer;
 using Makardwaj.Environment;
-using Makardwaj.InteractiveItem;
 
 namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 {
@@ -23,7 +22,6 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         [SerializeField] private Transform m_groundCheck;
         [SerializeField] private Transform m_mouthPosition;
         [SerializeField] private Bubble m_bubblePrefab;
-        public Transform m_dialgouePosition;
         #endregion
 
         #region PrivateFields
@@ -74,8 +72,6 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         private int _debuffAmount;
 
         public Vector2 FeetPosition { get => _sr.bounds.min; }
-        public bool CanInteract { get; set; }
-        public DialogueZone PlayerDialogueZone { get; private set; }
 
         private Vector2 _workspace;
         #endregion
@@ -142,20 +138,13 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
                 collectible.Collect();
                 SoundManager.Instance.PlaySFX(MixerPlayer.Movement, "collect", 1, false);
             }
-
-            var portal = collision.GetComponent<Portal>();   
-            if (portal)
+            else
             {
-                CanEnterPortal = true;
-            }
-
-            var interactiveItem = collision.GetComponent<DialogueZone>();
-            if (interactiveItem)
-            {
-                CanInteract = true;
-                PlayerDialogueZone = interactiveItem;
-
-                Debug.Log("Can interact: " + CanInteract);
+                var portal = collision.GetComponent<Portal>();
+                if (portal)
+                {
+                    CanEnterPortal = true;
+                }
             }
         }
 
@@ -169,15 +158,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             var portal = collision.GetComponent<Portal>();
             if (portal)
             {
-                CanEnterPortal = true;
-            }
-
-            var interactiveItem = collision.GetComponent<DialogueZone>();
-            if (interactiveItem)
-            {
-                CanInteract = false;
-                PlayerDialogueZone = null;
-                Debug.Log("Can interact: " + CanInteract);
+                CanEnterPortal = false;
             }
         }
         #endregion
@@ -192,7 +173,6 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public MakarDeadState DeadState { get; private set; }
         public MakarEnterPortalState EnterPortalState { get; private set; }
         public MakarExitPortalState ExitPortalState { get; private set; }
-        public MakarInteractiveState InteractiveState { get; private set; }
 
         private void SetupStateMachine()
         {
@@ -207,7 +187,6 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             DeadState = new MakarDeadState(this, _stateMachine, m_data, "dead", "die");
             EnterPortalState = new MakarEnterPortalState(this, _stateMachine, m_data, "enterPortal", "");
             ExitPortalState = new MakarExitPortalState(this, _stateMachine, m_data, "exitPortal", "");
-            InteractiveState = new MakarInteractiveState(this, _stateMachine, m_data, "isInteracting", "");
 
             _stateMachine.Initialize(IdleState);
         }

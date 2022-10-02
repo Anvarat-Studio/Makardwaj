@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioCollection:
   - assetName: jump
-    asset: {fileID: 8300000, guid: 179af428b842947b98335dce32850d29, type: 3}
+    asset: {fileID: 8300000, guid: 8a6da126293186640a5b643fe641d7fc, type: 3}
   - assetName: shoot
-    asset: {fileID: 8300000, guid: 7496567e4fd0b42399ad311b5d68bffe, type: 3}
+    asset: {fileID: 8300000, guid: cb27d128a1b1f0f4ea4ed5cd8475d6a2, type: 3}
   - assetName: bubblePop
     asset: {fileID: 8300000, guid: 8e0171c157f2f45cc8c963dc24461aa8, type: 3}
   - assetName: die
     asset: {fileID: 8300000, guid: a683d964cdd55474e840fbfe3d1c030e, type: 3}
   - assetName: collect
-    asset: {fileID: 8300000, guid: 538fa87a1790545358cfe1b3439d089a, type: 3}
+    asset: {fileID: 8300000, guid: 888524a2f65646c40ba5df2d0c231e5f, type: 3}
   - assetName: enemyCapture
-    asset: {fileID: 8300000, guid: 179af428b842947b98335dce32850d29, type: 3}
+    asset: {fileID: 8300000, guid: 7e2a5cff9fb2bc54dbbac55af4a82bd7, type: 3}
   - assetName: bubbleBurst
-    asset: {fileID: 8300000, guid: 8e0171c157f2f45cc8c963dc24461aa8, type: 3}
+    asset: {fileID: 8300000, guid: 78f51f38b4454284bb14a972fa1dcbfd, type: 3}

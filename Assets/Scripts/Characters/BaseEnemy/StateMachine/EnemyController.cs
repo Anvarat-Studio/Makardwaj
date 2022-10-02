@@ -1,3 +1,4 @@
+using CCS.SoundPlayer;
 using Makardwaj.Characters.Enemy.States;
 
 namespace Makardwaj.Characters.Enemy.Base
@@ -10,6 +11,13 @@ namespace Makardwaj.Characters.Enemy.Base
         {
             base.InitializeStateMachine();
             _stateMachine.Initialize(PatrolState);
+        }
+
+        public override void SpawnBody()
+        {
+            base.SpawnBody();
+
+            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "mushroomDie", 0.5f, false);
         }
         #endregion
     }

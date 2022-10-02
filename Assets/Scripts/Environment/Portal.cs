@@ -1,4 +1,5 @@
 using System.Collections;
+using CCS.SoundPlayer;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -57,6 +58,8 @@ namespace Makardwaj.Environment
             _animator.SetBool("close", false);
             _collider.enabled = false;
             _enableEntering = enableEntering;
+
+            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "doorOpen", 0.5f, false);
         }
 
         public void CloseDoor()
@@ -64,6 +67,7 @@ namespace Makardwaj.Environment
             _animator.SetBool("open", false);
             _animator.SetBool("close", true);
             _collider.enabled = false;
+            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "doorClose", 0.5f, false);
         }
 
         public void DoorOpenTrigger()

@@ -98,11 +98,13 @@ public class GameManager : MonoBehaviour
         {
             SendPlayerToHeaven();
             EventHandler.GameEnd?.Invoke();
+            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "gameOver", 0.5f, false);
         }
         else
         {
             
             RespawnPlayer();
+            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "lifeLost", 0.5f, false);
         }
     }
 

@@ -9,6 +9,7 @@ namespace Makardwaj.UI
     {
         [SerializeField] private GameObject m_lifeIcon;
         [SerializeField] private Transform m_livesParent;
+        [SerializeField] private PauseMenuHandler m_pauseMenuHandler;
 
         private List<GameObject> m_lifeIcons;
 
@@ -59,6 +60,11 @@ namespace Makardwaj.UI
             {
                 i.SetActive(true);
             }
+        }
+
+        public void ActivatePauseMenu()
+        {
+            m_pauseMenuHandler.SetActive(true);
         }
     }
 }

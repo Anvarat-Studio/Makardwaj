@@ -136,7 +136,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             {
                 //Destroy(collectible.gameObject, 0);
                 collectible.Collect();
-                SoundManager.Instance.PlaySFX(MixerPlayer.Movement, "collect", 1, false);
+                SoundManager.Instance.PlaySFX(MixerPlayer.Dialog, "collect", 1, false);
             }
             else
             {

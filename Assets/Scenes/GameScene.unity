@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 50195958}
   - component: {fileID: 50195957}
   - component: {fileID: 50195956}
+  - component: {fileID: 50195960}
   m_Layer: 5
   m_Name: PauseMenuCanvas
   m_TagString: Untagged
@@ -305,6 +306,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &50195960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50195955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7207620e71f6489a80149c7b550f546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &51168558
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +509,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 210245385}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 50195960}
+        m_TargetAssemblyTypeName: Makardwaj.UI.PauseMenuHandler, Assembly-CSharp
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &210245384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,7 +664,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 240994843}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 50195960}
+        m_TargetAssemblyTypeName: Makardwaj.UI.PauseMenuHandler, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &240994842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2256,7 +2293,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 971593150}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2023982179}
+        m_TargetAssemblyTypeName: Makardwaj.UI.UIManager, Assembly-CSharp
+        m_MethodName: ActivatePauseMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &971593150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3873,6 +3922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_lifeIcon: {fileID: 5331382904268624959, guid: 02964f1553f27452ba11d6cc73d4c38a, type: 3}
   m_livesParent: {fileID: 1835552788}
+  m_pauseMenuHandler: {fileID: 50195960}
 --- !u!1 &2084707452
 GameObject:
   m_ObjectHideFlags: 0

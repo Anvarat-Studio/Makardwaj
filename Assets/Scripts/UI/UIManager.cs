@@ -1,7 +1,9 @@
 using Makardwaj.Managers;
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 namespace Makardwaj.UI
 {
@@ -10,6 +12,7 @@ namespace Makardwaj.UI
         [SerializeField] private GameObject m_lifeIcon;
         [SerializeField] private Transform m_livesParent;
         [SerializeField] private PauseMenuHandler m_pauseMenuHandler;
+        [SerializeField] private Text m_levelText;
 
         private List<GameObject> m_lifeIcons;
 
@@ -18,6 +21,7 @@ namespace Makardwaj.UI
             EventHandler.GameStart += OnGameStart;
             EventHandler.PlayerLiveLost += OnLifeLost;
             EventHandler.ResetLives += ResetLives;
+            EventHandler.LevelChanged += FadeInLevelText;
         }
 
         private void OnDisable()
@@ -25,6 +29,7 @@ namespace Makardwaj.UI
             EventHandler.GameStart -= OnGameStart;
             EventHandler.PlayerLiveLost -= OnLifeLost;
             EventHandler.ResetLives = ResetLives;
+            EventHandler.LevelChanged -= FadeInLevelText;
         }
 
         private void InstantiateLives(int lives)
@@ -65,6 +70,49 @@ namespace Makardwaj.UI
         public void ActivatePauseMenu()
         {
             m_pauseMenuHandler.SetActive(true);
+        }
+
+        public void FadeInLevelText(int levelIndex)
+        {
+            if(coroutine_FadeText != null)
+            {
+                StopCoroutine(coroutine_FadeText);
+            }
+
+            m_levelText.text = (levelIndex >= 0) ? $"LEVEL - {levelIndex + 1}" : "SWARG";
+            m_levelText.gameObject.SetActive(true);
+            coroutine_FadeText = StartCoroutine(IE_FadeText(m_levelText, 1, true, () =>{
+                coroutine_FadeText = StartCoroutine(IE_FadeText(m_levelText, onComplete: () =>
+                {
+                    m_levelText.gameObject.SetActive(false);
+                }));
+            }, 1));
+        }
+
+        private Coroutine coroutine_FadeText;
+        private IEnumerator IE_FadeText(Text target, float speed = 1, bool isFadeIn = false, UnityAction onComplete = null, int delay = 0)
+        {
+            var targetAlpha = 0;
+            if (isFadeIn)
+            {
+                targetAlpha = 1;
+            }
+
+            var color = target.color;
+            color.a = (targetAlpha > 0) ? 0 : 1;
+            target.color = color;
+
+            while(Mathf.Abs(target.color.a - targetAlpha) > 0.01f)
+            {
+                color.a = Mathf.MoveTowards(color.a, targetAlpha, Time.deltaTime  * speed);
+                target.color = color;
+                yield return null;
+            }
+
+            color.a = targetAlpha;
+            target.color = color;
+            yield return new WaitForSeconds(delay);
+            onComplete?.Invoke();
         }
     }
 }

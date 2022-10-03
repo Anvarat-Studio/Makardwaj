@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -28,6 +29,7 @@ namespace Makardwaj.Levels
         public LevelData LoadCurrentLevel()
         {
             CurrentLevelData = Instantiate(m_collection.collection[_currentLevel]);
+            Managers.EventHandler.LevelChanged?.Invoke(_currentLevel);
             return CurrentLevelData;
         }
 
@@ -87,7 +89,7 @@ namespace Makardwaj.Levels
 
             CurrentLevelData = NextLevelData;
             NextLevelData = LoadNextLevel();
-
+            Managers.EventHandler.LevelChanged?.Invoke(_currentLevel);
             nextLevelLoaded?.Invoke();
         }
 
@@ -99,6 +101,7 @@ namespace Makardwaj.Levels
                 HeavenData.gameObject.SetActive(true);
                 onHeavenActivated?.Invoke(HeavenData.m_portalInitialPosition.position, HeavenData.m_portalEndPosition.position);
                 m_overlay.FadeOut();
+                Managers.EventHandler.LevelChanged?.Invoke(-1);
             });
         }
 

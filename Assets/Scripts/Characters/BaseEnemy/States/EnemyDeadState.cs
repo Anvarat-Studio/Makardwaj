@@ -31,7 +31,16 @@ namespace Makardwaj.Characters.Enemy.States
             {
                 if (!_enemyController.IsDead)
                 {
-                    stateMachine.ChangeState(_controller.PatrolState);
+                    var ec = _enemyController as EnemyFrogController;
+                    if (ec)
+                    {
+                        stateMachine.ChangeState(ec.PatrolState);
+                    }
+                    else
+                    {
+                        stateMachine.ChangeState(_controller.PatrolState);
+                    }
+                    
                 }
             }
         }

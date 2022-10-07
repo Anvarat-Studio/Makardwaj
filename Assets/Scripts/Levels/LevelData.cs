@@ -10,6 +10,7 @@ namespace Makardwaj.Levels
         public List<BaseEnemyController> m_enemies;
         public Transform m_portalInitialPosition;
         public Transform m_portalEndPosition;
+        public bool isBossBattle;
     }
 }
 

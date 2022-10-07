@@ -110,6 +110,11 @@ public class GameManager : MonoBehaviour
 
     private void OnEnemyKilled()
     {
+        if (m_levelManager.CurrentLevelData.isBossBattle)
+        {
+            return;
+        }
+
         _remainingEnemies--;
         if(_remainingEnemies < 1)
         {

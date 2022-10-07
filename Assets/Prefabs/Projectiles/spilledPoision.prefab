@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8120675670704877749}
   - component: {fileID: 7171554899660462213}
   - component: {fileID: 6454895417020577259}
-  - component: {fileID: 972276764524020242}
+  - component: {fileID: 7432355918581644271}
   m_Layer: 16
   m_Name: spilledPoision
   m_TagString: Untagged
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activeTime: 3
---- !u!61 &972276764524020242
+--- !u!61 &7432355918581644271
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

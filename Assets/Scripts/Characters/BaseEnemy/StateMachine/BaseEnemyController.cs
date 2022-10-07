@@ -104,7 +104,17 @@ namespace Makardwaj.Characters.Enemy.Base
         {
             _collectibleFactory.Instantiate(transform.position, Quaternion.identity, collectibleColorNotAllowed);
             EventHandler.EnemyKilled?.Invoke();
-            Destroy(gameObject, 0);
+            //Destroy(gameObject, 0);
+            gameObject.SetActive(false);
+        }
+
+        public void Respawn(Vector2 position)
+        {
+            transform.position = position;
+            IsDead = false;
+            IsCaptured = false;
+            gameObject.SetActive(true);
+            EnableCollider();
         }
 
         #region Triggers

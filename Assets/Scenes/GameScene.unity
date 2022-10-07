@@ -3923,6 +3923,7 @@ MonoBehaviour:
   m_lifeIcon: {fileID: 5331382904268624959, guid: 02964f1553f27452ba11d6cc73d4c38a, type: 3}
   m_livesParent: {fileID: 1835552788}
   m_pauseMenuHandler: {fileID: 50195960}
+  m_levelText: {fileID: 1995825039}
 --- !u!1 &2084707452
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,7 +41,7 @@ namespace Makardwaj.Characters.Enemy.Base
         {
             var player = collision.collider.GetComponent<MakardwajController>();
 
-            if (player)
+            if (player && !player.IsDead)
             {
                 player.Die();
             }

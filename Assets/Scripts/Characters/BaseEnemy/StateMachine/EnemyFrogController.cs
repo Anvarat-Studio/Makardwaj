@@ -1,5 +1,7 @@
-﻿using Makardwaj.Characters.Enemy.Frog;
+﻿using CCS.SoundPlayer;
+using Makardwaj.Characters.Enemy.Frog;
 using Makardwaj.Characters.Enemy.States;
+using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 using Makardwaj.Projectiles;
 using UnityEngine;
 
@@ -52,7 +54,22 @@ namespace Makardwaj.Characters.Enemy.Base
                 return false;
             }
             Debug.DrawRay(m_eyePosition.position, Vector2.right * FacingDirection * _frogData.attackDistance, Color.red, 0.1f);
-            return Physics2D.Raycast(m_eyePosition.position, Vector2.right * FacingDirection, _frogData.attackDistance, _frogData.playerLayerMask);
+
+            var hit = Physics2D.Raycast(m_eyePosition.position, Vector2.right * FacingDirection, _frogData.attackDistance, _frogData.playerLayerMask);
+            if (hit)
+            {
+                var player = hit.collider.GetComponent<MakardwajController>();
+                if (!player.IsDead)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return false;
         }
 
         public void ShootPoison()
@@ -60,6 +77,13 @@ namespace Makardwaj.Characters.Enemy.Base
             LastShotTime = Time.time;
             _poison.gameObject.SetActive(true);
             _poison.Shoot(m_mouthPosition.position, _frogData.posionSpeed, FacingDirection);
+        }
+
+        public override void SpawnBody()
+        {
+            base.SpawnBody();
+
+            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "frogDie", 0.5f, false);
         }
     }
 }

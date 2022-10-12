@@ -178,7 +178,7 @@ namespace CCS.SoundPlayer
         /// </summary>
         /// <param name="sound"></param>
         /// <param name="pitch"></param>
-        public AudioSource OverridePlaySound(AudioClip sound, float pitch)
+        public AudioSource OverridePlaySound(AudioClip sound, float pitch, bool looping = false)
         {
             //Checks to see if the source is not playing - automatically choses this option instead of stopping a sound.
             foreach (AudioSource source in sources)
@@ -187,6 +187,7 @@ namespace CCS.SoundPlayer
                 {
                     source.clip = sound;
                     source.pitch = pitch;
+                    source.loop = looping;
                     source.Play();
                     return source;
                 }

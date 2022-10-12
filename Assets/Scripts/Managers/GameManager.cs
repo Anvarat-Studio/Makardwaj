@@ -1,4 +1,5 @@
 using System.Collections;
+using Anvarat.Splash;
 using CCS.SoundPlayer;
 using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 using Makardwaj.Data;
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform m_bubbleParent;
     [SerializeField] private Portal m_portalPrefab;
     [SerializeField] private LevelManager m_levelManager;
+    [SerializeField] private AnvaratSplashHandler m_splashScreenHandler;
 
     private MakardwajController m_player;
     private Portal _portal;
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
     {
         EventHandler.EnemyKilled += OnEnemyKilled;
         m_levelManager.nextLevelLoaded += OnLevelLoaded;
+        m_splashScreenHandler.splashEnded += InitiateGame;
+        m_splashScreenHandler.splashScreenActivated += SplashScreenActivated;
     }
 
     private void Start()
@@ -58,9 +62,8 @@ public class GameManager : MonoBehaviour
         _portal.doorClosed += OnDoorClose;
         _playerSpawnPosition = _portal.PlayerPosition;
         _remainingEnemies = _totalEnemies;
-        _portal.OpenAndCloseDoor();
 
-        StartGame();
+        m_splashScreenHandler.gameObject.SetActive(true);
     }
 
     private void OnDisable()
@@ -70,12 +73,40 @@ public class GameManager : MonoBehaviour
         _portal.doorOpened -= OnDoorOpen;
         _portal.doorClosed -= OnDoorClose;
         m_levelManager.nextLevelLoaded -= OnLevelLoaded;
+        m_splashScreenHandler.splashEnded -= InitiateGame;
+        m_splashScreenHandler.splashScreenActivated -= SplashScreenActivated; 
+    }
+
+    
+    private void SplashScreenActivated()
+    {
+        StartCoroutine(IE_OnSplashActivated());
+    }
+
+    private void InitiateGame()
+    {
+        StartGame();
+        _portal.OpenAndCloseDoor();
+        if (m_levelManager.CurrentLevelData.isBossLevel)
+        {
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic", 1, true);
+        }
+        else
+        {
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
+        }
+        
+    }
+
+    private IEnumerator IE_OnSplashActivated()
+    {
+        yield return new WaitForSeconds(m_gameData.splashScreenTime);
+        m_splashScreenHandler.DisableSplash();
     }
 
     private void Initialize()
     {
         Application.targetFrameRate = m_targetFrameRate;
-        SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
         _remainingLives = m_gameData.maxLives;
         _respawnTime = new WaitForSeconds(m_gameData.respawnTime);
     }
@@ -98,23 +129,16 @@ public class GameManager : MonoBehaviour
         {
             SendPlayerToHeaven();
             EventHandler.GameEnd?.Invoke();
-            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "gameOver", 0.5f, false);
         }
         else
         {
             
             RespawnPlayer();
-            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "lifeLost", 0.5f, false);
         }
     }
 
     private void OnEnemyKilled()
     {
-        if (m_levelManager.CurrentLevelData.isBossBattle)
-        {
-            return;
-        }
-
         _remainingEnemies--;
         if(_remainingEnemies < 1)
         {
@@ -209,6 +233,15 @@ public class GameManager : MonoBehaviour
         _portal.Teleport(_portalInitialPosition);
         _playerSpawnPosition = _portal.PlayerPosition;
         _portal.OpenAndCloseDoor();
+
+        if (m_levelManager.CurrentLevelData.isBossLevel)
+        {
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic", 1, true);
+        }
+        else
+        {
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
+        }
     }
 
     private void InitializeLevelData()

@@ -28,10 +28,7 @@ namespace Makardwaj.Projectiles
             transform.position = startPos;
             _workbench.Set(speed * dir, _workbench.y);
             _rigidbody.velocity = _workbench;
-            gameObject.SetActive(true);
         }
-
-
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
@@ -44,6 +41,8 @@ namespace Makardwaj.Projectiles
                 _vfxParticles = Instantiate(m_vfxParticles, player.transform.position, Quaternion.identity);
                 Invoke(nameof(DestroyParticles), 1);
             }
+
+            
 
             gameObject.SetActive(false);
             _spillVFX.Activate(point);

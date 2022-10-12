@@ -184,6 +184,7 @@ namespace CCS.SoundPlayer
             {
                 if(EnumFlags<MixerPlayer>.HasFlag(m.player, player))
                 {
+                    m.Pause();
                     m.PlaySound(sound.asset, pitch, enableLooping);
                 }
             }

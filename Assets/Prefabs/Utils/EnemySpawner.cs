@@ -27,7 +27,6 @@ namespace Makardwaj.Utils
             InitializePoisonPool();
 
             Random.InitState((int)Time.time);
-            SpawnPoison(30, 0.1f, 0.5f);
         }
 
 

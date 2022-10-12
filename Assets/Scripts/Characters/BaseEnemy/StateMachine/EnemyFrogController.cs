@@ -1,5 +1,4 @@
-﻿using CCS.SoundPlayer;
-using Makardwaj.Characters.Enemy.Frog;
+﻿using Makardwaj.Characters.Enemy.Frog;
 using Makardwaj.Characters.Enemy.States;
 using Makardwaj.Projectiles;
 using UnityEngine;
@@ -61,12 +60,6 @@ namespace Makardwaj.Characters.Enemy.Base
             LastShotTime = Time.time;
             _poison.gameObject.SetActive(true);
             _poison.Shoot(m_mouthPosition.position, _frogData.posionSpeed, FacingDirection);
-        }
-
-        public override void SpawnBody()
-        {
-            base.SpawnBody();
-            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "frogDie", 0.5f, false);
         }
     }
 }

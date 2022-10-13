@@ -22,8 +22,8 @@ TagManager:
   - Portal
   - Poison
   - PoisonSpill
-  - 
-  - 
+  - PoisonCollision
+  - Boss
   - 
   - 
   - 

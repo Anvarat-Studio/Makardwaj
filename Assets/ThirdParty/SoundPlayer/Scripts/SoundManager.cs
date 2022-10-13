@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using CCS.EnumerationFlags;
@@ -184,6 +183,7 @@ namespace CCS.SoundPlayer
             {
                 if(EnumFlags<MixerPlayer>.HasFlag(m.player, player))
                 {
+                    m.Pause();
                     m.PlaySound(sound.asset, pitch, enableLooping);
                 }
             }
@@ -199,6 +199,21 @@ namespace CCS.SoundPlayer
                     m.PlaySound(sound.asset, pitch, enableLooping);
                 }
             }
+        }
+
+        public AudioSource PlaySoundOverride(MixerPlayer player, string audioName, float pitch, bool looping)
+        {
+            var sound = sfxCollection.audioCollection.FirstOrDefault(s => s.assetName == audioName);
+            foreach (Mixer m in mixers)
+            {
+
+                if (EnumFlags<MixerPlayer>.HasFlag(m.player, player))
+                {
+                    return m.OverridePlaySound(sound.asset, pitch, looping);
+                }
+            }
+
+            return null;
         }
 
         /// <summary>

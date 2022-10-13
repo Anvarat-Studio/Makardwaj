@@ -15,5 +15,7 @@ MonoBehaviour:
   collection:
   - {fileID: -985826542261610881, guid: db6be0d4b871bf444bb32596aaa7a7bb, type: 3}
   - {fileID: 4394338158036555721, guid: 806463d728b864244b2b2a05483d8d79, type: 3}
+  - {fileID: 4394338158036555721, guid: c9b48301128984cea9f729d598b0fd8b, type: 3}
+  - {fileID: 6447463627996061919, guid: 5ca864dd460d74507989cf4176c7297c, type: 3}
   heaven: {fileID: 5103904432056871288, guid: b2c7990c38d9c4f63a23cf7e4755d91c, type: 3}
   nextLevelPosition: {x: 0, y: -30}

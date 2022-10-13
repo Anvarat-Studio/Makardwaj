@@ -15,3 +15,5 @@ MonoBehaviour:
   audioCollection:
   - assetName: bgMusic
     asset: {fileID: 8300000, guid: f82f9d2e4ca094d8f99bd17c0c1ec5f5, type: 3}
+  - assetName: bossMusic
+    asset: {fileID: 8300000, guid: 8580f77c6e78141dca8f2abdeab5b65a, type: 3}

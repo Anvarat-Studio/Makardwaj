@@ -9,19 +9,17 @@ namespace Makardwaj.Characters.Enemy.Base
 {
     public class EnemyFrogController : BaseEnemyController
     {
-        [SerializeField] private Poison m_poisonPrefab;
         [SerializeField] private Transform m_mouthPosition;
 
         private EnemyFrogData _frogData;
+        private PoisonPool _poisonPool;
         public float LastShotTime { get; private set; }
-        private Poison _poison;
 
         protected override void Awake()
         {
             base.Awake();
+            _poisonPool = FindObjectOfType<PoisonPool>();
             _frogData = m_enemyData as EnemyFrogData;
-            _poison = Instantiate(m_poisonPrefab, transform.position, Quaternion.identity);
-            _poison.gameObject.SetActive(false);
             LastShotTime = Time.time - _frogData.attackCooldownTime;
         }
         #region StateMachine
@@ -75,15 +73,14 @@ namespace Makardwaj.Characters.Enemy.Base
         public void ShootPoison()
         {
             LastShotTime = Time.time;
-            _poison.gameObject.SetActive(true);
-            _poison.Shoot(m_mouthPosition.position, _frogData.posionSpeed, FacingDirection);
+            _poisonPool.InstantiatePoison(m_mouthPosition.position, _frogData.posionSpeed, FacingDirection);
         }
 
         public override void SpawnBody()
         {
             base.SpawnBody();
 
-            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "frogDie", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Enemy, "frogDie", 0.5f, false);
         }
     }
 }

@@ -58,7 +58,7 @@ namespace Makardwaj.Environment
             _animator.SetBool("close", false);
             _collider.enabled = false;
             _enableEntering = enableEntering;
-            SoundManager.Instance.PlaySFX(MixerPlayer.Explosions, "doorOpen", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Extra, "doorOpen", 0.5f, false);
         }
 
         public void CloseDoor()
@@ -66,7 +66,7 @@ namespace Makardwaj.Environment
             _animator.SetBool("open", false);
             _animator.SetBool("close", true);
             _collider.enabled = false;
-            SoundManager.Instance.PlaySFX(MixerPlayer.Explosions, "doorClose", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Extra, "doorClose", 0.5f, false);
         }
 
         public void DoorOpenTrigger()

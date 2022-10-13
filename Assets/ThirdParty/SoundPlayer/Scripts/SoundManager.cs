@@ -8,12 +8,15 @@ namespace CCS.SoundPlayer
 {
     public enum MixerPlayer
     {
-        Explosions = 1,
-        Instantiations = 2,
-        Movement = 4,
+        Movement = 1,
+        Bubble = 2,
+        Enemy = 4,
         Music = 8,
-        Interactions = 16,
-        Dialog = 32
+        UI = 16,
+        Collectibles = 32,
+        Splash = 64,
+        Extra = 128,
+        Player = 256
     }
 
 
@@ -38,11 +41,11 @@ namespace CCS.SoundPlayer
 #endregion
         private Mixer[] mixers;
         private string[] mixerPrefixes=
-            {"Explosion","Instantiation","Movement","Music","Interaction","Dialog" };
+            {"Movement","Bubble","Enemy","Music","UI", "Splash", "Collectibles", "Extra", "Player" };
         private MixerPlayer[] mixerTypes =
-            {MixerPlayer.Explosions,MixerPlayer.Instantiations,MixerPlayer.Movement,MixerPlayer.Music,MixerPlayer.Interactions,MixerPlayer.Dialog};
+            {MixerPlayer.Movement,MixerPlayer.Bubble,MixerPlayer.Enemy,MixerPlayer.Music,MixerPlayer.UI, MixerPlayer.Collectibles, MixerPlayer.Splash, MixerPlayer.Extra, MixerPlayer.Player};
         private string[] mixerResourceNames =
-            {"Explosions","Instantiations","Movement","Music","Interactions","Dialog" };
+            {"Movement","Bubble","Enemy","Music","UI", "Splash", "Collectibles", "Extra", "Player" };
 
         /// <summary>
         /// Initializing the Sound Manager.
@@ -174,6 +177,30 @@ namespace CCS.SoundPlayer
                 }
             }
 
+        }
+
+        public void MuteMusic()
+        {
+            foreach (Mixer m in mixers)
+            {
+                if (EnumFlags<MixerPlayer>.HasFlag(MixerPlayer.Music, MixerPlayer.Music))
+                {
+                    m.AdjustMasterLevel(0);
+                    return;
+                }
+            }
+        }
+
+        public void UnMuteMusic()
+        {
+            foreach (Mixer m in mixers)
+            {
+                if (EnumFlags<MixerPlayer>.HasFlag(MixerPlayer.Music, MixerPlayer.Music))
+                {
+                    m.AdjustMasterLevel(1);
+                    return;
+                }
+            }
         }
 
         public void PlayMusic(MixerPlayer player, string audioName, float pitch, bool enableLooping)
@@ -381,7 +408,7 @@ namespace CCS.SoundPlayer
         /// <param name="volumeLevel"></param>
         public void AdjustVolume(MixerPlayer player, float volumeLevel)
         {
-            if (EnumFlags<MixerPlayer>.HasAllFlags(player, MixerPlayer.Dialog , MixerPlayer.Explosions , MixerPlayer.Instantiations , MixerPlayer.Interactions , MixerPlayer.Movement , MixerPlayer.Music))
+            if (EnumFlags<MixerPlayer>.HasAllFlags(player, MixerPlayer.Bubble , MixerPlayer.Enemy , MixerPlayer.Movement , MixerPlayer.Music , MixerPlayer.UI , MixerPlayer.Extra, MixerPlayer.Collectibles, MixerPlayer.Splash, MixerPlayer.Player))
             {
                 AdjustMasterVolume(volumeLevel);
                 return;

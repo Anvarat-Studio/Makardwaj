@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         _remainingEnemies = _totalEnemies;
 
         m_splashScreenHandler.gameObject.SetActive(true);
-        SoundManager.Instance.PlaySFX(MixerPlayer.Instantiations, "splashSound", 0.5f, false);
+        SoundManager.Instance.PlaySFX(MixerPlayer.Splash, "splashSound", 0.5f, false);
     }
 
     private void OnDisable()
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         StartGame();
         _portal.OpenAndCloseDoor();
 
-        string levelName = (m_levelManager.CurrentLevelData.isBossLevel) ? m_levelManager.CurrentLevelData.levelName : $"LEVEL - {m_levelManager.m_currentLevel + 1}";
+        string levelName = (m_levelManager.CurrentLevelData.isBossLevel) ? m_levelManager.CurrentLevelData.levelName : $"LEVEL - 1.{m_levelManager.m_currentLevel + 1}";
         EventHandler.LevelComplete?.Invoke(levelName);
 
         if (m_levelManager.CurrentLevelData.isBossLevel)
@@ -134,13 +134,13 @@ public class GameManager : MonoBehaviour
         {
             SendPlayerToHeaven();
             EventHandler.GameEnd?.Invoke();
-            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "gameOver", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Player, "gameOver", 0.5f, false);
         }
         else
         {
             
             RespawnPlayer();
-            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "lifeLost", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Player, "lifeLost", 0.5f, false);
         }
     }
 

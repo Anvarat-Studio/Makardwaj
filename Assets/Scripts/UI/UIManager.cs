@@ -14,6 +14,7 @@ namespace Makardwaj.UI
         [SerializeField] private Transform m_livesParent;
         [SerializeField] private PauseMenuHandler m_pauseMenu;
         [SerializeField] private Text m_levelIndexText;
+        
 
         private List<GameObject> m_lifeIcons;
 
@@ -130,7 +131,7 @@ namespace Makardwaj.UI
 
         public void PlayClickSound()
         {
-            SoundManager.Instance.PlaySFX(MixerPlayer.Instantiations, "click", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.UI, "click", 0.5f, false);
         }
     }
 }

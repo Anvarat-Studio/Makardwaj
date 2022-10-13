@@ -18,7 +18,7 @@ namespace Makardwaj.Characters.Enemy.Base
         {
             base.SpawnBody();
 
-            SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, "mushroomDie", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Enemy, "mushroomDie", 0.5f, false);
         }
     }
 }

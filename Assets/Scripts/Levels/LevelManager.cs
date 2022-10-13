@@ -89,7 +89,7 @@ namespace Makardwaj.Levels
             CurrentLevelData = NextLevelData;
             NextLevelData = LoadNextLevel();
 
-            string levelName = (CurrentLevelData.isBossLevel) ? CurrentLevelData.levelName : $"LEVEL - {m_currentLevel + 1}";
+            string levelName = (CurrentLevelData.isBossLevel) ? CurrentLevelData.levelName : $"LEVEL - 1.{m_currentLevel + 1}";
             EventHandler.LevelComplete?.Invoke(levelName);
 
             nextLevelLoaded?.Invoke();

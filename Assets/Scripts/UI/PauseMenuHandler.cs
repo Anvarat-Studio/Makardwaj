@@ -11,6 +11,8 @@ namespace Makardwaj.UI
 {
     public class PauseMenuHandler : MonoBehaviour
     {
+        private bool _musicEnabled = true;
+
         public void SetActive(bool isActive)
         {
             gameObject.SetActive(isActive);
@@ -20,7 +22,7 @@ namespace Makardwaj.UI
 
         public void PlayClickSound()
         {
-            SoundManager.Instance.PlaySFX(MixerPlayer.Instantiations, "click", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.UI, "click", 0.5f, false);
         }
 
         public void QuitGame()
@@ -30,6 +32,19 @@ namespace Makardwaj.UI
 #else
             EditorApplication.isPlaying = false;
 #endif
+        }
+
+        public void ToggleMusic()
+        {
+            _musicEnabled = !_musicEnabled;
+            if (_musicEnabled)
+            {
+                SoundManager.Instance.UnMuteMusic();
+            }
+            else
+            {
+                SoundManager.Instance.MuteMusic();
+            }
         }
     }
 }

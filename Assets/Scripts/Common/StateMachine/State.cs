@@ -32,7 +32,7 @@ using UnityEngine;
             controller.Anim.SetBool(animBoolName, true);
             if (!string.IsNullOrEmpty(sfxName))
             {
-                SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, sfxName, 1, false);
+                SoundManager.Instance.PlaySFX(MixerPlayer.Enemy, sfxName, 1, false);
             }
             startTime = Time.time;
             isAnimationFinished = false;

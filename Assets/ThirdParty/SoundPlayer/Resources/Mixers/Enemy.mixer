@@ -6,7 +6,7 @@ AudioMixerController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Explosions
+  m_Name: Enemy
   m_OutputGroup: {fileID: 0}
   m_MasterGroup: {fileID: 24300002}
   m_Snapshots:
@@ -85,7 +85,7 @@ AudioMixerSnapshotController:
     e6994a0825b65244591fcde2f5f16586: 0.1
     f54202b97b2a0b646a55599e8b46539e: 20
     4a24a7aba0c4358459d375ffd1b9ebcc: -5
-    43b395ebc224ab4418f41cb2b4a70716: -2.5738313
+    43b395ebc224ab4418f41cb2b4a70716: -5.3230715
     e058b60e89ff9f04aae626c119d3cc19: -80
     2b770c4f14d21c540b96b26e792ea504: -5
   m_TransitionOverrides: {}
@@ -95,7 +95,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Explosion1
+  m_Name: Enemy1
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 71122f8203ee4e7498b30e7844e9ef94
   m_Children: []
@@ -114,7 +114,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Explosion3
+  m_Name: Enemy3
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: dd1572c43d804c440aa7e5882ce44f10
   m_Children: []
@@ -133,7 +133,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Explosion2
+  m_Name: Enemy2
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: ee5ee1d69e444f34abf2020320359301
   m_Children: []
@@ -152,7 +152,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Explosion5
+  m_Name: Enemy5
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: b40d098a024213644b097727b0b97ab3
   m_Children: []
@@ -171,7 +171,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Explosion4
+  m_Name: Enemy4
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: b980fd57b5549c74b87389addfa31c1f
   m_Children: []

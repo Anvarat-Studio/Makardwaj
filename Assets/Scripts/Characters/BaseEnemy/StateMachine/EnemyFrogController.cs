@@ -1,5 +1,7 @@
-﻿using Makardwaj.Characters.Enemy.Frog;
+﻿using CCS.SoundPlayer;
+using Makardwaj.Characters.Enemy.Frog;
 using Makardwaj.Characters.Enemy.States;
+using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 using Makardwaj.Projectiles;
 using UnityEngine;
 
@@ -7,19 +9,17 @@ namespace Makardwaj.Characters.Enemy.Base
 {
     public class EnemyFrogController : BaseEnemyController
     {
-        [SerializeField] private Poison m_poisonPrefab;
         [SerializeField] private Transform m_mouthPosition;
 
         private EnemyFrogData _frogData;
+        private PoisonPool _poisonPool;
         public float LastShotTime { get; private set; }
-        private Poison _poison;
 
         protected override void Awake()
         {
             base.Awake();
+            _poisonPool = FindObjectOfType<PoisonPool>();
             _frogData = m_enemyData as EnemyFrogData;
-            _poison = Instantiate(m_poisonPrefab, transform.position, Quaternion.identity);
-            _poison.gameObject.SetActive(false);
             LastShotTime = Time.time - _frogData.attackCooldownTime;
         }
         #region StateMachine
@@ -52,14 +52,35 @@ namespace Makardwaj.Characters.Enemy.Base
                 return false;
             }
             Debug.DrawRay(m_eyePosition.position, Vector2.right * FacingDirection * _frogData.attackDistance, Color.red, 0.1f);
-            return Physics2D.Raycast(m_eyePosition.position, Vector2.right * FacingDirection, _frogData.attackDistance, _frogData.playerLayerMask);
+
+            var hit = Physics2D.Raycast(m_eyePosition.position, Vector2.right * FacingDirection, _frogData.attackDistance, _frogData.playerLayerMask);
+            if (hit)
+            {
+                var player = hit.collider.GetComponent<MakardwajController>();
+                if (!player.IsDead)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return false;
         }
 
         public void ShootPoison()
         {
             LastShotTime = Time.time;
-            _poison.gameObject.SetActive(true);
-            _poison.Shoot(m_mouthPosition.position, _frogData.posionSpeed, FacingDirection);
+            _poisonPool.InstantiatePoison(m_mouthPosition.position, _frogData.posionSpeed, FacingDirection);
+        }
+
+        public override void SpawnBody()
+        {
+            base.SpawnBody();
+
+            SoundManager.Instance.PlaySFX(MixerPlayer.Enemy, "frogDie", 0.5f, false);
         }
     }
 }

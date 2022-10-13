@@ -6,20 +6,17 @@ namespace Makardwaj.Projectiles
 {
     public class Poison : MonoBehaviour
     {
-        [SerializeField] private PoisonSpillVfx m_spillVFXPrefab;
-
         private Rigidbody2D _rigidbody;
-        private PoisonSpillVfx _spillVFX;
         [SerializeField] private GameObject m_vfxParticles;
 
+        private PoisonPool _pool;
         private Vector2 _workbench;
         private GameObject _vfxParticles;
 
         private void Awake()
         {
+            _pool = FindObjectOfType<PoisonPool>();
             _rigidbody = GetComponent<Rigidbody2D>();
-            _spillVFX = Instantiate(m_spillVFXPrefab, transform.position, Quaternion.identity);
-            _spillVFX.gameObject.SetActive(false);
         }
 
         public void Shoot(Vector2 startPos, float speed, int dir)
@@ -45,7 +42,7 @@ namespace Makardwaj.Projectiles
             
 
             gameObject.SetActive(false);
-            _spillVFX.Activate(point);
+            _pool.InstantiatePoisonSpill(point);
         }
 
         private void DestroyParticles()

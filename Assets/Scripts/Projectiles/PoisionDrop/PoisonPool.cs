@@ -1,0 +1,79 @@
+using Assets.Scripts.Projectiles.PoisionDrop;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+namespace Makardwaj.Projectiles
+{
+    public class PoisonPool : MonoBehaviour
+    {
+        [SerializeField] private Poison m_poisonPrefab;
+        [SerializeField] private PoisonSpillVfx m_poisonSpillPrefab;
+        [SerializeField] private int m_initialPoolCount = 10;
+        [SerializeField] private Transform m_poisonParent;
+        [SerializeField] private Transform m_poisonSpillParent;
+
+        private List<Poison> _poisonPool;
+        private List<PoisonSpillVfx> _poisonSpillPool;
+        private Poison _workspacePoison;
+        private PoisonSpillVfx _workspacePoisonSpill;
+
+        private void Awake()
+        {
+            InitializePool();
+        }
+
+        private void InitializePool()
+        {
+            _poisonPool = new List<Poison>();
+            _poisonSpillPool = new List<PoisonSpillVfx>();
+
+            for (int i = 0; i < m_initialPoolCount; i++)
+            {
+                _workspacePoison = Instantiate(m_poisonPrefab, m_poisonParent);
+                _workspacePoison.gameObject.SetActive(false);
+
+                _poisonPool.Add(_workspacePoison);
+
+                _workspacePoisonSpill = Instantiate(m_poisonSpillPrefab, m_poisonSpillParent);
+                _workspacePoisonSpill.gameObject.SetActive(false);
+
+                _poisonSpillPool.Add(_workspacePoisonSpill);
+            }
+        }
+
+        public Poison InstantiatePoison(Vector2 position, float speed, int dir)
+        {
+            _workspacePoison = _poisonPool.FirstOrDefault(p => !p.gameObject.activeInHierarchy);
+
+            if (!_workspacePoison)
+            {
+                _workspacePoison = Instantiate(m_poisonPrefab, m_poisonParent);
+                _workspacePoison.gameObject.SetActive(false);
+                _poisonPool.Add(_workspacePoison);
+            }
+
+            _workspacePoison.gameObject.SetActive(true);
+            _workspacePoison.Shoot(position, speed, dir);
+
+            return _workspacePoison;
+        }
+
+        public PoisonSpillVfx InstantiatePoisonSpill(Vector2 position)
+        {
+            _workspacePoisonSpill = _poisonSpillPool.FirstOrDefault(p => !p.gameObject.activeInHierarchy);
+
+            if (!_workspacePoisonSpill)
+            {
+                _workspacePoisonSpill = Instantiate(m_poisonSpillPrefab, m_poisonSpillParent);
+                _workspacePoisonSpill.gameObject.SetActive(false);
+                _poisonSpillPool.Add(_workspacePoisonSpill);
+            }
+
+            _workspacePoisonSpill.Activate(position);
+            _workspacePoisonSpill.gameObject.SetActive(true);
+
+            return _workspacePoisonSpill;
+        }
+    }
+}

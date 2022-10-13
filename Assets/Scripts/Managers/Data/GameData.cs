@@ -10,5 +10,6 @@ namespace Makardwaj.Data
         public MakardwajController player;
         public int maxLives = 3;
         public float respawnTime = 3;
+        public float splashScreenTime = 2f;
     }
 }

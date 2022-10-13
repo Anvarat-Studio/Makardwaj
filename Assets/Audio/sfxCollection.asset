@@ -14,16 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioCollection:
   - assetName: jump
-    asset: {fileID: 8300000, guid: 179af428b842947b98335dce32850d29, type: 3}
+    asset: {fileID: 8300000, guid: 8a6da126293186640a5b643fe641d7fc, type: 3}
   - assetName: shoot
-    asset: {fileID: 8300000, guid: 7496567e4fd0b42399ad311b5d68bffe, type: 3}
+    asset: {fileID: 8300000, guid: cb27d128a1b1f0f4ea4ed5cd8475d6a2, type: 3}
   - assetName: bubblePop
-    asset: {fileID: 8300000, guid: 8e0171c157f2f45cc8c963dc24461aa8, type: 3}
+    asset: {fileID: 8300000, guid: a457472631227bf49b3f51490b67c087, type: 3}
   - assetName: die
     asset: {fileID: 8300000, guid: a683d964cdd55474e840fbfe3d1c030e, type: 3}
   - assetName: collect
-    asset: {fileID: 8300000, guid: 538fa87a1790545358cfe1b3439d089a, type: 3}
+    asset: {fileID: 8300000, guid: 888524a2f65646c40ba5df2d0c231e5f, type: 3}
   - assetName: enemyCapture
-    asset: {fileID: 8300000, guid: 179af428b842947b98335dce32850d29, type: 3}
+    asset: {fileID: 8300000, guid: 7e2a5cff9fb2bc54dbbac55af4a82bd7, type: 3}
   - assetName: bubbleBurst
-    asset: {fileID: 8300000, guid: 8e0171c157f2f45cc8c963dc24461aa8, type: 3}
+    asset: {fileID: 8300000, guid: a457472631227bf49b3f51490b67c087, type: 3}
+  - assetName: doorOpen
+    asset: {fileID: 8300000, guid: 4b5d984343817ff488db2a9491750f72, type: 3}
+  - assetName: doorClose
+    asset: {fileID: 8300000, guid: a6bc49058a67d9449911a2f2f3883469, type: 3}
+  - assetName: lifeLost
+    asset: {fileID: 8300000, guid: dac5dcde04aa72e4184eff991846fba0, type: 3}
+  - assetName: gameOver
+    asset: {fileID: 8300000, guid: 9f31833cf1dacb84b8e5d1821d50dd91, type: 3}
+  - assetName: mushroomDie
+    asset: {fileID: 8300000, guid: bde9b9501090ac442a1489ae7ce598cb, type: 3}
+  - assetName: frogDie
+    asset: {fileID: 8300000, guid: 1e5b3a4d8d677ac4ca13fabb46707c71, type: 3}
+  - assetName: stepSound
+    asset: {fileID: 8300000, guid: f8af2716075337e478a893b6357dffb0, type: 3}
+  - assetName: click
+    asset: {fileID: 8300000, guid: 8dcdeb98f576fb343a51bb7307e0983a, type: 3}
+  - assetName: splashSound
+    asset: {fileID: 8300000, guid: 12fb98aeaa972134e96beb2f8c95164f, type: 3}

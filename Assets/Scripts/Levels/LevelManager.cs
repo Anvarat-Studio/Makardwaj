@@ -1,3 +1,4 @@
+using Makardwaj.Managers;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,7 +8,7 @@ namespace Makardwaj.Levels
     public class LevelManager : MonoBehaviour
     {
         [SerializeField] private LevelCollection m_collection;
-        [SerializeField] private int _currentLevel = 2;
+        public int m_currentLevel = 2;
         [SerializeField] private Overlay m_overlay;
 
         public LevelData CurrentLevelData { get; private set; }
@@ -27,17 +28,17 @@ namespace Makardwaj.Levels
 
         public LevelData LoadCurrentLevel()
         {
-            CurrentLevelData = Instantiate(m_collection.collection[_currentLevel]);
+            CurrentLevelData = Instantiate(m_collection.collection[m_currentLevel]);
             return CurrentLevelData;
         }
 
         public LevelData LoadNextLevel()
         {
-            if (m_collection.collection.Count < _currentLevel + 2)
+            if (m_collection.collection.Count < m_currentLevel + 2)
             {
                 return null;
             }
-            NextLevelData = Instantiate(m_collection.collection[_currentLevel + 1], m_collection.nextLevelPosition, Quaternion.identity);
+            NextLevelData = Instantiate(m_collection.collection[m_currentLevel + 1], m_collection.nextLevelPosition, Quaternion.identity);
             NextLevelData.gameObject.SetActive(false);
             return NextLevelData;
         }
@@ -82,11 +83,14 @@ namespace Makardwaj.Levels
 
             Destroy(CurrentLevelData.gameObject, 0);
 
-            _currentLevel++;
-            _currentLevel = Mathf.Clamp(_currentLevel, 0, m_collection.collection.Count - 1);
+            m_currentLevel++;
+            m_currentLevel = Mathf.Clamp(m_currentLevel, 0, m_collection.collection.Count - 1);
 
             CurrentLevelData = NextLevelData;
             NextLevelData = LoadNextLevel();
+
+            string levelName = (CurrentLevelData.isBossLevel) ? CurrentLevelData.levelName : $"LEVEL - 1.{m_currentLevel + 1}";
+            EventHandler.LevelComplete?.Invoke(levelName);
 
             nextLevelLoaded?.Invoke();
         }
@@ -98,7 +102,9 @@ namespace Makardwaj.Levels
                 CurrentLevelData.gameObject.SetActive(false);
                 HeavenData.gameObject.SetActive(true);
                 onHeavenActivated?.Invoke(HeavenData.m_portalInitialPosition.position, HeavenData.m_portalEndPosition.position);
-                m_overlay.FadeOut();
+                m_overlay.FadeOut(() => {
+                    EventHandler.LevelComplete?.Invoke("SWARG");
+                });
             });
         }
 
@@ -107,7 +113,7 @@ namespace Makardwaj.Levels
             m_overlay.FadeIn(() =>
             {
                 HeavenData.gameObject.SetActive(false);
-                _currentLevel = 0;
+                m_currentLevel = 0;
                 if(CurrentLevelData != null)
                 {
                     Destroy(CurrentLevelData.gameObject, 0);

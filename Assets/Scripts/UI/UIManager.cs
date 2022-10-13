@@ -1,7 +1,10 @@
+using CCS.SoundPlayer;
 using Makardwaj.Managers;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Makardwaj.UI
 {
@@ -9,6 +12,9 @@ namespace Makardwaj.UI
     {
         [SerializeField] private GameObject m_lifeIcon;
         [SerializeField] private Transform m_livesParent;
+        [SerializeField] private PauseMenuHandler m_pauseMenu;
+        [SerializeField] private Text m_levelIndexText;
+        
 
         private List<GameObject> m_lifeIcons;
 
@@ -17,6 +23,7 @@ namespace Makardwaj.UI
             EventHandler.GameStart += OnGameStart;
             EventHandler.PlayerLiveLost += OnLifeLost;
             EventHandler.ResetLives += ResetLives;
+            EventHandler.LevelComplete += OnLevelComplete;
         }
 
         private void OnDisable()
@@ -24,6 +31,7 @@ namespace Makardwaj.UI
             EventHandler.GameStart -= OnGameStart;
             EventHandler.PlayerLiveLost -= OnLifeLost;
             EventHandler.ResetLives = ResetLives;
+            EventHandler.LevelComplete -= OnLevelComplete;
         }
 
         private void InstantiateLives(int lives)
@@ -59,6 +67,71 @@ namespace Makardwaj.UI
             {
                 i.SetActive(true);
             }
+        }
+
+        public void ActivatePauseMenu()
+        {
+            m_pauseMenu.SetActive(true);
+        }
+
+        private void OnLevelComplete(string levelName)
+        {
+            m_levelIndexText.text = levelName;
+
+            FadeInLevelText();
+        }
+
+        #region LevelText
+        private void FadeInLevelText()
+        {
+            m_levelIndexText.gameObject.SetActive(true);
+            FadeLevelText(true, 1f, () =>
+            {
+                FadeLevelText(false, onComplete: () =>
+                {
+                    m_levelIndexText.gameObject.SetActive(false);
+                });
+            });
+        }
+
+        private Coroutine _fadeLevelTextCoroutine;
+        private void FadeLevelText(bool fadeIn, float delay = 0f, UnityAction onComplete = null)
+        { 
+            if(_fadeLevelTextCoroutine != null)
+            {
+                StopCoroutine(_fadeLevelTextCoroutine);
+            }
+
+            _fadeLevelTextCoroutine = StartCoroutine(IE_FadeLevelText(fadeIn, delay, onComplete));
+        }
+
+        private IEnumerator IE_FadeLevelText(bool fadeIn, float delay = 1f, UnityAction onComplete = null)
+        {
+            var targetAlpha = fadeIn ? 1.0f : 0.0f;
+
+            var currentColor = m_levelIndexText.color;
+            currentColor.a = fadeIn ? 0.0f : 1.0f;
+            m_levelIndexText.color = currentColor;
+
+            while(Mathf.Abs(currentColor.a - targetAlpha) > 0.01f)
+            {
+                currentColor.a = Mathf.MoveTowards(currentColor.a, targetAlpha, Time.deltaTime * 0.5f);
+                m_levelIndexText.color = currentColor;
+                yield return null;
+            }
+
+            currentColor.a = targetAlpha;
+            m_levelIndexText.color = currentColor;
+
+            yield return new WaitForSeconds(delay);
+            onComplete?.Invoke();
+
+        }
+        #endregion
+
+        public void PlayClickSound()
+        {
+            SoundManager.Instance.PlaySFX(MixerPlayer.UI, "click", 0.5f, false);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             player.Anim.SetBool(animBoolName, true);
             if (!string.IsNullOrEmpty(sfxName))
             {
-                SoundManager.Instance.PlaySFX(MixerPlayer.Interactions, sfxName, 1, false);
+                SoundManager.Instance.PlaySFX(MixerPlayer.Player, sfxName, 1, false);
             }
             startTime = Time.time;
             //Debug.Log(animBoolName);

@@ -58,21 +58,11 @@ namespace Makardwaj.Bosses
         public void SpawnEnemies(UnityAction onComplete)
         {
             IsSpawningResources = true;
-            m_resourceSpawner.SpawnEnemy(3, 0, 0.5f, () =>
-            {
-                IsSpawningResources = false;
-                onComplete?.Invoke();
-            });
         }
 
         public void PoisonRain(UnityAction onComplete)
         {
             IsSpawningResources = true;
-            m_resourceSpawner.SpawnPoison(10, 0, 0.5f, () =>
-            {
-                IsSpawningResources = false;
-                onComplete?.Invoke();
-            });
         }
 
 

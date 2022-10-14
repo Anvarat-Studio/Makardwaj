@@ -2999,6 +2999,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2952791037110120627, guid: bb6d5acc77f9a4e9f87d6b36824eea53, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 253e3d945cbcd41639e213962800133d, type: 3}
     - target: {fileID: 3375252398135721604, guid: bb6d5acc77f9a4e9f87d6b36824eea53, type: 3}
       propertyPath: m_Name
       value: AnvaratSplashCanvas
@@ -3006,6 +3010,34 @@ PrefabInstance:
     - target: {fileID: 3375252398135721604, guid: bb6d5acc77f9a4e9f87d6b36824eea53, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776186849002225200, guid: bb6d5acc77f9a4e9f87d6b36824eea53, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 274.512
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776186849002225200, guid: bb6d5acc77f9a4e9f87d6b36824eea53, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 56.112
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776186849002225200, guid: bb6d5acc77f9a4e9f87d6b36824eea53, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971827352476890484, guid: bb6d5acc77f9a4e9f87d6b36824eea53, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971827352476890484, guid: bb6d5acc77f9a4e9f87d6b36824eea53, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971827352476890484, guid: bb6d5acc77f9a4e9f87d6b36824eea53, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971827352476890484, guid: bb6d5acc77f9a4e9f87d6b36824eea53, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 216
       objectReference: {fileID: 0}
     - target: {fileID: 8803567550672609606, guid: bb6d5acc77f9a4e9f87d6b36824eea53, type: 3}
       propertyPath: m_Pivot.x
@@ -3220,6 +3252,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287789594}
   m_CullTransparentMesh: 1
+--- !u!1 &1336127368 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 233901798979056130, guid: bb6d5acc77f9a4e9f87d6b36824eea53, type: 3}
+  m_PrefabInstance: {fileID: 1116946629}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1336127372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336127368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 4
+  m_AspectRatio: 1.7777778
 --- !u!1001 &1368373700
 PrefabInstance:
   m_ObjectHideFlags: 0

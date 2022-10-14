@@ -73,7 +73,7 @@ namespace Makardwaj.Characters.Enemy.Base
         public void ShootPoison()
         {
             LastShotTime = Time.time;
-            _poisonPool.InstantiatePoison(m_mouthPosition.position, _frogData.posionSpeed, FacingDirection);
+            _poisonPool.ShootPoison(m_mouthPosition.position, _frogData.posionSpeed, FacingDirection);
         }
 
         public override void SpawnBody()

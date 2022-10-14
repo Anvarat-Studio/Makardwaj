@@ -42,7 +42,7 @@ namespace Makardwaj.Projectiles
             }
         }
 
-        public Poison InstantiatePoison(Vector2 position, float speed, int dir)
+        public Poison InstantiatePoison()
         {
             _workspacePoison = _poisonPool.FirstOrDefault(p => !p.gameObject.activeInHierarchy);
 
@@ -54,7 +54,21 @@ namespace Makardwaj.Projectiles
             }
 
             _workspacePoison.gameObject.SetActive(true);
+
+            return _workspacePoison;
+        }
+
+        public Poison ShootPoison(Vector2 position, float speed, int dir)
+        {
+            _workspacePoison = InstantiatePoison();
             _workspacePoison.Shoot(position, speed, dir);
+            return _workspacePoison;
+        }
+
+        public Poison DropPoison(Vector2 position, float dropSpeed)
+        {
+            _workspacePoison = InstantiatePoison();
+            _workspacePoison.Drop(position, dropSpeed);
 
             return _workspacePoison;
         }

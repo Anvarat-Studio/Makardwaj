@@ -8,6 +8,8 @@ namespace Makardwaj.Projectiles
     {
         private Rigidbody2D _rigidbody;
         [SerializeField] private GameObject m_vfxParticles;
+        [SerializeField] private LayerMask m_groundLayer;
+        [SerializeField] private float m_groundCheckLength = 10f;
 
         private PoisonPool _pool;
         private Vector2 _workbench;
@@ -27,6 +29,14 @@ namespace Makardwaj.Projectiles
             _rigidbody.velocity = _workbench;
         }
 
+        public void Drop(Vector2 startPos, float dropSpeed = 1f)
+        {
+            _workbench = _rigidbody.velocity;
+            transform.position = startPos;
+            _workbench.Set(_workbench.x, -dropSpeed);
+            _rigidbody.velocity = _workbench;
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             var player = collision.collider.GetComponent<MakardwajController>();
@@ -34,7 +44,7 @@ namespace Makardwaj.Projectiles
             Vector2 point = collisionPoint.point;
             if (player)
             {
-                point = player.FeetPosition;
+                point = GetGroundPosition();
                 _vfxParticles = Instantiate(m_vfxParticles, player.transform.position, Quaternion.identity);
                 Invoke(nameof(DestroyParticles), 1);
             }
@@ -48,6 +58,13 @@ namespace Makardwaj.Projectiles
         private void DestroyParticles()
         {
             Destroy(_vfxParticles, 0);
+        }
+
+        private Vector2 GetGroundPosition()
+        {
+            var hit = Physics2D.Raycast(transform.position, Vector2.down, m_groundCheckLength, m_groundLayer);
+            Debug.DrawRay(transform.position, Vector2.down * m_groundCheckLength, Color.magenta, 5f);
+            return hit.point;
         }
     }
 }

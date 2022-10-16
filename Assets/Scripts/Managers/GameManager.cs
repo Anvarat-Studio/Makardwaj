@@ -70,7 +70,8 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         EventHandler.EnemyKilled -= OnEnemyKilled;
-        m_player.lifeLost -= OnPlayerLifeLost;
+        if(m_player)
+            m_player.lifeLost -= OnPlayerLifeLost;
         _portal.doorOpened -= OnDoorOpen;
         _portal.doorClosed -= OnDoorClose;
         m_levelManager.nextLevelLoaded -= OnLevelLoaded;
@@ -147,7 +148,7 @@ public class GameManager : MonoBehaviour
     private void OnEnemyKilled()
     {
         _remainingEnemies--;
-        if(_remainingEnemies < 1)
+        if(!m_levelManager.CurrentLevelData.isBossLevel && _remainingEnemies < 1)
         {
             _areAllEnemiesDead = true;
             _portal.Teleport(_portalEndPosition);

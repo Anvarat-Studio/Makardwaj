@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: FrogBossData
   m_EditorClassIdentifier: 
   movementSpeed: 1
-  idleWaitTime: 2
-  stunnedTime: 2
-  coolDownTime: 5
-  jumpAngle: 45
-  jumpSpeed: 7
-  arcHeight: 0.3
-  enemyLayer:
+  outOfHoleSpeed: 10
+  stunTime: 5
+  stompHeight: 7
+  stompWaitTime: 2
+  idleTime: 10
+  stompHeightVelocity: 10
+  stompVelocity: 70
+  stompEffectRadius: 5
+  cameraShakeDuration: 0.3
+  groundCheckRadius: 2.67
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 0
-  tongueLength: 6
+    m_Bits: 64

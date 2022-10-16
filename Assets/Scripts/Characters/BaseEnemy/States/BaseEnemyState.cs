@@ -25,4 +25,17 @@ public class BaseEnemyState : State
 
         _isGrounded = _enemyController.CheckIfGrounded();
     }
+
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+
+        if (!isExitingState)
+        {
+            if (_enemyController.IsIdle && !stateMachine.CurrentState.Equals(_enemyController.IdleState))
+            {
+                stateMachine.ChangeState(_enemyController.IdleState);
+            }
+        }
+    }
 }

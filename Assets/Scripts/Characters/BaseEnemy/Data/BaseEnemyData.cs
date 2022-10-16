@@ -8,4 +8,5 @@ public class BaseEnemyData : BaseData
     public float visionDistance = 1f;
     public LayerMask groundLayer;
     public float groundCheckRadius = 1f;
+    public float spawnSpeed = 1f;
 }

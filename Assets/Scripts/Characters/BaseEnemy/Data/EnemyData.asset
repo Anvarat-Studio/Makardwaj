@@ -21,3 +21,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheckRadius: 0.51
+  spawnSpeed: 10

@@ -2,6 +2,7 @@ using Makardwaj.Characters.Enemy.Base;
 using Makardwaj.Characters.Enemy.States;
 using Makardwaj.Common;
 using Makardwaj.Common.FiniteStateMachine;
+using UnityEngine;
 
 namespace Makardwaj.Characters.Enemy.Frog
 {
@@ -17,6 +18,11 @@ namespace Makardwaj.Characters.Enemy.Frog
             _frogController = controller as EnemyFrogController;
         }
 
+        public override void Enter()
+        {
+            base.Enter();
+        }
+
         public override void DoChecks()
         {
             base.DoChecks();
@@ -28,7 +34,6 @@ namespace Makardwaj.Characters.Enemy.Frog
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-
             if (!isExitingState)
             {
                 if(_canShootPoision && _isPlayerInFront)

@@ -21,6 +21,11 @@ namespace Makardwaj.Characters.Enemy.States
             _enemyController.SetSpeedZero();
         }
 
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
         public override void LogicUpdate()
         {
             base.LogicUpdate();
@@ -31,6 +36,7 @@ namespace Makardwaj.Characters.Enemy.States
             {
                 if (!_enemyController.IsDead)
                 {
+                    _enemyController.ResetRotation();
                     stateMachine.ChangeState(_controller.PatrolState);
                 }
             }

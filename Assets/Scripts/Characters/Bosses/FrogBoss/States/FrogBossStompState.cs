@@ -1,6 +1,6 @@
 using Makardwaj.Common;
 using Makardwaj.Common.FiniteStateMachine;
-
+using UnityEngine;
 
 namespace Makardwaj.Bosses
 {
@@ -8,6 +8,7 @@ namespace Makardwaj.Bosses
     {
         private bool _isGrounded;
         private bool _touchedGround;
+        private float _pitEnterTimeStart;
         public FrogBossStompStae(Controller controller, StateMachine stateMachine, BaseData playerData, string animBoolName, string sfxName = "") : base(controller, stateMachine, playerData, animBoolName, sfxName)
         {
         }
@@ -36,6 +37,11 @@ namespace Makardwaj.Bosses
                 {
                     _frogBoss.StompDamage();
                     _touchedGround = true;
+                    _pitEnterTimeStart = Time.time;
+                }
+                else if(_touchedGround && Time.time - _pitEnterTimeStart >= _frogBossData.waitBeforeEnteringPit)
+                {
+                    stateMachine.ChangeState(_frogBoss.GoInsidePitState);
                 }
             }
         }

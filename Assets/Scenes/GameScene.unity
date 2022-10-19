@@ -3333,8 +3333,8 @@ SpriteMask:
   m_BackSortingLayerID: -429698155
   m_FrontSortingLayer: 3
   m_BackSortingLayer: 3
-  m_FrontSortingOrder: 1
-  m_BackSortingOrder: -1
+  m_FrontSortingOrder: 10
+  m_BackSortingOrder: -10
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
 --- !u!4 &1302339473
@@ -3813,7 +3813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_collection: {fileID: 11400000, guid: 35e1db9753e9f5d4fb362b3ae1f72625, type: 2}
-  m_currentLevel: 3
+  m_currentLevel: 0
   m_overlay: {fileID: 1868147313}
 --- !u!4 &1771530446
 Transform:

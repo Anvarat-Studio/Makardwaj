@@ -4,6 +4,7 @@ using UnityEngine;
 using Makardwaj.Characters.Enemy.Base;
 using System.Linq;
 using Makardwaj.Managers;
+using System.Collections;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -49,10 +50,72 @@ namespace Makardwaj.Utils
             EventHandler.EnemyKilled -= OnEnemykilled;
         }
 
+
+        private Coroutine _dropPoisonCoroutine;
+        public void DropPoison(int enemyCount, float delay)
+        {
+            if (_dropPoisonCoroutine != null)
+            {
+                StopCoroutine(_dropPoisonCoroutine);
+            }
+
+            _dropPoisonCoroutine = StartCoroutine(IE_DropPoison(enemyCount, delay));
+        }
+
+        private IEnumerator IE_DropPoison(int poisonCount, float delay)
+        {
+            for (int i = 0; i < poisonCount; i++)
+            {
+                int j = i % m_poisonSpawnPoints.Count;
+                _workspace = m_poisonSpawnPoints[j].position;
+
+                _poisonPool.DropPoison(_workspace, m_dropSpeed);
+                yield return new WaitForSeconds(delay);
+            }
+        }
+
         public void DropPoison()
         {
             _workspace = m_poisonSpawnPoints[Random.Range(0, m_poisonSpawnPoints.Count)].position;
             _poisonPool.DropPoison(_workspace, m_dropSpeed);
+        }
+
+        private Coroutine _spawnEnemyCoroutine;
+        public void SpawnEnemies(int enemyCount, float delay)
+        {
+            if(_spawnEnemyCoroutine != null)
+            {
+                StopCoroutine(_spawnEnemyCoroutine);
+            }
+
+            _spawnEnemyCoroutine = StartCoroutine(IE_SpawnEnemies(enemyCount, delay));
+        }
+
+        private IEnumerator IE_SpawnEnemies(int enemyCount, float delay)
+        {
+            if(_currentEnemyCount >= m_maxAllowedEnemiesOnScreen)
+            {
+                yield break;
+            }
+            else
+            {
+                enemyCount = Mathf.Min(enemyCount, m_maxAllowedEnemiesOnScreen - _currentEnemyCount);
+            }
+
+            for(int i = 0; i < enemyCount; i++)
+            {
+                int j = i % m_enemySpawnPoints.Count;
+                _workspace = m_enemySpawnPoints[j].position;
+
+                _enemyWorkspace = InstantiateEnemy();
+                _finalPos = _workspace;
+                _finalPos.y = m_endYPos;
+
+                _enemyWorkspace.SpawnFromTo(_workspace, _finalPos);
+                _currentEnemyCount++;
+
+                yield return new WaitForSeconds(delay);
+            }
         }
 
         public void SpawnEnemy()

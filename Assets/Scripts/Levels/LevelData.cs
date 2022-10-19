@@ -12,6 +12,7 @@ namespace Makardwaj.Levels
         public Transform m_portalEndPosition;
         public bool isBossLevel = false;
         public string levelName;
+        public Boss boss;
     }
 }
 

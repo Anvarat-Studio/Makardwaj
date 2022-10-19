@@ -8,6 +8,8 @@ namespace Makardwaj.Bosses
     public class FrogBoss : Boss
     {
         [SerializeField] private FrogBossData m_data;
+        [SerializeField] private Tornado m_tornadoLeft;
+        [SerializeField] private Tornado m_tornadoRight;
         [SerializeField] private EnemySpawner m_spawner;
         [SerializeField] protected Transform m_groundCheck;
 
@@ -35,14 +37,24 @@ namespace Makardwaj.Bosses
             InitializeStateMachine();
         }
 
+        public override void Activate()
+        {
+            base.Activate();
+
+            gameObject.SetActive(true);
+        }
+
         #region Statemachine
         public FrogBossOutOfPitState OutOfPitState { get; private set; }
         public FrogBossStompStae StompState { get; private set; }
+        public FrogBossGoInsidePitState GoInsidePitState { get; private set; }
+
         private void InitializeStateMachine()
         {
             _stateMachine = new Common.FiniteStateMachine.StateMachine();
             OutOfPitState = new FrogBossOutOfPitState(this, _stateMachine, m_data, "outOfPit");
             StompState = new FrogBossStompStae(this, _stateMachine, m_data, "stomp");
+            GoInsidePitState = new FrogBossGoInsidePitState(this, _stateMachine, m_data, "goInsidePit");
 
             _stateMachine.Initialize(OutOfPitState);
         }
@@ -104,6 +116,8 @@ namespace Makardwaj.Bosses
         public void StompDamage()
         {
             _cameraShake.shakeDuration = m_data.cameraShakeDuration;
+            m_tornadoLeft?.StartMoving();
+            m_tornadoRight?.StartMoving();
         }
 
         private IEnumerator IE_AchieveStompHeight()
@@ -135,6 +149,16 @@ namespace Makardwaj.Bosses
             SetVelocityY(-m_data.stompVelocity);
         }
         #endregion
+
+        public void SpawnEnemies(int enemyCount, float delay)
+        {
+            m_spawner.SpawnEnemies(enemyCount, delay);
+        }
+
+        public void DropPoison(int poisonCount, float delay)
+        {
+            m_spawner.DropPoison(poisonCount, delay);
+        }
 
         public bool CheckIfGrounded()
         {

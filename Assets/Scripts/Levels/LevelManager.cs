@@ -29,6 +29,12 @@ namespace Makardwaj.Levels
         public LevelData LoadCurrentLevel()
         {
             CurrentLevelData = Instantiate(m_collection.collection[m_currentLevel]);
+
+            if (CurrentLevelData.isBossLevel)
+            {
+                CurrentLevelData.boss?.Activate();
+            }
+
             return CurrentLevelData;
         }
 
@@ -91,6 +97,11 @@ namespace Makardwaj.Levels
 
             string levelName = (CurrentLevelData.isBossLevel) ? CurrentLevelData.levelName : $"LEVEL - 1.{m_currentLevel + 1}";
             EventHandler.LevelComplete?.Invoke(levelName);
+
+            if (CurrentLevelData.isBossLevel)
+            {
+                CurrentLevelData.boss?.Activate();
+            }
 
             nextLevelLoaded?.Invoke();
         }

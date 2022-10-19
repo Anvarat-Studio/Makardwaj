@@ -44,7 +44,7 @@ MonoBehaviour:
   - {fileID: 598768820419099864}
   - {fileID: -8309228111639091834}
   root: {fileID: 8367566865408849710}
-  scrollPosition: {x: 49622.5, y: 49961}
+  scrollPosition: {x: 49617.5, y: 49970}
 --- !u!114 &598768820419099864
 MonoBehaviour:
   m_ObjectHideFlags: 0

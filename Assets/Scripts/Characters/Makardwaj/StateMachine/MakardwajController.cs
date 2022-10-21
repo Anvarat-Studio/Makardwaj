@@ -11,6 +11,7 @@ using UnityEngine.Events;
 using Makardwaj.Collectibles;
 using CCS.SoundPlayer;
 using Makardwaj.Environment;
+using Makardwaj.InteractiveItems;
 
 namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 {
@@ -66,6 +67,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public int CurrentActiveBubbles { get; set; } = 0;
         public bool IsDead { get; set; }
         public Transform BubbleParent { get; set; }
+        public InteractiveItem InteractiveItemNearby { get; set; }
         public bool CanEnterPortal;
         public bool IsInsidePortal { get; private set; }
         private bool _isGettingDebuffed { get; set; }
@@ -173,6 +175,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public MakarDeadState DeadState { get; private set; }
         public MakarEnterPortalState EnterPortalState { get; private set; }
         public MakarExitPortalState ExitPortalState { get; private set; }
+        public MakarInteractionState InteractionState { get; private set; }
 
         private void SetupStateMachine()
         {
@@ -187,6 +190,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             DeadState = new MakarDeadState(this, _stateMachine, m_data, "dead", "die");
             EnterPortalState = new MakarEnterPortalState(this, _stateMachine, m_data, "enterPortal", "");
             ExitPortalState = new MakarExitPortalState(this, _stateMachine, m_data, "exitPortal", "");
+            InteractionState = new MakarInteractionState(this, _stateMachine, m_data, "interacting", "");
 
             _stateMachine.Initialize(IdleState);
         }

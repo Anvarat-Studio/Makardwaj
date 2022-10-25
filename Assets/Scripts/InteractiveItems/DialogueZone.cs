@@ -13,7 +13,6 @@ namespace Makardwaj.InteractiveItems
         [SerializeField] private DialogueGraph m_dialogues;
         [SerializeField] private GameObject m_interactionIcon;
 
-        [SerializeField] private float m_interactionRadius = 30f;
         [SerializeField] private Vector2 m_triggerArea = new Vector2(10, 20);
         [SerializeField] private LayerMask m_playerLayer;
 

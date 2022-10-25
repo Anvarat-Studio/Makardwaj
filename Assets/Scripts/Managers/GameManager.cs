@@ -70,16 +70,16 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         EventHandler.EnemyKilled -= OnEnemyKilled;
-        if(m_player)
+        if (m_player)
             m_player.lifeLost -= OnPlayerLifeLost;
         _portal.doorOpened -= OnDoorOpen;
         _portal.doorClosed -= OnDoorClose;
         m_levelManager.nextLevelLoaded -= OnLevelLoaded;
         m_splashScreenHandler.splashEnded -= InitiateGame;
-        m_splashScreenHandler.splashScreenActivated -= SplashScreenActivated; 
+        m_splashScreenHandler.splashScreenActivated -= SplashScreenActivated;
     }
 
-    
+
     private void SplashScreenActivated()
     {
         StartCoroutine(IE_OnSplashActivated());
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         else
         {
             SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
-        } 
+        }
     }
 
     private IEnumerator IE_OnSplashActivated()
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            
+
             RespawnPlayer();
             SoundManager.Instance.PlaySFX(MixerPlayer.Player, "lifeLost", 0.5f, false);
         }
@@ -147,12 +147,12 @@ public class GameManager : MonoBehaviour
     private void OnEnemyKilled()
     {
         _remainingEnemies--;
-        if(!m_levelManager.CurrentLevelData.isBossLevel && _remainingEnemies < 1)
+        if (!m_levelManager.CurrentLevelData.isBossLevel && _remainingEnemies < 1)
         {
             _areAllEnemiesDead = true;
             _portal.Teleport(_portalEndPosition);
             _portal.OpenDoor(true);
-            EventHandler.AllEnemiesKilled?.Invoke(); 
+            EventHandler.AllEnemiesKilled?.Invoke();
         }
     }
 
@@ -169,6 +169,9 @@ public class GameManager : MonoBehaviour
     private IEnumerator IE_RespawnPlayer()
     {
         yield return _respawnTime;
+
+        m_player.HidePlayer();
+
         _portal.Teleport(_portalInitialPosition);
         _portal.OpenAndCloseDoor();
 
@@ -177,7 +180,7 @@ public class GameManager : MonoBehaviour
 
     private void SendPlayerToHeaven()
     {
-        if(_sendPlayerToHeavenCoroutine != null)
+        if (_sendPlayerToHeavenCoroutine != null)
         {
             StopCoroutine(_sendPlayerToHeavenCoroutine);
         }
@@ -188,7 +191,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator IE_SendPlayerToHeaven()
     {
         yield return _respawnTime;
-        m_levelManager.ActivateHeaven((playerPos, doorPos)=> {
+        m_levelManager.ActivateHeaven((playerPos, doorPos) =>
+        {
             m_player.RespawnAt(playerPos);
             _portal.Teleport(doorPos);
             _portal.OpenDoor(true);
@@ -203,7 +207,7 @@ public class GameManager : MonoBehaviour
         {
             m_player.RespawnAt(_playerSpawnPosition);
         }
-        
+
     }
 
     private void OnDoorClose()
@@ -214,7 +218,8 @@ public class GameManager : MonoBehaviour
         }
         else if (_isHeavenActivated)
         {
-            m_levelManager.DeactivateHeaven(() => {
+            m_levelManager.DeactivateHeaven(() =>
+            {
                 _remainingLives = m_gameData.maxLives;
                 _isHeavenActivated = false;
                 EventHandler.ResetLives?.Invoke(_remainingLives);
@@ -240,7 +245,7 @@ public class GameManager : MonoBehaviour
 
     private void OnPlayerEnterPortal()
     {
-        _portal.CloseDoor();
+            _portal.CloseDoor();
     }
 
     private void OnLevelLoaded()

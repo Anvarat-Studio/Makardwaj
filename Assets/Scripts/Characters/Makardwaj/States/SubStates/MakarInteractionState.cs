@@ -1,7 +1,6 @@
 ﻿using Makardwaj.Characters.Makardwaj.Data;
 using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 using Makardwaj.InteractiveItems;
-using UnityEngine;
 
 namespace Makardwaj.Characters.Makardwaj.States
 {
@@ -29,6 +28,8 @@ namespace Makardwaj.Characters.Makardwaj.States
         public override void Exit()
         {
             base.Exit();
+
+            player.ResetSpeechBubbleRotation();
 
             if (_dialogueZone)
             {

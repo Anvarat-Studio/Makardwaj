@@ -27,6 +27,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         [SerializeField] private Bubble m_bubblePrefab;
         [SerializeField] private GameObject m_speechBubble;
         [SerializeField] private Text m_speechText;
+        [SerializeField] private Collider2D m_wallCollider;
         #endregion
 
         #region PrivateFields
@@ -76,6 +77,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public bool IsInsidePortal { get; private set; }
         private bool _isGettingDebuffed { get; set; }
         private int _debuffAmount;
+        private float _lastDamageTime;
 
         public Vector2 FeetPosition { get => _sr.bounds.min; }
 
@@ -293,6 +295,10 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         {
             FacingDirection *= -1;
             transform.Rotate(0.0f, 180.0f, 0.0f);
+        }
+
+        public void ResetSpeechBubbleRotation()
+        {
             m_speechBubble.transform.rotation = Quaternion.identity;
         }
 
@@ -334,6 +340,9 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             ResetDirection();
             IsInsidePortal = false;
             _debuffAmount = 0;
+            _lastDamageTime = Time.time;
+            _collider.enabled = true;
+            m_wallCollider.enabled = false;
             _stateMachine.ChangeState(ExitPortalState);
         }
 
@@ -388,12 +397,14 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 
         public void Die()
         {
-            if(IsDead)
+            if(IsDead || (Time.time - _lastDamageTime) <= m_data.damageCooldownTime)
             {
                 return;
             }
             _sr.color = Color.white;
             _isGettingDebuffed = false;
+            _collider.enabled = false;
+            m_wallCollider.enabled = true;
             IsDead = true;
             lifeLost?.Invoke();
         }

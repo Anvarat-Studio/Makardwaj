@@ -26,5 +26,8 @@ namespace Makardwaj.Characters.Makardwaj.Data
         [Header("Debuff")]
         public int debuffTime = 6;
         public Color debuffColor;
+
+        [Header("Health")]
+        public float damageCooldownTime = 2f;
     }
 }

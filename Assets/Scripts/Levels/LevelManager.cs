@@ -46,6 +46,7 @@ namespace Makardwaj.Levels
             }
             NextLevelData = Instantiate(m_collection.collection[m_currentLevel + 1], m_collection.nextLevelPosition, Quaternion.identity);
             NextLevelData.gameObject.SetActive(false);
+            NextLevelData.DeactivateEnemies();
             return NextLevelData;
         }
 
@@ -75,7 +76,7 @@ namespace Makardwaj.Levels
             {
                 yield break;
             }
-            
+            EventHandler.LevelChangeStarted?.Invoke();
             while (Vector2.Distance(CurrentLevelData.transform.position, _previousLevelPosition) > 0.01f ||
                 Vector2.Distance(NextLevelData.transform.position, _currentLevelPosition) > 0.01f)
             {
@@ -93,6 +94,7 @@ namespace Makardwaj.Levels
             m_currentLevel = Mathf.Clamp(m_currentLevel, 0, m_collection.collection.Count - 1);
 
             CurrentLevelData = NextLevelData;
+            CurrentLevelData.ActivateEnemies();
             NextLevelData = LoadNextLevel();
 
             string levelName = (CurrentLevelData.isBossLevel) ? CurrentLevelData.levelName : $"LEVEL - 1.{m_currentLevel + 1}";
@@ -138,7 +140,9 @@ namespace Makardwaj.Levels
                 LoadCurrentLevel();
                 LoadNextLevel();
                 onHeavenDeactivated?.Invoke();
-                m_overlay.FadeOut();
+                m_overlay.FadeOut(()=> {
+                    EventHandler.LevelComplete?.Invoke($"LEVEL - 1.{m_currentLevel + 1}");
+                });
             });
         }
 

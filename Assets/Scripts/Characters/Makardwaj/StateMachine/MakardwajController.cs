@@ -12,6 +12,8 @@ using Makardwaj.Collectibles;
 using CCS.SoundPlayer;
 using Makardwaj.Environment;
 using Makardwaj.InteractiveItems;
+using CleverCrow.Fluid.Dialogues;
+using UnityEngine.UI;
 
 namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
 {
@@ -23,6 +25,8 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         [SerializeField] private Transform m_groundCheck;
         [SerializeField] private Transform m_mouthPosition;
         [SerializeField] private Bubble m_bubblePrefab;
+        [SerializeField] private GameObject m_speechBubble;
+        [SerializeField] private Text m_speechText;
         #endregion
 
         #region PrivateFields
@@ -289,6 +293,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         {
             FacingDirection *= -1;
             transform.Rotate(0.0f, 180.0f, 0.0f);
+            m_speechBubble.transform.rotation = Quaternion.identity;
         }
 
         public void ResetDirection()
@@ -451,6 +456,26 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public void Shoot()
         {
             InstantiateBubble(m_mouthPosition.position, Quaternion.identity, FacingDirection);
+        }
+        #endregion
+
+        #region Dialogue
+        public void OnDialogueChange(IActor actor, string dialogue)
+        {
+            if (actor.DisplayName.Equals(m_data.characterName))
+            {
+                m_speechBubble.SetActive(true);
+                m_speechText.text = dialogue;
+            }
+            else
+            {
+                m_speechBubble.SetActive(false);
+            }
+        }
+
+        public void OnDialogueEnd()
+        {
+            m_speechBubble.SetActive(false);
         }
         #endregion
 

@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f278db72dc8a8490d9e810a7374203d9, type: 3}
-  m_Name: GameData
+  m_Script: {fileID: 11500000, guid: 604a6ace6b46473fa9efde504ee00623, type: 3}
+  m_Name: Chitragupt
   m_EditorClassIdentifier: 
-  player: {fileID: 7812557466160827627, guid: bc6d078332c1f499c8e97dbf62748cb2, type: 3}
-  maxLives: 3
-  respawnTime: 3
-  splashScreenTime: 2
+  _displayName: Chitragupt
+  _portrait: {fileID: -1799251068, guid: 9a9b47d872af89547a2d43dfdf9177dd, type: 3}

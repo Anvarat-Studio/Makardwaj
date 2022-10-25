@@ -20,13 +20,184 @@ MonoBehaviour:
     width: 200
     height: 142
   nodeTitle: 
+  children:
+  - {fileID: 5400914605420059061}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: Hi, bro, sup?
+--- !u!114 &-6474489253317102213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: beadae5e-47d4-4369-9e82-a08ab83224c8
+  rect:
+    serializedVersion: 2
+    x: 52307
+    y: 50135
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: -1163569512558874681}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
+  dialogue: " I\u2019ll help you travel to these realms, just pass throug the travel
+    door and you will be teleported\nto the nearest realm where the piece might be.
+    Now go and get those pieces before you are\nsummoned for the hearing."
+--- !u!114 &-4905084486926239508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 014de28c-5c1f-437f-9097-9c30311694b9
+  rect:
+    serializedVersion: 2
+    x: 50908
+    y: 50149
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: -1314234902957379543}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
+  dialogue: You were supposed to be on the guard duty when they went missing.
+--- !u!114 &-4343008510379237634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: b401e4bd-49ea-4e22-9690-20e1df3d6220
+  rect:
+    serializedVersion: 2
+    x: 52086
+    y: 50140
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: -6474489253317102213}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: "that\u2019s gona take some time, hope I could make it back before dinner."
+--- !u!114 &-2040068123406444681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 5b7e4ff6-2aa9-4f67-b91a-7f1938225f9a
+  rect:
+    serializedVersion: 2
+    x: 50650
+    y: 50151
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: -4905084486926239508}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: "Maybe, and a pair of my socks is also missing, \nbut how does these
+    kundals (earings)\nconcern me?"
+--- !u!114 &-1314234902957379543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 7bb74754-2a37-48f6-ba04-d9add284c878
+  rect:
+    serializedVersion: 2
+    x: 51144
+    y: 50147
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: 8344597224976785520}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: Oh! Ok!
+--- !u!114 &-1163569512558874681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 73dfb6d8-6020-4d14-bb91-bc379127e6d4
+  rect:
+    serializedVersion: 2
+    x: 52550
+    y: 50138
+    width: 200
+    height: 142
+  nodeTitle: 
   children: []
   conditions: []
   enterActions: []
   exitActions: []
   choices: []
   actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
-  dialogue: I am a makar
+  dialogue: oh! Ok! Adios!
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,8 +214,18 @@ MonoBehaviour:
   - {fileID: 8367566865408849710}
   - {fileID: 598768820419099864}
   - {fileID: -8309228111639091834}
+  - {fileID: 5400914605420059061}
+  - {fileID: -2040068123406444681}
+  - {fileID: -4905084486926239508}
+  - {fileID: -1314234902957379543}
+  - {fileID: 8344597224976785520}
+  - {fileID: 5968775459973815965}
+  - {fileID: 9175456428187491064}
+  - {fileID: -4343008510379237634}
+  - {fileID: -6474489253317102213}
+  - {fileID: -1163569512558874681}
   root: {fileID: 8367566865408849710}
-  scrollPosition: {x: 49617.5, y: 49970}
+  scrollPosition: {x: 49355.5, y: 49662}
 --- !u!114 &598768820419099864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,8 +252,97 @@ MonoBehaviour:
   enterActions: []
   exitActions: []
   choices: []
+  actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
+  dialogue: There you are Dhwaj!
+--- !u!114 &5400914605420059061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 23817122-090e-469b-836d-22d7b227cdd8
+  rect:
+    serializedVersion: 2
+    x: 50401
+    y: 50150
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: -2040068123406444681}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
+  dialogue: "There is a report that one of the \nmakarkundala (makar shaped earring
+    of gods) has gone\nmissing!"
+--- !u!114 &5968775459973815965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 08e83f6e-7d98-41d6-b16b-c445fbd7a51c
+  rect:
+    serializedVersion: 2
+    x: 51598
+    y: 50146
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: 9175456428187491064}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
   actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
-  dialogue: Hi this is Dhwaj
+  dialogue: 'There is a case!! There will be punishment? Oh this is getting serious.
+    Where can i find them
+
+    i have no freaking Idea.'
+--- !u!114 &8344597224976785520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 5a3b7921-757e-4e9a-ba6a-3697a9e4e667
+  rect:
+    serializedVersion: 2
+    x: 51373
+    y: 50145
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: 5968775459973815965}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
+  dialogue: "Now its your duty to get them back, Fetch them and i\u2019ll present
+    your\ncase such that you get\nminimum possible punishment."
 --- !u!114 &8367566865408849710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,3 +368,34 @@ MonoBehaviour:
   conditions: []
   enterActions: []
   exitActions: []
+--- !u!114 &9175456428187491064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: f411f2c4-3162-4267-907d-b2e0b8907cba
+  rect:
+    serializedVersion: 2
+    x: 51857
+    y: 50145
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: -4343008510379237634}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
+  dialogue: 'News is that the makarkundals were broken down into 10 pieces and are
+    now owned by
+
+    champions of different regions of different realms'

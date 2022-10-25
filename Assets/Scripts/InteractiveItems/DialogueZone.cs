@@ -4,6 +4,7 @@ using CleverCrow.Fluid.Databases;
 using UnityEngine;
 using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 using Makardwaj.Utils;
+using UnityEngine.Events;
 
 namespace Makardwaj.InteractiveItems
 {
@@ -24,6 +25,9 @@ namespace Makardwaj.InteractiveItems
         private DatabaseInstance _database;
         private Collider2D _makarCollider;
         public bool IsInteracting { get; set ;}
+
+        public UnityAction<IActor, string> dialogueChange;
+        public UnityAction dialogueEnd;
 
         private void Awake()
         {
@@ -59,6 +63,7 @@ namespace Makardwaj.InteractiveItems
         private void OnSpeak(IActor actor, string dialogue)
         {
             Debug.Log($"{actor.DisplayName}: {dialogue}");
+            dialogueChange?.Invoke(actor, dialogue.ToUpper());
         }
 
         private void OnDialogueEnd()
@@ -66,6 +71,8 @@ namespace Makardwaj.InteractiveItems
             _controller.Stop();
             //_controller.Play(m_dialogues);
             IsInteracting = false;
+            m_interactionIcon.SetActive(true);
+            dialogueEnd?.Invoke();
         }
 
         public void PlayNextDialogue()
@@ -79,8 +86,6 @@ namespace Makardwaj.InteractiveItems
                 _controller.Next();
             }
         }
-
-        
 
         protected void OnDrawGizmos()
         {
@@ -108,6 +113,7 @@ namespace Makardwaj.InteractiveItems
             if (!IsInteracting)
             {
                 IsInteracting = true;
+                m_interactionIcon.SetActive(false);
             }
             PlayNextDialogue(); ;
         }

@@ -100,8 +100,7 @@ public class GameManager : MonoBehaviour
         else
         {
             SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
-        }
-        
+        } 
     }
 
     private IEnumerator IE_OnSplashActivated()
@@ -194,6 +193,7 @@ public class GameManager : MonoBehaviour
             _portal.Teleport(doorPos);
             _portal.OpenDoor(true);
             _isHeavenActivated = true;
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
         });
     }
 
@@ -225,6 +225,15 @@ public class GameManager : MonoBehaviour
                 Score = 0;
                 EventHandler.collectibleCollected?.Invoke(Score);
                 _portal.OpenAndCloseDoor();
+
+                if (m_levelManager.CurrentLevelData.isBossLevel)
+                {
+                    SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic", 1, true);
+                }
+                else
+                {
+                    SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
+                }
             });
         }
     }

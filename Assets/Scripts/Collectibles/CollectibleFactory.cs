@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Makardwaj.Managers;
 using UnityEngine;
 
 namespace Makardwaj.Collectibles
@@ -13,16 +14,19 @@ namespace Makardwaj.Collectibles
 
         private List<Collectible> _collectibles;
 
-
-        private List<CollectibleType> _collectibleNames;
-        private int _collectibleCount;
+        private void OnEnable()
+        {
+            EventHandler.LevelChangeStarted += DisableAllCollectibles;
+        }
 
         private void Awake()
         {
-            _collectibleNames = System.Enum.GetValues(typeof(CollectibleType)).Cast<CollectibleType>().ToList();
-            _collectibleCount = _collectibleNames.Count;
-
             InitializePool();
+        }
+
+        private void OnDisable()
+        {
+            EventHandler.LevelChangeStarted -= DisableAllCollectibles;
         }
 
         public void InitializePool()
@@ -69,6 +73,13 @@ namespace Makardwaj.Collectibles
 
             return collectible;
         }
-        
+
+        private void DisableAllCollectibles()
+        {
+            for(int i = 0; i < _collectibles.Count; i++)
+            {
+                _collectibles[i].gameObject.SetActive(false);
+            }
+        }
     }
 }

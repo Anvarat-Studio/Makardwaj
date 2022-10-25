@@ -5,6 +5,8 @@ namespace Makardwaj.Characters.Makardwaj.Data
     [CreateAssetMenu(fileName = "MakardwajData", menuName = "Data/Characters/Makardwaj", order = 1)]
     public class MakardwajData : ScriptableObject
     {
+        public string characterName = "Dhwaj";
+
         [Header("Locomotion")]
         public float walkSpeed = 5f;
         public float jumpSpeed = 7f;

@@ -52,7 +52,7 @@ namespace Makardwaj.Characters.Makardwaj.States
 
             if (!isExitingState)
             {
-                if (!player.InteractiveItemNearby.IsInteracting)
+                if (player.InteractiveItemNearby == null || !player.InteractiveItemNearby.IsInteracting)
                 {
                     isAbilityDone = true;
                 }

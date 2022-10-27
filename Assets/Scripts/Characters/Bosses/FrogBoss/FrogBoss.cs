@@ -1,7 +1,11 @@
+using CleverCrow.Fluid.Dialogues;
+using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
+using Makardwaj.InteractiveItems;
 using Makardwaj.Utils;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Makardwaj.Bosses
 {
@@ -12,9 +16,14 @@ namespace Makardwaj.Bosses
         [SerializeField] private Tornado m_tornadoRight;
         [SerializeField] private EnemySpawner m_spawner;
         [SerializeField] protected Transform m_groundCheck;
+        [SerializeField] protected DialogueZone m_dialogueZone;
+        [SerializeField] protected GameObject m_speechBubble;
+        [SerializeField] protected Text m_speechText;
+        [SerializeField] protected string m_characterName = "Manduka";
 
         public bool IsStunned { get; private set; }
         public bool HasAchievedStompHeight { get; private set; }
+        public bool IsInteracting { get; private set; }
 
         private SpriteRenderer _sr;
 
@@ -26,15 +35,25 @@ namespace Makardwaj.Bosses
         private Vector2 _targetPos;
         private Vector2 _initialPos;
 
+
+        private void OnEnable()
+        {
+            m_dialogueZone.dialogueChange += OnDialogueChange;
+            m_dialogueZone.dialogueEnd += OnDialogueEnd;
+        }
+
         protected override void Awake()
         {
             base.Awake();
             _sr = GetComponent<SpriteRenderer>();
-            _pitInPosition = m_spawner.m_bossPitInPosition.position;
-            _pitOutPosition = _pitInPosition;
-            _pitOutPosition.y = m_spawner.m_bossPitOutPositionY;
             _cameraShake = FindObjectOfType<CameraShake>();
             InitializeStateMachine();
+        }
+
+        private void OnDisable()
+        {
+            m_dialogueZone.dialogueChange -= OnDialogueChange;
+            m_dialogueZone.dialogueEnd -= OnDialogueEnd;
         }
 
         public override void Activate()
@@ -46,17 +65,23 @@ namespace Makardwaj.Bosses
 
         #region Statemachine
         public FrogBossOutOfPitState OutOfPitState { get; private set; }
-        public FrogBossStompStae StompState { get; private set; }
+        public FrogBossStompState StompState { get; private set; }
         public FrogBossGoInsidePitState GoInsidePitState { get; private set; }
+        public FrogBossLandedState LandedState {get; private set; }
+        public FrogBossInteractionState InteractionState { get; private set; }
+        public FrogBossIdleState IdleState { get; private set; }
 
         private void InitializeStateMachine()
         {
             _stateMachine = new Common.FiniteStateMachine.StateMachine();
-            OutOfPitState = new FrogBossOutOfPitState(this, _stateMachine, m_data, "outOfPit");
-            StompState = new FrogBossStompStae(this, _stateMachine, m_data, "stomp");
-            GoInsidePitState = new FrogBossGoInsidePitState(this, _stateMachine, m_data, "goInsidePit");
+            OutOfPitState = new FrogBossOutOfPitState(this, _stateMachine, m_data, "idle");
+            StompState = new FrogBossStompState(this, _stateMachine, m_data, "jumpUp");
+            GoInsidePitState = new FrogBossGoInsidePitState(this, _stateMachine, m_data, "idle");
+            LandedState = new FrogBossLandedState(this, _stateMachine, m_data, "landed");
+            InteractionState = new FrogBossInteractionState(this, _stateMachine, m_data, "idle");
+            IdleState = new FrogBossIdleState(this, _stateMachine, m_data, "idle");
 
-            _stateMachine.Initialize(OutOfPitState);
+            _stateMachine.Initialize(IdleState);
         }
         #endregion
 
@@ -73,12 +98,17 @@ namespace Makardwaj.Bosses
         #region Pit
         public void ComeOutOfPit(bool insidePit, UnityAction onStart, UnityAction onComplete = null)
         {
-            if(_outOfPitCoroutine != null)
+            StopComeOutOfPitCoroutine();
+
+            _outOfPitCoroutine = StartCoroutine(IE_ComeOutOfPit(insidePit, onStart, onComplete));
+        }
+
+        public void StopComeOutOfPitCoroutine()
+        {
+            if (_outOfPitCoroutine != null)
             {
                 StopCoroutine(_outOfPitCoroutine);
             }
-
-            _outOfPitCoroutine = StartCoroutine(IE_ComeOutOfPit(insidePit, onStart, onComplete));
         }
 
         private IEnumerator IE_ComeOutOfPit(bool insidePit, UnityAction onStart, UnityAction onComplete)
@@ -173,6 +203,57 @@ namespace Makardwaj.Bosses
                 Gizmos.DrawWireSphere(m_groundCheck.position, m_data.groundCheckRadius);
         }
         #endregion
+
+        private void OnDialogueChange(IActor actor, string dialogue)
+        {
+            if (actor.DisplayName.Equals(m_characterName))
+            {
+                m_speechBubble.SetActive(true);
+                m_speechText.text = dialogue;
+            }
+            else
+            {
+                m_speechBubble.SetActive(false);
+            }
+        }
+
+        private void OnDialogueEnd()
+        {
+            m_speechBubble.SetActive(false);
+            if (_player)
+            {
+                _player.InteractiveItemNearby = null;
+            }
+            IsInteracting = false;
+        }
+
+        private MakardwajController _player;
+
+        public override void SetInteracting()
+        {
+            base.SetInteracting();
+            gameObject.SetActive(true);
+            StopComeOutOfPitCoroutine();
+            _pitInPosition = m_spawner.m_bossPitInPosition.position;
+            _pitOutPosition = _pitInPosition;
+            _pitOutPosition.y = m_spawner.m_bossPitOutPositionY;
+            transform.position = _pitOutPosition;
+            
+            SetMask(false);
+            EnableCollider();
+            SetKinematic(false);
+
+            IsInteracting = true;
+            if (!_player)
+            {
+                _player = FindObjectOfType<MakardwajController>();
+            }
+            
+            if (_player)
+            {
+                _player.SetInteracting(m_dialogueZone);
+            }
+        }
     }
 }
 

@@ -50,8 +50,9 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         EventHandler.EnemyKilled += OnEnemyKilled;
-        m_levelManager.nextLevelLoaded += OnLevelLoaded;
-        m_splashScreenHandler.splashEnded += InitiateGame;
+        m_splashScreenHandler.splashEnded += InitialLevelData;
+        //m_levelManager.nextLevelLoaded += OnLevelLoaded;
+        EventHandler.LevelTextDisabled += InitiateGame;
         m_splashScreenHandler.splashScreenActivated += SplashScreenActivated;
     }
 
@@ -74,8 +75,10 @@ public class GameManager : MonoBehaviour
             m_player.lifeLost -= OnPlayerLifeLost;
         _portal.doorOpened -= OnDoorOpen;
         _portal.doorClosed -= OnDoorClose;
-        m_levelManager.nextLevelLoaded -= OnLevelLoaded;
-        m_splashScreenHandler.splashEnded -= InitiateGame;
+        //m_levelManager.nextLevelLoaded -= OnLevelLoaded;
+        m_splashScreenHandler.splashEnded -= InitialLevelData;
+        EventHandler.LevelTextDisabled -= InitiateGame;
+        EventHandler.LevelTextDisabled -= OnLevelLoaded;
         m_splashScreenHandler.splashScreenActivated -= SplashScreenActivated;
     }
 
@@ -85,13 +88,19 @@ public class GameManager : MonoBehaviour
         StartCoroutine(IE_OnSplashActivated());
     }
 
+    private void InitialLevelData()
+    {
+        string levelName = (m_levelManager.CurrentLevelData.isBossLevel) ? m_levelManager.CurrentLevelData.levelName : $"LEVEL - 1.{m_levelManager.m_currentLevel + 1}";
+        EventHandler.LevelComplete?.Invoke(levelName);
+    }
+
     private void InitiateGame()
     {
         StartGame();
-        _portal.OpenAndCloseDoor();
+        _portal.OpenAndCloseDoor(OnLevelStart);
 
-        string levelName = (m_levelManager.CurrentLevelData.isBossLevel) ? m_levelManager.CurrentLevelData.levelName : $"LEVEL - 1.{m_levelManager.m_currentLevel + 1}";
-        EventHandler.LevelComplete?.Invoke(levelName);
+        //string levelName = (m_levelManager.CurrentLevelData.isBossLevel) ? m_levelManager.CurrentLevelData.levelName : $"LEVEL - 1.{m_levelManager.m_currentLevel + 1}";
+        //EventHandler.LevelComplete?.Invoke(levelName);
 
         if (m_levelManager.CurrentLevelData.isBossLevel)
         {
@@ -101,6 +110,9 @@ public class GameManager : MonoBehaviour
         {
             SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
         }
+
+        EventHandler.LevelTextDisabled -= InitiateGame;
+        EventHandler.LevelTextDisabled += OnLevelLoaded;
     }
 
     private IEnumerator IE_OnSplashActivated()
@@ -187,6 +199,7 @@ public class GameManager : MonoBehaviour
 
         _sendPlayerToHeavenCoroutine = StartCoroutine(IE_SendPlayerToHeaven());
     }
+    private Vector2 _heavenDoorPos;
 
     private IEnumerator IE_SendPlayerToHeaven()
     {
@@ -194,10 +207,11 @@ public class GameManager : MonoBehaviour
         m_levelManager.ActivateHeaven((playerPos, doorPos) =>
         {
             m_player.RespawnAt(playerPos);
-            _portal.Teleport(doorPos);
-            _portal.OpenDoor(true);
+            //_portal.Teleport(doorPos);
+            //_portal.OpenDoor(true);
+            _heavenDoorPos = doorPos;
             _isHeavenActivated = true;
-            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
+            //SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
         });
     }
 
@@ -229,7 +243,7 @@ public class GameManager : MonoBehaviour
                 _remainingEnemies = m_levelManager.CurrentLevelData.m_enemies.Count;
                 Score = 0;
                 EventHandler.collectibleCollected?.Invoke(Score);
-                _portal.OpenAndCloseDoor();
+                //_portal.OpenAndCloseDoor();
 
                 if (m_levelManager.CurrentLevelData.isBossLevel)
                 {
@@ -250,11 +264,20 @@ public class GameManager : MonoBehaviour
 
     private void OnLevelLoaded()
     {
+        if (_isHeavenActivated)
+        {
+            _portal.Teleport(_heavenDoorPos);
+            _portal.OpenDoor(true);
+            _isHeavenActivated = true;
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
+            return;
+        }
+
         InitializeLevelData();
 
         _portal.Teleport(_portalInitialPosition);
         _playerSpawnPosition = _portal.PlayerPosition;
-        _portal.OpenAndCloseDoor();
+        _portal.OpenAndCloseDoor(OnLevelStart);
 
         if (m_levelManager.CurrentLevelData.isBossLevel)
         {
@@ -264,6 +287,11 @@ public class GameManager : MonoBehaviour
         {
             SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
         }
+    }
+
+    private void OnLevelStart()
+    {
+        EventHandler.LevelStarted?.Invoke();
     }
 
     private void InitializeLevelData()

@@ -21,19 +21,29 @@ namespace Makardwaj.Levels
         private Coroutine _coroutineChangeLevel;
         public UnityAction nextLevelLoaded;
 
+        private void OnEnable()
+        {
+            EventHandler.LevelStarted += OnLevelStarted;
+        }
+
         private void Awake()
         {
             LoadHeaven();
+        }
+
+        private void OnDisable()
+        {
+            EventHandler.LevelStarted -= OnLevelStarted;
         }
 
         public LevelData LoadCurrentLevel()
         {
             CurrentLevelData = Instantiate(m_collection.collection[m_currentLevel]);
 
-            if (CurrentLevelData.isBossLevel)
-            {
-                CurrentLevelData.boss?.Activate();
-            }
+            //if (CurrentLevelData.isBossLevel)
+            //{
+            //    CurrentLevelData.boss?.Activate();
+            //}
 
             return CurrentLevelData;
         }
@@ -100,10 +110,10 @@ namespace Makardwaj.Levels
             string levelName = (CurrentLevelData.isBossLevel) ? CurrentLevelData.levelName : $"LEVEL - 1.{m_currentLevel + 1}";
             EventHandler.LevelComplete?.Invoke(levelName);
 
-            if (CurrentLevelData.isBossLevel)
-            {
-                CurrentLevelData.boss?.Activate();
-            }
+            //if (CurrentLevelData.isBossLevel)
+            //{
+            //    CurrentLevelData.boss?.Activate();
+            //}
 
             nextLevelLoaded?.Invoke();
         }
@@ -119,6 +129,15 @@ namespace Makardwaj.Levels
                     EventHandler.LevelComplete?.Invoke("SWARG");
                 });
             });
+        }
+
+        private void OnLevelStarted()
+        {
+            if (CurrentLevelData.isBossLevel)
+            {
+
+                CurrentLevelData.boss?.SetInteracting();
+            }
         }
 
         public void DeactivateHeaven(UnityAction onHeavenDeactivated = null)
@@ -140,6 +159,7 @@ namespace Makardwaj.Levels
                 LoadCurrentLevel();
                 LoadNextLevel();
                 onHeavenDeactivated?.Invoke();
+
                 m_overlay.FadeOut(()=> {
                     EventHandler.LevelComplete?.Invoke($"LEVEL - 1.{m_currentLevel + 1}");
                 });

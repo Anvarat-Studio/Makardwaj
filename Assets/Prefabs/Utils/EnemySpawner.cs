@@ -179,6 +179,7 @@ namespace Makardwaj.Utils
 
             if(GUILayout.Button("Drop Poison"))
             {
+                Debug.Log("Dropping Poison");
                 _enemySpawner.DropPoison();
             }
 

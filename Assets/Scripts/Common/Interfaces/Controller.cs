@@ -69,5 +69,10 @@ namespace Makardwaj.Common
         {
            _collider.enabled = true;
         }
+
+        #region Triggers
+        public void AnimationFinishTrigger() => _stateMachine.CurrentState.AnimationFinishTrigger();
+        public void AnimationTrigger() => _stateMachine.CurrentState.AnimationTrigger();
+        #endregion
     }
 }

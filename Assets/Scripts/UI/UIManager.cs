@@ -90,6 +90,7 @@ namespace Makardwaj.UI
                 FadeLevelText(false, onComplete: () =>
                 {
                     m_levelIndexText.gameObject.SetActive(false);
+                    EventHandler.LevelTextDisabled?.Invoke();
                 });
             });
         }

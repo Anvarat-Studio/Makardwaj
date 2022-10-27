@@ -12,15 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b678abecf0bff49e08a47eef153b1a8f, type: 3}
   m_Name: MakardwajData
   m_EditorClassIdentifier: 
+  characterName: Dhwaj
   walkSpeed: 6
   jumpSpeed: 20
   groundLayer:
     serializedVersion: 2
     m_Bits: 320
+  bubbleLayer:
+    serializedVersion: 2
+    m_Bits: 256
   groundCheckRadius: 0.5
+  bubbleCheckWidth: 1
+  bubbleCheckHeight: 1
   amountOfJumps: 1
   coyoteTime: 0.2
   maxBubbleCount: 1
   bubblePoolStartingCount: 2
   debuffTime: 6
   debuffColor: {r: 0.5803922, g: 0.73333335, b: 0.21568628, a: 1}
+  damageCooldownTime: 2

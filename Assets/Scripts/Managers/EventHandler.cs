@@ -14,5 +14,7 @@ namespace Makardwaj.Managers
         public static UnityAction<int> ResetLives;
         public static UnityAction<string> LevelComplete;
         public static UnityAction LevelChangeStarted;
+        public static UnityAction LevelStarted;
+        public static UnityAction LevelTextDisabled;
     }
 }

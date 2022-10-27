@@ -4,12 +4,11 @@ using UnityEngine;
 
 namespace Makardwaj.Bosses
 {
-    public class FrogBossStompStae : BaseFrogBossState
+    public class FrogBossStompState : BaseFrogBossState
     {
         private bool _isGrounded;
         private bool _touchedGround;
-        private float _pitEnterTimeStart;
-        public FrogBossStompStae(Controller controller, StateMachine stateMachine, BaseData playerData, string animBoolName, string sfxName = "") : base(controller, stateMachine, playerData, animBoolName, sfxName)
+        public FrogBossStompState(Controller controller, StateMachine stateMachine, BaseData playerData, string animBoolName, string sfxName = "") : base(controller, stateMachine, playerData, animBoolName, sfxName)
         {
         }
 
@@ -19,6 +18,12 @@ namespace Makardwaj.Bosses
 
             _frogBoss.Stomp();
             _touchedGround = false;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            _frogBoss.Anim.SetBool("jumpDown", false);
         }
 
         public override void DoChecks()
@@ -37,11 +42,9 @@ namespace Makardwaj.Bosses
                 {
                     _frogBoss.StompDamage();
                     _touchedGround = true;
-                    _pitEnterTimeStart = Time.time;
-                }
-                else if(_touchedGround && Time.time - _pitEnterTimeStart >= _frogBossData.waitBeforeEnteringPit)
-                {
-                    stateMachine.ChangeState(_frogBoss.GoInsidePitState);
+                    _frogBoss.Anim.SetBool(animBoolName, false);
+                    _frogBoss.Anim.SetBool("jumpDown", true);
+                    stateMachine.ChangeState(_frogBoss.LandedState);
                 }
             }
         }

@@ -33,7 +33,7 @@ namespace Makardwaj.Environment
             transform.position = position;
         }
 
-        public void OpenAndCloseDoor()
+        public void OpenAndCloseDoor(UnityAction onComplete = null)
         {
             OpenDoor();
 
@@ -42,13 +42,15 @@ namespace Makardwaj.Environment
                 StopCoroutine(_coroutineCloseDoor);
             }
 
-            StartCoroutine(IE_CloseDoor());
+            StartCoroutine(IE_CloseDoor(onComplete));
         }
 
-        private IEnumerator IE_CloseDoor()
+        private IEnumerator IE_CloseDoor(UnityAction onComplete = null)
         {
             yield return new WaitWhile(() => !_isDoorOpen);
             CloseDoor();
+            yield return new WaitForSeconds(1f);
+            onComplete?.Invoke();
         }
 
 

@@ -4769,6 +4769,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3742970305996472725}
     m_Modifications:
+    - target: {fileID: 419373411523678283, guid: 289268abf3b9c4a83a1f61563c53ef86, type: 3}
+      propertyPath: m_SortingOrder
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068443287333517091, guid: 289268abf3b9c4a83a1f61563c53ef86, type: 3}
+      propertyPath: m_SortingOrder
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 5642814982596644499, guid: 289268abf3b9c4a83a1f61563c53ef86, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -4816,6 +4824,10 @@ PrefabInstance:
     - target: {fileID: 8109663144200881640, guid: 289268abf3b9c4a83a1f61563c53ef86, type: 3}
       propertyPath: m_Name
       value: chitragupt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472056524775205054, guid: 289268abf3b9c4a83a1f61563c53ef86, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 289268abf3b9c4a83a1f61563c53ef86, type: 3}

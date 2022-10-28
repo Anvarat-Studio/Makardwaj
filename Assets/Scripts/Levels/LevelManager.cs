@@ -40,11 +40,6 @@ namespace Makardwaj.Levels
         {
             CurrentLevelData = Instantiate(m_collection.collection[m_currentLevel]);
 
-            //if (CurrentLevelData.isBossLevel)
-            //{
-            //    CurrentLevelData.boss?.Activate();
-            //}
-
             return CurrentLevelData;
         }
 
@@ -122,13 +117,33 @@ namespace Makardwaj.Levels
         {
             m_overlay.FadeIn(() =>
             {
-                CurrentLevelData.gameObject.SetActive(false);
+                if (CurrentLevelData)
+                {
+                    CurrentLevelData.gameObject.SetActive(false);
+                }
+                
                 HeavenData.gameObject.SetActive(true);
                 onHeavenActivated?.Invoke(HeavenData.m_portalInitialPosition.position, HeavenData.m_portalEndPosition.position);
                 EventHandler.heavenActivated?.Invoke();
                 m_overlay.FadeOut(() => {
                     EventHandler.LevelComplete?.Invoke("SWARG", false);
                 });
+            });
+        }
+
+        public void ActivateHeavenImmediately(UnityAction<Vector2, Vector2> onHeavenActivated = null)
+        {
+            if (CurrentLevelData)
+            {
+                CurrentLevelData.gameObject.SetActive(false);
+            }
+
+            HeavenData.gameObject.SetActive(true);
+            onHeavenActivated?.Invoke(HeavenData.m_portalInitialPosition.position, HeavenData.m_portalEndPosition.position);
+            EventHandler.heavenActivated?.Invoke();
+            m_overlay.SetLayoutColor(Color.white);
+            m_overlay.FadeOut(() => {
+                EventHandler.LevelComplete?.Invoke("SWARG", false);
             });
         }
 
@@ -145,7 +160,7 @@ namespace Makardwaj.Levels
         {
             m_overlay.FadeIn(() =>
             {
-                onHeavenDeactivated?.Invoke();
+                EventHandler.heavenDeactivated?.Invoke();
                 HeavenData.gameObject.SetActive(false);
                 m_currentLevel = 0;
                 if(CurrentLevelData != null)
@@ -160,7 +175,8 @@ namespace Makardwaj.Levels
 
                 LoadCurrentLevel();
                 LoadNextLevel();
-                EventHandler.heavenDeactivated?.Invoke();
+                onHeavenDeactivated?.Invoke();
+                
                 m_overlay.FadeOut(()=> {
                     EventHandler.LevelComplete?.Invoke($"LEVEL - 1.{m_currentLevel + 1}", CurrentLevelData.isBossLevel);
                 });

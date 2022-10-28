@@ -108,7 +108,7 @@ namespace Makardwaj.Levels
             NextLevelData = LoadNextLevel();
 
             string levelName = (CurrentLevelData.isBossLevel) ? CurrentLevelData.levelName : $"LEVEL - 1.{m_currentLevel + 1}";
-            EventHandler.LevelComplete?.Invoke(levelName);
+            EventHandler.LevelComplete?.Invoke(levelName, CurrentLevelData.isBossLevel);
 
             //if (CurrentLevelData.isBossLevel)
             //{
@@ -126,7 +126,7 @@ namespace Makardwaj.Levels
                 HeavenData.gameObject.SetActive(true);
                 onHeavenActivated?.Invoke(HeavenData.m_portalInitialPosition.position, HeavenData.m_portalEndPosition.position);
                 m_overlay.FadeOut(() => {
-                    EventHandler.LevelComplete?.Invoke("SWARG");
+                    EventHandler.LevelComplete?.Invoke("SWARG", false);
                 });
             });
         }
@@ -161,7 +161,7 @@ namespace Makardwaj.Levels
                 onHeavenDeactivated?.Invoke();
 
                 m_overlay.FadeOut(()=> {
-                    EventHandler.LevelComplete?.Invoke($"LEVEL - 1.{m_currentLevel + 1}");
+                    EventHandler.LevelComplete?.Invoke($"LEVEL - 1.{m_currentLevel + 1}", CurrentLevelData.isBossLevel);
                 });
             });
         }

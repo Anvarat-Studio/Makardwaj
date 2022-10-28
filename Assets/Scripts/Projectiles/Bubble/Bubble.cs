@@ -69,6 +69,11 @@ namespace Makardwaj.Projectiles.Bubble
             }
             else
             {
+                var boss = collision.collider.GetComponent<Boss>();
+                if (boss)
+                {
+                    boss.TakeDamage();
+                }
                 IsDamaged = true;
             }
         }

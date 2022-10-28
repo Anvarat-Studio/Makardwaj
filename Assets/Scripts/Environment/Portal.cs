@@ -49,7 +49,7 @@ namespace Makardwaj.Environment
         {
             yield return new WaitWhile(() => !_isDoorOpen);
             CloseDoor();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             onComplete?.Invoke();
         }
 

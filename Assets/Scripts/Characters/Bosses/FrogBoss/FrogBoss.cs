@@ -1,6 +1,8 @@
 using CleverCrow.Fluid.Dialogues;
 using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 using Makardwaj.InteractiveItems;
+using Makardwaj.Managers;
+using Makardwaj.Projectiles;
 using Makardwaj.Utils;
 using System.Collections;
 using UnityEngine;
@@ -20,8 +22,12 @@ namespace Makardwaj.Bosses
         [SerializeField] protected GameObject m_speechBubble;
         [SerializeField] protected Text m_speechText;
         [SerializeField] protected string m_characterName = "Manduka";
+        [SerializeField] protected Transform m_poisonCenter;
+        [SerializeField] protected GameObject m_poisonFlowVfx;
 
         public bool IsStunned { get; private set; }
+        public bool IsCollectingPoison { get; private set; }
+        public bool IsDead { get; private set; }
         public bool HasAchievedStompHeight { get; private set; }
         public bool IsInteracting { get; private set; }
 
@@ -34,6 +40,9 @@ namespace Makardwaj.Bosses
         private Coroutine _outOfPitCoroutine;
         private Vector2 _targetPos;
         private Vector2 _initialPos;
+        private PoisonPool _poisonPool;
+        public bool HasPoison { get; private set; }
+        private int _currentHealth;
 
 
         private void OnEnable()
@@ -47,6 +56,8 @@ namespace Makardwaj.Bosses
             base.Awake();
             _sr = GetComponent<SpriteRenderer>();
             _cameraShake = FindObjectOfType<CameraShake>();
+            _poisonPool = FindObjectOfType<PoisonPool>();
+            HasPoison = true;
             InitializeStateMachine();
         }
 
@@ -70,6 +81,9 @@ namespace Makardwaj.Bosses
         public FrogBossLandedState LandedState {get; private set; }
         public FrogBossInteractionState InteractionState { get; private set; }
         public FrogBossIdleState IdleState { get; private set; }
+        public FrogBossThrowPoisonState ThrowPoisonState { get; private set; }
+        public FrogBossStunnedState StunnedState { get; private set; }
+        public FrogBossCollectPoisonState CollectPoisonState { get; private set; }
 
         private void InitializeStateMachine()
         {
@@ -80,6 +94,9 @@ namespace Makardwaj.Bosses
             LandedState = new FrogBossLandedState(this, _stateMachine, m_data, "landed");
             InteractionState = new FrogBossInteractionState(this, _stateMachine, m_data, "idle");
             IdleState = new FrogBossIdleState(this, _stateMachine, m_data, "idle");
+            ThrowPoisonState = new FrogBossThrowPoisonState(this, _stateMachine, m_data, "throwPoison");
+            StunnedState = new FrogBossStunnedState(this, _stateMachine, m_data, "stunned");
+            CollectPoisonState = new FrogBossCollectPoisonState(this, _stateMachine, m_data, "collectPoison");
 
             _stateMachine.Initialize(IdleState);
         }
@@ -253,6 +270,67 @@ namespace Makardwaj.Bosses
             {
                 _player.SetInteracting(m_dialogueZone);
             }
+
+            _currentHealth = m_data.maxHealth;
+            EventHandler.bossTookDamage?.Invoke(_currentHealth);
+        }
+
+        public void ThrowPoison()
+        {
+            var angle = (180.0f / m_data.poisonDartCount);
+
+            for(int i = 1; i <= m_data.poisonDartCount; i++)
+            {
+                _poisonPool.ShootPoison(m_poisonCenter.position, m_data.poisonDartSpeed, angle * i);
+            }
+
+            HasPoison = false;
+        }
+
+        public void CollectPoison()
+        {
+            IsCollectingPoison = true;
+            m_poisonFlowVfx.SetActive(true);
+        }
+
+        public void StopCollectingPoison()
+        {
+            IsCollectingPoison = false;
+            HasPoison = true;
+            m_poisonFlowVfx.SetActive(false);
+        }
+
+        public void SetNormal()
+        {
+            IsStunned = false;
+        }
+
+        public override void TakeDamage()
+        {
+            if (IsDead)
+            {
+                return;
+            }
+
+            base.TakeDamage();
+
+            _currentHealth -= IsStunned ? m_data.damageStunned : m_data.damageNormal;
+
+            if (IsCollectingPoison)
+            {
+                IsStunned = true;
+                StopCollectingPoison();
+            }
+
+            if(_currentHealth > 0)
+            {
+                
+            }
+            else
+            {
+                IsDead = true;   
+            }
+            EventHandler.bossTookDamage?.Invoke(_currentHealth);
         }
     }
 }

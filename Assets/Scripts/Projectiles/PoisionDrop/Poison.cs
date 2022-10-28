@@ -30,6 +30,18 @@ namespace Makardwaj.Projectiles
             LookInVelocityDirection();
         }
 
+        public void Shoot(Vector2 startPos, float angle, float speed)
+        {
+            angle *= Mathf.Deg2Rad;
+            _workbench.x = Mathf.Cos(angle);
+            _workbench.y = Mathf.Sin(angle);
+            transform.position = startPos;
+            _rigidbody.velocity = _workbench * speed;
+            _rigidbody.gravityScale = 0;
+
+            LookInVelocityDirection();
+        }
+
         public void Drop(Vector2 startPos, float dropSpeed = 1f)
         {
             _workbench = _rigidbody.velocity;
@@ -45,17 +57,41 @@ namespace Makardwaj.Projectiles
             var player = collision.collider.GetComponent<MakardwajController>();
             var collisionPoint = collision.GetContact(0);
             Vector2 point = collisionPoint.point;
+            float rotation = 0;
             if (player)
             {
                 point = GetGroundPosition();
                 _vfxParticles = Instantiate(m_vfxParticles, player.transform.position, Quaternion.identity);
                 Invoke(nameof(DestroyParticles), 1);
             }
+            else
+            {
+
+                rotation = GetRotation(collisionPoint.normal);
+            }
 
             
 
             gameObject.SetActive(false);
-            _pool.InstantiatePoisonSpill(point);
+            _pool.InstantiatePoisonSpill(point, rotation);
+        }
+
+        private float GetRotation(Vector2 normal)
+        {
+            int x = (int)normal.x;
+            int y = (int)normal.y;
+
+            float rotation = 0;
+
+            if(x != 0)
+            {
+                rotation = (x > 0) ? 270 : 90;  
+            }else if(y != 0)
+            {
+                rotation = (y > 0) ? 0 : 180;
+            }
+
+            return rotation;
         }
 
         private void DestroyParticles()

@@ -65,6 +65,13 @@ namespace Makardwaj.Projectiles
             return _workspacePoison;
         }
 
+        public Poison ShootPoison(Vector2 position, float speed, float angle)
+        {
+            _workspacePoison = InstantiatePoison();
+            _workspacePoison.Shoot(position, angle, speed);
+            return _workspacePoison;
+        }
+
         public Poison DropPoison(Vector2 position, float dropSpeed)
         {
             _workspacePoison = InstantiatePoison();
@@ -73,7 +80,7 @@ namespace Makardwaj.Projectiles
             return _workspacePoison;
         }
 
-        public PoisonSpillVfx InstantiatePoisonSpill(Vector2 position)
+        public PoisonSpillVfx InstantiatePoisonSpill(Vector2 position, float rotation)
         {
             _workspacePoisonSpill = _poisonSpillPool.FirstOrDefault(p => !p.gameObject.activeInHierarchy);
 
@@ -86,6 +93,7 @@ namespace Makardwaj.Projectiles
 
             _workspacePoisonSpill.Activate(position);
             _workspacePoisonSpill.gameObject.SetActive(true);
+            _workspacePoisonSpill.transform.rotation = Quaternion.Euler(Vector3.forward * rotation);
 
             return _workspacePoisonSpill;
         }

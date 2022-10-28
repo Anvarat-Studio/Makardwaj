@@ -17,8 +17,6 @@ namespace Makardwaj.Bosses
 
             _frogBoss.ComeOutOfPit(true, OnFrogBossGoingInsidePit, OnFrogBossOutOfPit);
             _enterTime = Time.time;
-
-
         }
 
         public override void LogicUpdate()
@@ -27,9 +25,25 @@ namespace Makardwaj.Bosses
 
             if (!isExitingState)
             {
-                if(Time.time - _enterTime >= _frogBossData.idleTime)
+                if (!_frogBoss.HasPoison)
                 {
-                    stateMachine.ChangeState(_frogBoss.StompState);
+                    stateMachine.ChangeState(_frogBoss.CollectPoisonState);
+                }
+                if (Time.time - _enterTime >= _frogBossData.idleTime)
+                {
+                    var attackType = Random.Range(0, 2);
+                    switch (attackType)
+                    {
+                        case 0:
+                            stateMachine.ChangeState(_frogBoss.StompState);
+                            break;
+                        case 1:
+                            stateMachine.ChangeState(_frogBoss.ThrowPoisonState);
+                            break;
+                        default:
+                            Debug.Log("Something Went Wrong");
+                            break;
+                    }
                 }
             }
         }

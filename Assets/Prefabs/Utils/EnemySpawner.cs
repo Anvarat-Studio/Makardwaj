@@ -52,14 +52,14 @@ namespace Makardwaj.Utils
 
 
         private Coroutine _dropPoisonCoroutine;
-        public void DropPoison(int enemyCount, float delay)
+        public void DropPoison(int poisonCount, float delay)
         {
             if (_dropPoisonCoroutine != null)
             {
                 StopCoroutine(_dropPoisonCoroutine);
             }
 
-            _dropPoisonCoroutine = StartCoroutine(IE_DropPoison(enemyCount, delay));
+            _dropPoisonCoroutine = StartCoroutine(IE_DropPoison(poisonCount, delay));
         }
 
         private IEnumerator IE_DropPoison(int poisonCount, float delay)

@@ -1401,7 +1401,7 @@ RectTransform:
   - {fileID: 2114929558}
   - {fileID: 1956488540}
   m_Father: {fileID: 2023982178}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -4406,7 +4406,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2023982178}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4966,8 +4966,8 @@ RectTransform:
   - {fileID: 719711587}
   - {fileID: 1995825037}
   - {fileID: 971593148}
-  - {fileID: 1868147312}
   - {fileID: 548133220}
+  - {fileID: 1868147312}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4992,6 +4992,7 @@ MonoBehaviour:
   m_livesParent: {fileID: 1835552788}
   m_pauseMenu: {fileID: 50195960}
   m_levelIndexText: {fileID: 1995825039}
+  m_bossHealthSlider: {fileID: 548133221}
 --- !u!1 &2084707452
 GameObject:
   m_ObjectHideFlags: 0

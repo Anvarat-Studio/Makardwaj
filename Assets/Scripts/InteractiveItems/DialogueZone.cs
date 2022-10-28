@@ -61,7 +61,7 @@ namespace Makardwaj.InteractiveItems
 
         private void OnSpeak(IActor actor, string dialogue)
         {
-            Debug.Log($"{actor.DisplayName}: {dialogue}");
+            //Debug.Log($"{actor.DisplayName}: {dialogue}");
             dialogueChange?.Invoke(actor, dialogue.ToUpper());
         }
 

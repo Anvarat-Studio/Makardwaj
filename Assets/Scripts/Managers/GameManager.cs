@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         m_levelManager.nextLevelLoaded += OnLevelChange;
         EventHandler.LevelTextDisabled += InitiateGame;
         m_splashScreenHandler.splashScreenActivated += SplashScreenActivated;
+        EventHandler.heavenMainDialogueCompleted += OpenHeavenDoor;
     }
 
     private void Start()
@@ -79,6 +80,7 @@ public class GameManager : MonoBehaviour
         m_splashScreenHandler.splashEnded -= InitialLevelData;
         EventHandler.LevelTextDisabled -= InitiateGame;
         EventHandler.LevelTextDisabled -= OnLevelLoaded;
+        EventHandler.heavenMainDialogueCompleted -= OpenHeavenDoor;
         m_splashScreenHandler.splashScreenActivated -= SplashScreenActivated;
     }
 
@@ -274,13 +276,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OpenHeavenDoor()
+    {
+        _portal.Teleport(_heavenDoorPos);
+        _portal.OpenDoor(true);
+    }
+
     private void OnLevelLoaded()
     {
         if (_isHeavenActivated)
         {
-            _portal.Teleport(_heavenDoorPos);
-            _portal.OpenDoor(true);
-            _isHeavenActivated = true;
+            //_portal.Teleport(_heavenDoorPos);
+            //_portal.OpenDoor(true);
             return;
         }
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using CleverCrow.Fluid.Dialogues;
 using Makardwaj.InteractiveItems;
 using UnityEngine;

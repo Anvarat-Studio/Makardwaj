@@ -4744,28 +4744,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7579963620544479588, guid: b73677f1c661548a9932e416fb62b0ce, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b73677f1c661548a9932e416fb62b0ce, type: 3}
---- !u!114 &3536603652290597090 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1317478938409255150, guid: b73677f1c661548a9932e416fb62b0ce, type: 3}
-  m_PrefabInstance: {fileID: 2547958036107890700}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d5f9f60826c8495f9a3c6265b87fd71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &3536603652290597091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1317478938409255151, guid: b73677f1c661548a9932e416fb62b0ce, type: 3}
   m_PrefabInstance: {fileID: 2547958036107890700}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6024896530981971645 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8124653349388285617, guid: b73677f1c661548a9932e416fb62b0ce, type: 3}
+  m_PrefabInstance: {fileID: 2547958036107890700}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eace1e57b65e47d48a6855e662c4746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5249963550445874205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4845,7 +4841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7527549b60287468fb8f6dc7c7b0c997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dialogueZone: {fileID: 3536603652290597090}
+  m_dialogueZone: {fileID: 6024896530981971645}
   m_speechBubble: {fileID: 1473639865941043492}
   m_speechText: {fileID: 1473639866147325388}
   m_characterName: Chitragupt

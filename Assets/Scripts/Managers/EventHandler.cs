@@ -17,5 +17,8 @@ namespace Makardwaj.Managers
         public static UnityAction LevelStarted;
         public static UnityAction LevelTextDisabled;
         public static UnityAction<int> bossTookDamage;
+        public static UnityAction heavenActivated;
+        public static UnityAction heavenDeactivated;
+        public static UnityAction heavenMainDialogueCompleted;
     }
 }

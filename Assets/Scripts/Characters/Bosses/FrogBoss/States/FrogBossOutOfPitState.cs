@@ -7,6 +7,7 @@ namespace Makardwaj.Bosses
     public class FrogBossOutOfPitState : BaseFrogBossState
     {
         private float _enterTime;
+        private bool _isOutOfPit;
         public FrogBossOutOfPitState(Controller controller, StateMachine stateMachine, BaseData playerData, string animBoolName, string sfxName = "") : base(controller, stateMachine, playerData, animBoolName, sfxName)
         {
         }
@@ -14,7 +15,7 @@ namespace Makardwaj.Bosses
         public override void Enter()
         {
             base.Enter();
-
+            _isOutOfPit = false;
             _frogBoss.ComeOutOfPit(true, OnFrogBossGoingInsidePit, OnFrogBossOutOfPit);
             _enterTime = Time.time;
         }
@@ -23,7 +24,7 @@ namespace Makardwaj.Bosses
         {
             base.LogicUpdate();
 
-            if (!isExitingState)
+            if (!isExitingState && _isOutOfPit)
             {
                 if (!_frogBoss.HasPoison)
                 {
@@ -50,6 +51,7 @@ namespace Makardwaj.Bosses
 
         private void OnFrogBossOutOfPit()
         {
+            _isOutOfPit = true;
             _frogBoss.SetMask(false);
             _frogBoss.EnableCollider();
             _frogBoss.SetKinematic(false);
@@ -58,6 +60,7 @@ namespace Makardwaj.Bosses
         private void OnFrogBossGoingInsidePit()
         {
             _frogBoss.SetMask(true);
+            _frogBoss.ActivateIndicator(true);
             _frogBoss.DisableCollider();
             _frogBoss.SetKinematic(true);
             _frogBoss.SetSpeedZero();

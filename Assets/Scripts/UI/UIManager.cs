@@ -15,6 +15,7 @@ namespace Makardwaj.UI
         [SerializeField] private PauseMenuHandler m_pauseMenu;
         [SerializeField] private Text m_levelIndexText;
         [SerializeField] private Slider m_bossHealthSlider;
+        [SerializeField] private GameObject m_gameCompleteScreen;
         
 
         private List<GameObject> m_lifeIcons;
@@ -26,6 +27,7 @@ namespace Makardwaj.UI
             EventHandler.ResetLives += ResetLives;
             EventHandler.LevelComplete += OnLevelComplete;
             EventHandler.bossTookDamage += OnBossTakeDamage;
+            EventHandler.gameComplete += OnGameComplete;
         }
 
         private void OnDisable()
@@ -35,6 +37,7 @@ namespace Makardwaj.UI
             EventHandler.ResetLives = ResetLives;
             EventHandler.LevelComplete -= OnLevelComplete;
             EventHandler.bossTookDamage -= OnBossTakeDamage;
+            EventHandler.gameComplete -= OnGameComplete;
         }
 
         private void InstantiateLives(int lives)
@@ -147,6 +150,11 @@ namespace Makardwaj.UI
                 m_bossHealthSlider.maxValue = currentHealth;
             }
             m_bossHealthSlider.value = currentHealth;
+        }
+
+        private void OnGameComplete()
+        {
+            m_gameCompleteScreen?.SetActive(true);
         }
     }
 }

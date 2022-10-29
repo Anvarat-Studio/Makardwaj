@@ -18,14 +18,10 @@ namespace Makardwaj.Bosses
         {
             base.LogicUpdate();
 
-            if(!stateMachine.CurrentState.Equals(_frogBoss.InteractionState) &&
+            if(!_frogBoss.IsDead && !stateMachine.CurrentState.Equals(_frogBoss.InteractionState) &&
                 _frogBoss.IsInteracting)
             {
                 stateMachine.ChangeState(_frogBoss.InteractionState);
-            }else if(!stateMachine.CurrentState.Equals(_frogBoss.DeadState) &&
-                _frogBoss.IsDead)
-            {
-                stateMachine.ChangeState(_frogBoss.DeadState);
             }
         }
     }

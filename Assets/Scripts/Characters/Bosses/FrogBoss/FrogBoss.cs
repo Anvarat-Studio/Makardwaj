@@ -1,4 +1,5 @@
 using CleverCrow.Fluid.Dialogues;
+using CleverCrow.Fluid.Dialogues.Graphs;
 using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
 using Makardwaj.InteractiveItems;
 using Makardwaj.Managers;
@@ -24,6 +25,8 @@ namespace Makardwaj.Bosses
         [SerializeField] protected string m_characterName = "Manduka";
         [SerializeField] protected Transform m_poisonCenter;
         [SerializeField] protected GameObject m_poisonFlowVfx;
+        [SerializeField] protected DialogueGraph m_deathDialogues;
+        [SerializeField] protected GameObject m_warningIndicator;
 
         public bool IsStunned { get; private set; }
         public bool IsCollectingPoison { get; private set; }
@@ -120,7 +123,7 @@ namespace Makardwaj.Bosses
         {
             StopComeOutOfPitCoroutine();
 
-            _outOfPitCoroutine = StartCoroutine(IE_ComeOutOfPit(insidePit, onStart, onComplete));
+            _outOfPitCoroutine = StartCoroutine(IE_ComeOutOfPit(insidePit, onStart, onComplete, m_data.warningTime));
         }
 
         public void StopComeOutOfPitCoroutine()
@@ -131,9 +134,11 @@ namespace Makardwaj.Bosses
             }
         }
 
-        private IEnumerator IE_ComeOutOfPit(bool insidePit, UnityAction onStart, UnityAction onComplete)
+        private IEnumerator IE_ComeOutOfPit(bool insidePit, UnityAction onStart, UnityAction onComplete, float startDelay = 0)
         {
             onStart?.Invoke();
+            yield return new WaitForSeconds(startDelay);
+            ActivateIndicator(false);
             _initialPos = (insidePit) ? _pitInPosition : _pitOutPosition;
             _targetPos = (insidePit) ? _pitOutPosition : _pitInPosition;
             transform.position = _initialPos;
@@ -330,15 +335,36 @@ namespace Makardwaj.Bosses
                 IsDead = true;
                 m_spawner.RemoveAllEnemies();
                 m_spawner.RemovePoison();
-                EventHandler.bossDead?.Invoke();
+                _stateMachine.ChangeState(DeadState);
             }
             EventHandler.bossTookDamage?.Invoke(_currentHealth);
+        }
+
+        public void StartDeathConversation()
+        {
+            m_dialogueZone.SetDialogues(m_deathDialogues);
+
+            IsInteracting = true;
+            if (!_player)
+            {
+                _player = FindObjectOfType<MakardwajController>();
+            }
+
+            if (_player)
+            {
+                _player.SetInteracting(m_dialogueZone);
+            }
         }
 
         private void OnHeavenActivated()
         {
             m_spawner.RemoveAllEnemies();
             m_spawner.RemovePoison();
+        }
+
+        public void ActivateIndicator(bool isActive)
+        {
+            m_warningIndicator.SetActive(isActive);
         }
     }
 }

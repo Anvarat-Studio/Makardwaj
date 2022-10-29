@@ -116,5 +116,10 @@ namespace Makardwaj.InteractiveItems
             }
             PlayNextDialogue(); ;
         }
+
+        public virtual void SetDialogues(DialogueGraph dialogueGraph)
+        {
+            m_dialogues = dialogueGraph;
+        }
     }
 }

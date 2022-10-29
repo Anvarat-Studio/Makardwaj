@@ -34,3 +34,5 @@ MonoBehaviour:
   damageNormal: 1
   damageStunned: 5
   poisonCollectionTime: 3
+  warningTime: 3
+  deathWaitTime: 2

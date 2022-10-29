@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         //EventHandler.LevelTextDisabled += InitiateGame;
         m_splashScreenHandler.splashScreenActivated += SplashScreenActivated;
         EventHandler.heavenMainDialogueCompleted += OpenHeavenDoor;
+        EventHandler.bossDead += OnBossDead;
     }
 
     private void Start()
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
         EventHandler.LevelTextDisabled -= OnLevelLoaded;
         EventHandler.heavenMainDialogueCompleted -= OpenHeavenDoor;
         m_splashScreenHandler.splashScreenActivated -= SplashScreenActivated;
+        EventHandler.bossDead -= OnBossDead;
     }
 
 
@@ -175,6 +177,14 @@ public class GameManager : MonoBehaviour
             _portal.OpenDoor(true);
             EventHandler.AllEnemiesKilled?.Invoke();
         }
+    }
+
+    private void OnBossDead()
+    {
+        _areAllEnemiesDead = true;
+        _portal.Teleport(_portalEndPosition);
+        _portal.OpenDoor(true);
+        EventHandler.AllEnemiesKilled?.Invoke();
     }
 
     private void RespawnPlayer()

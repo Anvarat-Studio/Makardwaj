@@ -25,5 +25,7 @@ namespace Makardwaj.Bosses
         public int damageNormal = 2;
         public int damageStunned = 10;
         public float poisonCollectionTime = 3f;
+        public float warningTime = 2f;
+        public float deathWaitTime = 1f;
     }
 }

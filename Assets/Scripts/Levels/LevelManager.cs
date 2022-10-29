@@ -10,6 +10,7 @@ namespace Makardwaj.Levels
         [SerializeField] private LevelCollection m_collection;
         public int m_currentLevel = 2;
         [SerializeField] private Overlay m_overlay;
+        [SerializeField] private bool m_keepCurrentLevelAfterHeaven;
 
         public LevelData CurrentLevelData { get; private set; }
         public LevelData NextLevelData { get; private set; }
@@ -79,6 +80,7 @@ namespace Makardwaj.Levels
             }
             else
             {
+                EventHandler.gameComplete?.Invoke();
                 yield break;
             }
             EventHandler.LevelChangeStarted?.Invoke();
@@ -99,8 +101,9 @@ namespace Makardwaj.Levels
             m_currentLevel = Mathf.Clamp(m_currentLevel, 0, m_collection.collection.Count - 1);
 
             CurrentLevelData = NextLevelData;
-            CurrentLevelData.ActivateEnemies();
             NextLevelData = LoadNextLevel();
+
+            CurrentLevelData.ActivateEnemies();
 
             string levelName = (CurrentLevelData.isBossLevel) ? CurrentLevelData.levelName : $"LEVEL - 1.{m_currentLevel + 1}";
             EventHandler.LevelComplete?.Invoke(levelName, CurrentLevelData.isBossLevel);
@@ -157,7 +160,11 @@ namespace Makardwaj.Levels
             {
                 EventHandler.heavenDeactivated?.Invoke();
                 HeavenData.gameObject.SetActive(false);
-                m_currentLevel = 0;
+                if (!m_keepCurrentLevelAfterHeaven || (Application.platform != RuntimePlatform.OSXEditor &&
+                Application.platform != RuntimePlatform.WindowsEditor))
+                {
+                    m_currentLevel = 0;
+                }
                 if(CurrentLevelData != null)
                 {
                     Destroy(CurrentLevelData.gameObject, 0);

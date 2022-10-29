@@ -103,7 +103,7 @@ namespace Makardwaj.Projectiles
             for(int i = 0; i < _poisonPool.Count; i++)
             {
                 _poisonPool[i].gameObject.SetActive(false);
-                _poisonSpillPool[i].Deactivate();
+                _poisonSpillPool[i].gameObject.SetActive(false);
             }
         }
     }

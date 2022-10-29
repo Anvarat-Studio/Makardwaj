@@ -17,10 +17,6 @@ namespace Makardwaj.Bosses
         public override void Enter()
         {
             base.Enter();
-
-            
-
-            Debug.Log("Entered death state");
             _deathTime = Time.time;
             _hasNotifiedDeath = false;
             _hasStartedConversation = false;
@@ -41,17 +37,9 @@ namespace Makardwaj.Bosses
                 {
                     _hasNotifiedDeath = true;
                     EventHandler.bossDead?.Invoke();
+                    _frogBoss.gameObject.SetActive(false);
                 }
             }
-             
-
-            //if (!isExitingState)
-            //{
-            //    if (!_frogBoss.IsDead)
-            //    {
-            //        stateMachine.ChangeState(_frogBoss.GoInsidePitState);
-            //    }
-            //}
         }
     }
 

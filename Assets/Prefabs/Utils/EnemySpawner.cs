@@ -88,14 +88,21 @@ namespace Makardwaj.Utils
         }
 
         private Coroutine _spawnEnemyCoroutine;
-        public void SpawnEnemies(int enemyCount, float delay)
+        public bool SpawnEnemies(int enemyCount, float delay)
         {
+            if(_currentEnemyCount != 0)
+            {
+                return false;
+            }
+
             if(_spawnEnemyCoroutine != null)
             {
                 StopCoroutine(_spawnEnemyCoroutine);
+                m_enemyIndicators.ForEach(i => i.SetActive(false));
             }
 
             _spawnEnemyCoroutine = StartCoroutine(IE_SpawnEnemies(enemyCount, delay));
+            return true;
         }
 
         private IEnumerator IE_SpawnEnemies(int enemyCount, float delay)

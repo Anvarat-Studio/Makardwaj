@@ -20,14 +20,17 @@ namespace Makardwaj.Projectiles
             _rigidbody = GetComponent<Rigidbody2D>();
         }
 
+        private void Update()
+        {
+            LookInVelocityDirection();
+        }
+
         public void Shoot(Vector2 startPos, float speed, int dir)
         {
             _workbench = _rigidbody.velocity;
             transform.position = startPos;
             _workbench.Set(speed * dir, _workbench.y);
             _rigidbody.velocity = _workbench;
-
-            LookInVelocityDirection();
         }
 
         public void Shoot(Vector2 startPos, float angle, float speed)
@@ -37,9 +40,6 @@ namespace Makardwaj.Projectiles
             _workbench.y = Mathf.Sin(angle);
             transform.position = startPos;
             _rigidbody.velocity = _workbench * speed;
-            _rigidbody.gravityScale = 0;
-
-            LookInVelocityDirection();
         }
 
         public void Drop(Vector2 startPos, float dropSpeed = 1f)
@@ -48,8 +48,6 @@ namespace Makardwaj.Projectiles
             transform.position = startPos;
             _workbench.Set(_workbench.x, -dropSpeed);
             _rigidbody.velocity = _workbench;
-
-            LookInVelocityDirection();
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

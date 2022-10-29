@@ -30,9 +30,9 @@ MonoBehaviour:
     m_Bits: 64
   waitBeforeEnteringPit: 1
   poisonDartCount: 8
-  poisonDartSpeed: 20
+  poisonDartSpeed: 13
   damageNormal: 1
-  damageStunned: 5
+  damageStunned: 10
   poisonCollectionTime: 3
   warningTime: 3
   deathWaitTime: 2

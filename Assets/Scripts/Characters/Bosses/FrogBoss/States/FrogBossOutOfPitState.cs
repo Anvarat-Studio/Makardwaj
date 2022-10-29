@@ -16,8 +16,15 @@ namespace Makardwaj.Bosses
         {
             base.Enter();
             _isOutOfPit = false;
-            _frogBoss.ComeOutOfPit(true, OnFrogBossGoingInsidePit, OnFrogBossOutOfPit);
+            _frogBoss.ComeOutOfPit(true, OnFrogBossGoingInsidePit, OnFrogBossOutOfPit, delay: _frogBossData.warningTime);
             _enterTime = Time.time;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+
+            _frogBoss.Anim.SetBool("idle", false);
         }
 
         public override void LogicUpdate()
@@ -55,6 +62,8 @@ namespace Makardwaj.Bosses
             _frogBoss.SetMask(false);
             _frogBoss.EnableCollider();
             _frogBoss.SetKinematic(false);
+            _frogBoss.Anim.SetBool(animBoolName, false);
+            _frogBoss.Anim.SetBool("idle", true);
         }
 
         private void OnFrogBossGoingInsidePit()

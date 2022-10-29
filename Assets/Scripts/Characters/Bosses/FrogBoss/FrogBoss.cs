@@ -93,9 +93,9 @@ namespace Makardwaj.Bosses
         private void InitializeStateMachine()
         {
             _stateMachine = new Common.FiniteStateMachine.StateMachine();
-            OutOfPitState = new FrogBossOutOfPitState(this, _stateMachine, m_data, "idle");
+            OutOfPitState = new FrogBossOutOfPitState(this, _stateMachine, m_data, "comingOutOfPit");
             StompState = new FrogBossStompState(this, _stateMachine, m_data, "jumpUp");
-            GoInsidePitState = new FrogBossGoInsidePitState(this, _stateMachine, m_data, "idle");
+            GoInsidePitState = new FrogBossGoInsidePitState(this, _stateMachine, m_data, "goingInsidePit");
             LandedState = new FrogBossLandedState(this, _stateMachine, m_data, "landed");
             InteractionState = new FrogBossInteractionState(this, _stateMachine, m_data, "idle");
             IdleState = new FrogBossIdleState(this, _stateMachine, m_data, "idle");
@@ -119,11 +119,10 @@ namespace Makardwaj.Bosses
         }
 
         #region Pit
-        public void ComeOutOfPit(bool insidePit, UnityAction onStart, UnityAction onComplete = null)
+        public void ComeOutOfPit(bool insidePit, UnityAction onStart, UnityAction onComplete = null, float delay = 0)
         {
             StopComeOutOfPitCoroutine();
-
-            _outOfPitCoroutine = StartCoroutine(IE_ComeOutOfPit(insidePit, onStart, onComplete, m_data.warningTime));
+            _outOfPitCoroutine = StartCoroutine(IE_ComeOutOfPit(insidePit, onStart, onComplete, delay));
         }
 
         public void StopComeOutOfPitCoroutine()
@@ -205,9 +204,9 @@ namespace Makardwaj.Bosses
         }
         #endregion
 
-        public void SpawnEnemies(int enemyCount, float delay)
+        public bool SpawnEnemies(int enemyCount, float delay)
         {
-            m_spawner.SpawnEnemies(enemyCount, delay);
+            return m_spawner.SpawnEnemies(enemyCount, delay);
         }
 
         public void DropPoison(int poisonCount, float delay)
@@ -289,7 +288,10 @@ namespace Makardwaj.Bosses
 
             for(int i = 1; i <= m_data.poisonDartCount; i++)
             {
-                _poisonPool.ShootPoison(m_poisonCenter.position, m_data.poisonDartSpeed, angle * i);
+                if(angle * i != 90)
+                {
+                    _poisonPool.ShootPoison(m_poisonCenter.position, m_data.poisonDartSpeed, angle * i);
+                }
             }
 
             HasPoison = false;

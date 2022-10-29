@@ -34,7 +34,10 @@ namespace Makardwaj.Bosses
                         switch (attackType)
                         {
                             case 0:
-                                _frogBoss.SpawnEnemies(5, 0.3f);
+                                if(!_frogBoss.SpawnEnemies(5, 0.3f))
+                                {
+                                    stateMachine.ChangeState(_frogBoss.OutOfPitState);
+                                }
                                 break;
                             case 1:
                                 _frogBoss.DropPoison(4, 0.5f);

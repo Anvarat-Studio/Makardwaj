@@ -1,6 +1,5 @@
 using Makardwaj.Common;
 using Makardwaj.Common.FiniteStateMachine;
-using UnityEngine;
 
 namespace Makardwaj.Bosses
 {

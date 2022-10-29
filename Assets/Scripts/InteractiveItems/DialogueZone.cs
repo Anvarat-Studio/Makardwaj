@@ -62,7 +62,7 @@ namespace Makardwaj.InteractiveItems
         protected virtual void OnSpeak(IActor actor, string dialogue)
         {
             //Debug.Log($"{actor.DisplayName}: {dialogue}");
-            dialogueChange?.Invoke(actor, dialogue.ToUpper());
+            dialogueChange?.Invoke(actor, dialogue);
         }
 
         protected virtual void OnDialogueEnd()

@@ -22,7 +22,7 @@ namespace Makardwaj.UI
 
         public void PlayClickSound()
         {
-            SoundManager.Instance.PlaySFX(MixerPlayer.UI, "click", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.UI, "click");
         }
 
         public void QuitGame()

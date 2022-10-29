@@ -80,7 +80,7 @@ namespace Makardwaj.Characters.Enemy.Base
         {
             base.SpawnBody();
 
-            SoundManager.Instance.PlaySFX(MixerPlayer.Enemy, "frogDie", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Enemy, "frogDie");
         }
     }
 }

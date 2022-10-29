@@ -38,13 +38,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Initialize();
-
-        //var currentLevelData = m_levelManager.LoadCurrentLevel();
-        //m_levelManager.LoadNextLevel();
-
-        //_portalInitialPosition = currentLevelData.m_portalInitialPosition.position;
-        //_portalEndPosition = currentLevelData.m_portalEndPosition.position;
-        //_totalEnemies = currentLevelData.m_enemies.Count;
     }
 
     private void OnEnable()
@@ -52,7 +45,6 @@ public class GameManager : MonoBehaviour
         EventHandler.EnemyKilled += OnEnemyKilled;
         m_splashScreenHandler.splashEnded += InitialLevelData;
         m_levelManager.nextLevelLoaded += OnLevelChange;
-        //EventHandler.LevelTextDisabled += InitiateGame;
         m_splashScreenHandler.splashScreenActivated += SplashScreenActivated;
         EventHandler.heavenMainDialogueCompleted += OpenHeavenDoor;
         EventHandler.bossDead += OnBossDead;
@@ -67,7 +59,7 @@ public class GameManager : MonoBehaviour
         _remainingEnemies = _totalEnemies;
 
         m_splashScreenHandler.gameObject.SetActive(true);
-        SoundManager.Instance.PlaySFX(MixerPlayer.Splash, "splashSound", 0.5f, false);
+        SoundManager.Instance.PlaySFX(MixerPlayer.Splash, "splashSound");
     }
 
     private void OnDisable()
@@ -79,7 +71,6 @@ public class GameManager : MonoBehaviour
         _portal.doorClosed -= OnDoorClose;
         m_levelManager.nextLevelLoaded -= OnLevelChange;
         m_splashScreenHandler.splashEnded -= InitialLevelData;
-        //EventHandler.LevelTextDisabled -= InitiateGame;
         EventHandler.LevelTextDisabled -= OnLevelLoaded;
         EventHandler.heavenMainDialogueCompleted -= OpenHeavenDoor;
         m_splashScreenHandler.splashScreenActivated -= SplashScreenActivated;
@@ -94,35 +85,19 @@ public class GameManager : MonoBehaviour
 
     private void InitialLevelData()
     {
-        //string levelName = (m_levelManager.CurrentLevelData.isBossLevel) ? m_levelManager.CurrentLevelData.levelName : $"LEVEL - 1.{m_levelManager.m_currentLevel + 1}";
-        //EventHandler.LevelComplete?.Invoke(levelName, m_levelManager.CurrentLevelData.isBossLevel);
-
-        //TODO:
         m_levelManager.ActivateHeavenImmediately((playerPos, doorPos) =>
         {
             InitiateGame();
             m_player.RespawnAt(playerPos);
             _heavenDoorPos = doorPos;
             _isHeavenActivated = true;
-            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic");
         });
     }
 
     private void InitiateGame()
     {
         StartGame();
-        //_portal.OpenAndCloseDoor(OnLevelStart);
-
-        //if (m_levelManager.CurrentLevelData.isBossLevel)
-        //{
-        //    SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic", 1, true);
-        //}
-        //else
-        //{
-        //    SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
-        //}
-
-        //EventHandler.LevelTextDisabled -= InitiateGame;
         EventHandler.LevelTextDisabled += OnLevelLoaded;
     }
 
@@ -157,13 +132,13 @@ public class GameManager : MonoBehaviour
         {
             SendPlayerToHeaven();
             EventHandler.GameEnd?.Invoke();
-            SoundManager.Instance.PlaySFX(MixerPlayer.Player, "gameOver", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Player, "gameOver");
         }
         else
         {
 
             RespawnPlayer();
-            SoundManager.Instance.PlaySFX(MixerPlayer.Player, "lifeLost", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Player, "lifeLost");
         }
     }
 
@@ -230,7 +205,7 @@ public class GameManager : MonoBehaviour
             //_portal.OpenDoor(true);
             _heavenDoorPos = doorPos;
             _isHeavenActivated = true;
-            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic");
         });
     }
 
@@ -266,11 +241,11 @@ public class GameManager : MonoBehaviour
 
                 if (m_levelManager.CurrentLevelData.isBossLevel)
                 {
-                    SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic", 1, true);
+                    SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic");
                 }
                 else
                 {
-                    SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
+                    SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic");
                 }
             });
         }
@@ -285,11 +260,11 @@ public class GameManager : MonoBehaviour
     {
         if (m_levelManager.CurrentLevelData.isBossLevel)
         {
-            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic", 1, true);
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic");
         }
         else
         {
-            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic");
         }
     }
 

@@ -15,7 +15,7 @@ namespace Makardwaj.Bosses
         {
             base.Enter();
 
-            _frogBoss.Stomp();
+            _frogBoss.Stomp(OnAcheivingStompHeight, OnStartingStomp);
             _touchedGround = false;
         }
 
@@ -41,11 +41,21 @@ namespace Makardwaj.Bosses
                 {
                     _frogBoss.StompDamage();
                     _touchedGround = true;
-                    _frogBoss.Anim.SetBool(animBoolName, false);
-                    _frogBoss.Anim.SetBool("jumpDown", true);
                     stateMachine.ChangeState(_frogBoss.LandedState);
                 }
             }
+        }
+
+        private void OnAcheivingStompHeight()
+        {
+            _frogBoss.Anim.SetBool(animBoolName, false);
+            _frogBoss.Anim.SetBool("holdStomp", true);
+        }
+
+        private void OnStartingStomp()
+        {
+            _frogBoss.Anim.SetBool("holdStomp", false);
+            _frogBoss.Anim.SetBool("jumpDown", true);
         }
     }
 

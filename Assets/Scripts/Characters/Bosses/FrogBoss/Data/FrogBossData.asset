@@ -17,7 +17,7 @@ MonoBehaviour:
   outOfHoleSpeed: 10
   stunTime: 5
   stompHeight: 7
-  stompWaitTime: 0.5
+  stompWaitTime: 2
   inPitWaitTime: 3
   idleTime: 5
   stompHeightVelocity: 10

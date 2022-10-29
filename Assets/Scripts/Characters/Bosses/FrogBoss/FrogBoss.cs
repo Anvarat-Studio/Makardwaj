@@ -157,14 +157,14 @@ namespace Makardwaj.Bosses
         #region Stomp
         private Coroutine _stompCoroutine;
 
-        public void Stomp()
+        public void Stomp(UnityAction onStomHeightAcheived = null, UnityAction onStartingStomp = null)
         {
             if(_stompCoroutine != null)
             {
                 StopCoroutine(_stompCoroutine);
             }
 
-            _stompCoroutine = StartCoroutine(IE_Stomp());
+            _stompCoroutine = StartCoroutine(IE_Stomp(onStomHeightAcheived, onStartingStomp));
         }
 
         public void StompDamage()
@@ -190,14 +190,14 @@ namespace Makardwaj.Bosses
             transform.position = _workspace;
         }
 
-        private IEnumerator IE_Stomp()
+        private IEnumerator IE_Stomp(UnityAction onStomHeightAcheived, UnityAction onStartingStomp)
         {
             HasAchievedStompHeight = false;
             yield return StartCoroutine(IE_AchieveStompHeight());
             HasAchievedStompHeight = true;
-
+            onStomHeightAcheived?.Invoke();
             yield return new WaitForSeconds(m_data.stompWaitTime);
-
+            onStartingStomp?.Invoke();
             SetKinematic(false);
 
             SetVelocityY(-m_data.stompVelocity);

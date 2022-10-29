@@ -22,6 +22,10 @@ namespace Makardwaj.Bosses
                 _frogBoss.IsInteracting)
             {
                 stateMachine.ChangeState(_frogBoss.InteractionState);
+            }else if(!stateMachine.CurrentState.Equals(_frogBoss.DeadState) &&
+                _frogBoss.IsDead)
+            {
+                stateMachine.ChangeState(_frogBoss.DeadState);
             }
         }
     }

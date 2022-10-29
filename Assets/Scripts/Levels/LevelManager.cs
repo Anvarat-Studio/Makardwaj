@@ -105,11 +105,6 @@ namespace Makardwaj.Levels
             string levelName = (CurrentLevelData.isBossLevel) ? CurrentLevelData.levelName : $"LEVEL - 1.{m_currentLevel + 1}";
             EventHandler.LevelComplete?.Invoke(levelName, CurrentLevelData.isBossLevel);
 
-            //if (CurrentLevelData.isBossLevel)
-            //{
-            //    CurrentLevelData.boss?.Activate();
-            //}
-
             nextLevelLoaded?.Invoke();
         }
 

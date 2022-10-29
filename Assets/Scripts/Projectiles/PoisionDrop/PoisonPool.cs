@@ -97,5 +97,14 @@ namespace Makardwaj.Projectiles
 
             return _workspacePoisonSpill;
         }
+
+        public void RemoveAllPoison()
+        {
+            for(int i = 0; i < _poisonPool.Count; i++)
+            {
+                _poisonPool[i].gameObject.SetActive(false);
+                _poisonSpillPool[i].Deactivate();
+            }
+        }
     }
 }

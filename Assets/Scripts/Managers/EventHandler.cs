@@ -20,5 +20,6 @@ namespace Makardwaj.Managers
         public static UnityAction heavenActivated;
         public static UnityAction heavenDeactivated;
         public static UnityAction heavenMainDialogueCompleted;
+        public static UnityAction bossDead;
     }
 }

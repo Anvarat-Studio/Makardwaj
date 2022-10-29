@@ -80,6 +80,11 @@ namespace Makardwaj.Utils
             _poisonPool.DropPoison(_workspace, m_dropSpeed);
         }
 
+        public void RemovePoison()
+        {
+            _poisonPool.RemoveAllPoison();
+        }
+
         private Coroutine _spawnEnemyCoroutine;
         public void SpawnEnemies(int enemyCount, float delay)
         {
@@ -162,6 +167,14 @@ namespace Makardwaj.Utils
 
             _enemyWorkspace.Respawn();
             return _enemyWorkspace;
+        }
+
+        public void RemoveAllEnemies()
+        {
+            for(int i = 0; i < _enemyPool.Count; i++)
+            {
+                _enemyPool[i].gameObject.SetActive(false);
+            }
         }
         #endregion
     }

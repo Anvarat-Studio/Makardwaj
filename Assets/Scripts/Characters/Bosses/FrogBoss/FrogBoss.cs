@@ -27,7 +27,6 @@ namespace Makardwaj.Bosses
 
         public bool IsStunned { get; private set; }
         public bool IsCollectingPoison { get; private set; }
-        public bool IsDead { get; private set; }
         public bool HasAchievedStompHeight { get; private set; }
         public bool IsInteracting { get; private set; }
 
@@ -49,6 +48,7 @@ namespace Makardwaj.Bosses
         {
             m_dialogueZone.dialogueChange += OnDialogueChange;
             m_dialogueZone.dialogueEnd += OnDialogueEnd;
+            EventHandler.heavenActivated += OnHeavenActivated;
         }
 
         protected override void Awake()
@@ -65,6 +65,7 @@ namespace Makardwaj.Bosses
         {
             m_dialogueZone.dialogueChange -= OnDialogueChange;
             m_dialogueZone.dialogueEnd -= OnDialogueEnd;
+            EventHandler.heavenActivated -= OnHeavenActivated;
         }
 
         public override void Activate()
@@ -84,6 +85,7 @@ namespace Makardwaj.Bosses
         public FrogBossThrowPoisonState ThrowPoisonState { get; private set; }
         public FrogBossStunnedState StunnedState { get; private set; }
         public FrogBossCollectPoisonState CollectPoisonState { get; private set; }
+        public FrogBossDeadState DeadState { get; private set; }
 
         private void InitializeStateMachine()
         {
@@ -97,6 +99,7 @@ namespace Makardwaj.Bosses
             ThrowPoisonState = new FrogBossThrowPoisonState(this, _stateMachine, m_data, "throwPoison");
             StunnedState = new FrogBossStunnedState(this, _stateMachine, m_data, "stunned");
             CollectPoisonState = new FrogBossCollectPoisonState(this, _stateMachine, m_data, "collectPoison");
+            DeadState = new FrogBossDeadState(this, _stateMachine, m_data, "dead");
 
             _stateMachine.Initialize(IdleState);
         }
@@ -322,15 +325,20 @@ namespace Makardwaj.Bosses
                 StopCollectingPoison();
             }
 
-            if(_currentHealth > 0)
+            if(_currentHealth <= 0)
             {
-                
-            }
-            else
-            {
-                IsDead = true;   
+                IsDead = true;
+                m_spawner.RemoveAllEnemies();
+                m_spawner.RemovePoison();
+                EventHandler.bossDead?.Invoke();
             }
             EventHandler.bossTookDamage?.Invoke(_currentHealth);
+        }
+
+        private void OnHeavenActivated()
+        {
+            m_spawner.RemoveAllEnemies();
+            m_spawner.RemovePoison();
         }
     }
 }

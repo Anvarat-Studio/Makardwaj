@@ -201,10 +201,9 @@ public class GameManager : MonoBehaviour
         m_levelManager.ActivateHeaven((playerPos, doorPos) =>
         {
             m_player.RespawnAt(playerPos);
-            //_portal.Teleport(doorPos);
-            //_portal.OpenDoor(true);
             _heavenDoorPos = doorPos;
             _isHeavenActivated = true;
+            OpenHeavenDoor();
             SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic");
         });
     }

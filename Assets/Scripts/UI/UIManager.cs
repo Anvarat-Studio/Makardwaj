@@ -93,7 +93,7 @@ namespace Makardwaj.UI
         private void FadeInLevelText()
         {
             m_levelIndexText.gameObject.SetActive(true);
-            FadeLevelText(true, 1f, () =>
+            FadeLevelText(true, 0.5f, () =>
             {
                 FadeLevelText(false, onComplete: () =>
                 {
@@ -124,7 +124,7 @@ namespace Makardwaj.UI
 
             while(Mathf.Abs(currentColor.a - targetAlpha) > 0.01f)
             {
-                currentColor.a = Mathf.MoveTowards(currentColor.a, targetAlpha, Time.deltaTime * 0.5f);
+                currentColor.a = Mathf.MoveTowards(currentColor.a, targetAlpha, Time.deltaTime * 1f);
                 m_levelIndexText.color = currentColor;
                 yield return null;
             }

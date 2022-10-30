@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4138799963296002229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d8d0566afe4d5fa9596c80df966df6, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  _uniqueId: 0183b421-8675-4ee7-83ed-13fe298d27d2
+  rect:
+    serializedVersion: 2
+    x: 50050
+    y: 50200
+    width: 100
+    height: 57
+  nodeTitle: 
+  children:
+  - {fileID: -3782892119595704765}
+  conditions: []
+  enterActions: []
+  exitActions: []
+--- !u!114 &-3782892119595704765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: de5c6e1c-02b7-4284-a445-820b973873c2
+  rect:
+    serializedVersion: 2
+    x: 50178
+    y: 50157
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: -933701872755205813}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: knock knock!
+--- !u!114 &-933701872755205813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: bb9fde2f-92ae-4b7c-b7a4-664c681efeb6
+  rect:
+    serializedVersion: 2
+    x: 50404
+    y: 50158
+    width: 200
+    height: 142
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
+  dialogue: "we dont have time for your silly jokes, \nyour life is at stake!"
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35851dfd8754a74b333944d50d05bbd, type: 3}
+  m_Name: dialogue_chitragupt_random_visit_1
+  m_EditorClassIdentifier: 
+  _nodes:
+  - {fileID: -4138799963296002229}
+  - {fileID: -3782892119595704765}
+  - {fileID: -933701872755205813}
+  root: {fileID: -4138799963296002229}
+  scrollPosition: {x: 50551.5, y: 49946}

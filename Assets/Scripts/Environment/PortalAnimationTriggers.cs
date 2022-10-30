@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Makardwaj.Environment
 {
@@ -20,6 +19,11 @@ namespace Makardwaj.Environment
         private void DoorCloseTrigger()
         {
             _portal.DoorCloseTrigger();
+        }
+
+        private void PlayDoorCloseSound()
+        {
+            _portal.PlayDoorCloseSound();
         }
     }
 }

@@ -5384,6 +5384,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8124653349388285617, guid: b73677f1c661548a9932e416fb62b0ce, type: 3}
+      propertyPath: m_defaultDialogueGraph.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124653349388285617, guid: b73677f1c661548a9932e416fb62b0ce, type: 3}
+      propertyPath: m_defaultDialogueGraph.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 337ceb30ac321458b957395871453554, type: 2}
+    - target: {fileID: 8124653349388285617, guid: b73677f1c661548a9932e416fb62b0ce, type: 3}
+      propertyPath: m_defaultDialogueGraph.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 17ee1042b90d847c38e7801919b63f51, type: 2}
+    - target: {fileID: 8124653349388285617, guid: b73677f1c661548a9932e416fb62b0ce, type: 3}
+      propertyPath: m_defaultDialogueGraph.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: f3b217870f1b94ef399308fc54869605, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b73677f1c661548a9932e416fb62b0ce, type: 3}
 --- !u!4 &3536603652290597091 stripped

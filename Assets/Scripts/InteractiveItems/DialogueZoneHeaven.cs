@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CleverCrow.Fluid.Dialogues.Graphs;
 using Makardwaj.Managers;
 using Makardwaj.Utils;
@@ -10,7 +11,7 @@ namespace Makardwaj.InteractiveItems
         [Header("Dialogues")]
         [SerializeField] protected DialogueGraph m_firstVisitDialogueGraph;
         [SerializeField] protected DialogueGraph m_secondVisitDialogueGraph;
-        [SerializeField] protected DialogueGraph m_defaultDialogueGraph;
+        [SerializeField] protected List<DialogueGraph> m_defaultDialogueGraph;
 
         [ReadOnly]
         [SerializeField]
@@ -47,7 +48,7 @@ namespace Makardwaj.InteractiveItems
         {
             base.OnDialogueEnd();
 
-            m_dialogues = m_defaultDialogueGraph;
+            m_dialogues = m_defaultDialogueGraph[Random.Range(0, m_defaultDialogueGraph.Count)];
 
             if (!_isHeavenDoorOpen)
             {

@@ -50,7 +50,7 @@ namespace Makardwaj.InteractiveItems
 
             m_dialogues = m_defaultDialogueGraph[Random.Range(0, m_defaultDialogueGraph.Count)];
 
-            if (!_isHeavenDoorOpen)
+            if (!_isHeavenDoorOpen && !_hasAlreadyVisitedHeaven)
             {
                 _isHeavenDoorOpen = true;
                 EventHandler.heavenMainDialogueCompleted?.Invoke();

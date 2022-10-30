@@ -20,8 +20,8 @@ MonoBehaviour:
   stompWaitTime: 0.35
   inPitWaitTime: 3
   idleTime: 5
-  stompHeightVelocity: 10
-  stompVelocity: 70
+  stompHeightVelocity: 15
+  stompVelocity: 120
   stompEffectRadius: 5
   cameraShakeDuration: 0.3
   groundCheckRadius: 2.67

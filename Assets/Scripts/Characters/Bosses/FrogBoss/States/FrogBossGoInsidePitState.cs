@@ -16,6 +16,11 @@ namespace Makardwaj.Bosses
         {
             base.Enter();
             _hasEnteredPit = false;
+        }
+
+        public override void AnimationTrigger()
+        {
+            base.AnimationTrigger();
             _frogBoss.ComeOutOfPit(false, OnStartEnteringPit, OnEnteredPit);
         }
 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FrogBossData
   m_EditorClassIdentifier: 
   movementSpeed: 1
+  maxHealth: 200
   outOfHoleSpeed: 10
   stunTime: 5
   stompHeight: 7
@@ -28,3 +29,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   waitBeforeEnteringPit: 1
+  poisonDartCount: 8
+  poisonDartSpeed: 13
+  damageNormal: 1
+  damageStunned: 10
+  poisonCollectionTime: 3
+  warningTime: 3
+  deathWaitTime: 2

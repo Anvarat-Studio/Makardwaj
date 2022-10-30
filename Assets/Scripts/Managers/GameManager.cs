@@ -38,21 +38,16 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Initialize();
-
-        var currentLevelData = m_levelManager.LoadCurrentLevel();
-        m_levelManager.LoadNextLevel();
-
-        _portalInitialPosition = currentLevelData.m_portalInitialPosition.position;
-        _portalEndPosition = currentLevelData.m_portalEndPosition.position;
-        _totalEnemies = currentLevelData.m_enemies.Count;
     }
 
     private void OnEnable()
     {
         EventHandler.EnemyKilled += OnEnemyKilled;
-        m_levelManager.nextLevelLoaded += OnLevelLoaded;
-        m_splashScreenHandler.splashEnded += InitiateGame;
+        m_splashScreenHandler.splashEnded += InitialLevelData;
+        m_levelManager.nextLevelLoaded += OnLevelChange;
         m_splashScreenHandler.splashScreenActivated += SplashScreenActivated;
+        EventHandler.heavenMainDialogueCompleted += OpenHeavenDoor;
+        EventHandler.bossDead += OnBossDead;
     }
 
     private void Start()
@@ -64,7 +59,7 @@ public class GameManager : MonoBehaviour
         _remainingEnemies = _totalEnemies;
 
         m_splashScreenHandler.gameObject.SetActive(true);
-        SoundManager.Instance.PlaySFX(MixerPlayer.Splash, "splashSound", 0.5f, false);
+        SoundManager.Instance.PlaySFX(MixerPlayer.Splash, "splashSound");
     }
 
     private void OnDisable()
@@ -74,9 +69,12 @@ public class GameManager : MonoBehaviour
             m_player.lifeLost -= OnPlayerLifeLost;
         _portal.doorOpened -= OnDoorOpen;
         _portal.doorClosed -= OnDoorClose;
-        m_levelManager.nextLevelLoaded -= OnLevelLoaded;
-        m_splashScreenHandler.splashEnded -= InitiateGame;
+        m_levelManager.nextLevelLoaded -= OnLevelChange;
+        m_splashScreenHandler.splashEnded -= InitialLevelData;
+        EventHandler.LevelTextDisabled -= OnLevelLoaded;
+        EventHandler.heavenMainDialogueCompleted -= OpenHeavenDoor;
         m_splashScreenHandler.splashScreenActivated -= SplashScreenActivated;
+        EventHandler.bossDead -= OnBossDead;
     }
 
 
@@ -85,22 +83,22 @@ public class GameManager : MonoBehaviour
         StartCoroutine(IE_OnSplashActivated());
     }
 
+    private void InitialLevelData()
+    {
+        m_levelManager.ActivateHeavenImmediately((playerPos, doorPos) =>
+        {
+            InitiateGame();
+            m_player.RespawnAt(playerPos);
+            _heavenDoorPos = doorPos;
+            _isHeavenActivated = true;
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic");
+        });
+    }
+
     private void InitiateGame()
     {
         StartGame();
-        _portal.OpenAndCloseDoor();
-
-        string levelName = (m_levelManager.CurrentLevelData.isBossLevel) ? m_levelManager.CurrentLevelData.levelName : $"LEVEL - 1.{m_levelManager.m_currentLevel + 1}";
-        EventHandler.LevelComplete?.Invoke(levelName);
-
-        if (m_levelManager.CurrentLevelData.isBossLevel)
-        {
-            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic", 1, true);
-        }
-        else
-        {
-            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
-        }
+        EventHandler.LevelTextDisabled += OnLevelLoaded;
     }
 
     private IEnumerator IE_OnSplashActivated()
@@ -134,13 +132,13 @@ public class GameManager : MonoBehaviour
         {
             SendPlayerToHeaven();
             EventHandler.GameEnd?.Invoke();
-            SoundManager.Instance.PlaySFX(MixerPlayer.Player, "gameOver", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Player, "gameOver");
         }
         else
         {
 
             RespawnPlayer();
-            SoundManager.Instance.PlaySFX(MixerPlayer.Player, "lifeLost", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Player, "lifeLost");
         }
     }
 
@@ -154,6 +152,14 @@ public class GameManager : MonoBehaviour
             _portal.OpenDoor(true);
             EventHandler.AllEnemiesKilled?.Invoke();
         }
+    }
+
+    private void OnBossDead()
+    {
+        _areAllEnemiesDead = true;
+        _portal.Teleport(_portalEndPosition);
+        _portal.OpenDoor(true);
+        EventHandler.AllEnemiesKilled?.Invoke();
     }
 
     private void RespawnPlayer()
@@ -187,6 +193,7 @@ public class GameManager : MonoBehaviour
 
         _sendPlayerToHeavenCoroutine = StartCoroutine(IE_SendPlayerToHeaven());
     }
+    private Vector2 _heavenDoorPos;
 
     private IEnumerator IE_SendPlayerToHeaven()
     {
@@ -194,10 +201,11 @@ public class GameManager : MonoBehaviour
         m_levelManager.ActivateHeaven((playerPos, doorPos) =>
         {
             m_player.RespawnAt(playerPos);
-            _portal.Teleport(doorPos);
-            _portal.OpenDoor(true);
+            //_portal.Teleport(doorPos);
+            //_portal.OpenDoor(true);
+            _heavenDoorPos = doorPos;
             _isHeavenActivated = true;
-            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic");
         });
     }
 
@@ -229,15 +237,15 @@ public class GameManager : MonoBehaviour
                 _remainingEnemies = m_levelManager.CurrentLevelData.m_enemies.Count;
                 Score = 0;
                 EventHandler.collectibleCollected?.Invoke(Score);
-                _portal.OpenAndCloseDoor();
+                //_portal.OpenAndCloseDoor();
 
                 if (m_levelManager.CurrentLevelData.isBossLevel)
                 {
-                    SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic", 1, true);
+                    SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic");
                 }
                 else
                 {
-                    SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
+                    SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic");
                 }
             });
         }
@@ -248,22 +256,43 @@ public class GameManager : MonoBehaviour
             _portal.CloseDoor();
     }
 
+    private void OnLevelChange()
+    {
+        if (m_levelManager.CurrentLevelData.isBossLevel)
+        {
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic");
+        }
+        else
+        {
+            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic");
+        }
+    }
+
+    private void OpenHeavenDoor()
+    {
+        _portal.Teleport(_heavenDoorPos);
+        _portal.OpenDoor(true);
+    }
+
     private void OnLevelLoaded()
     {
+        if (_isHeavenActivated)
+        {
+            //_portal.Teleport(_heavenDoorPos);
+            //_portal.OpenDoor(true);
+            return;
+        }
+
         InitializeLevelData();
 
         _portal.Teleport(_portalInitialPosition);
         _playerSpawnPosition = _portal.PlayerPosition;
-        _portal.OpenAndCloseDoor();
+        _portal.OpenAndCloseDoor(OnLevelStart);
+    }
 
-        if (m_levelManager.CurrentLevelData.isBossLevel)
-        {
-            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bossMusic", 1, true);
-        }
-        else
-        {
-            SoundManager.Instance.PlayMusic(MixerPlayer.Music, "bgMusic", 1, true);
-        }
+    private void OnLevelStart()
+    {
+        EventHandler.LevelStarted?.Invoke();
     }
 
     private void InitializeLevelData()

@@ -12,7 +12,15 @@ namespace Makardwaj.Managers
         public static UnityAction EnemyKilled;
         public static UnityAction AllEnemiesKilled;
         public static UnityAction<int> ResetLives;
-        public static UnityAction<string> LevelComplete;
+        public static UnityAction<string, bool> LevelComplete;
         public static UnityAction LevelChangeStarted;
+        public static UnityAction LevelStarted;
+        public static UnityAction LevelTextDisabled;
+        public static UnityAction<int> bossTookDamage;
+        public static UnityAction heavenActivated;
+        public static UnityAction heavenDeactivated;
+        public static UnityAction heavenMainDialogueCompleted;
+        public static UnityAction bossDead;
+        public static UnityAction gameComplete;
     }
 }

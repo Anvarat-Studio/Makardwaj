@@ -1,0 +1,303 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8309228111639091834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 2f265aec-0e06-4418-afaf-04e2fdcc9b30
+  rect:
+    serializedVersion: 2
+    x: 50149
+    y: 50153
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: 5400914605420059061}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 64286d3505f95416d996471994609145, type: 2}
+  dialogue: Oh you are so small, and blue!
+--- !u!114 &-4905084486926239508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 014de28c-5c1f-437f-9097-9c30311694b9
+  rect:
+    serializedVersion: 2
+    x: 50908
+    y: 50149
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: -1314234902957379543}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: "Gimme\u2026\nwhat! I am not a sna\u2026"
+--- !u!114 &-2040068123406444681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 5b7e4ff6-2aa9-4f67-b91a-7f1938225f9a
+  rect:
+    serializedVersion: 2
+    x: 50650
+    y: 50151
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: -4905084486926239508}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 64286d3505f95416d996471994609145, type: 2}
+  dialogue: oh! You are a snake, maybe you are a guard from oceans!
+--- !u!114 &-1314234902957379543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 7bb74754-2a37-48f6-ba04-d9add284c878
+  rect:
+    serializedVersion: 2
+    x: 51144
+    y: 50147
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: 8344597224976785520}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 64286d3505f95416d996471994609145, type: 2}
+  dialogue: Oh you talk so much, and you might be a threat too
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35851dfd8754a74b333944d50d05bbd, type: 3}
+  m_Name: Dialogues_Level_Boss_start
+  m_EditorClassIdentifier: 
+  _nodes:
+  - {fileID: 8367566865408849710}
+  - {fileID: 598768820419099864}
+  - {fileID: -8309228111639091834}
+  - {fileID: 5400914605420059061}
+  - {fileID: -2040068123406444681}
+  - {fileID: -4905084486926239508}
+  - {fileID: -1314234902957379543}
+  - {fileID: 8344597224976785520}
+  - {fileID: 5968775459973815965}
+  - {fileID: 9175456428187491064}
+  root: {fileID: 8367566865408849710}
+  scrollPosition: {x: 51544.5, y: 49819}
+--- !u!114 &598768820419099864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 304bcc7f-0824-4c2f-ab9d-92568bfdbb9f
+  rect:
+    serializedVersion: 2
+    x: 49882
+    y: 50155
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: -8309228111639091834}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: "Listen up you\u2026 \nyou green thing, give me back that\u2026"
+--- !u!114 &5400914605420059061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 23817122-090e-469b-836d-22d7b227cdd8
+  rect:
+    serializedVersion: 2
+    x: 50401
+    y: 50150
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: -2040068123406444681}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: "give me back that\u2026 \nyou have my socks too! Gimme back\u2026"
+--- !u!114 &5968775459973815965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 08e83f6e-7d98-41d6-b16b-c445fbd7a51c
+  rect:
+    serializedVersion: 2
+    x: 51598
+    y: 50146
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: 9175456428187491064}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 64286d3505f95416d996471994609145, type: 2}
+  dialogue: "I find you cute but i\u2019ll have to kill you"
+--- !u!114 &8344597224976785520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 5a3b7921-757e-4e9a-ba6a-3697a9e4e667
+  rect:
+    serializedVersion: 2
+    x: 51373
+    y: 50145
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: 5968775459973815965}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: "why dont you let me spea\u2026"
+--- !u!114 &8367566865408849710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d8d0566afe4d5fa9596c80df966df6, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  _uniqueId: 88f837b4-6858-44ac-9870-ca1e6b8c6cc5
+  rect:
+    serializedVersion: 2
+    x: 49701
+    y: 50199
+    width: 100
+    height: 57
+  nodeTitle: 
+  children:
+  - {fileID: 598768820419099864}
+  conditions: []
+  enterActions: []
+  exitActions: []
+--- !u!114 &9175456428187491064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: f411f2c4-3162-4267-907d-b2e0b8907cba
+  rect:
+    serializedVersion: 2
+    x: 51857
+    y: 50145
+    width: 200
+    height: 142
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: what! Wait, cant we just ta..

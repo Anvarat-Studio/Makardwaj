@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7617375844813663038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 336b16d2-404e-455c-81dd-e314fd2c6d66
+  rect:
+    serializedVersion: 2
+    x: 50651
+    y: 50153
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: 3661059248949586031}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: 'and yes that peice of kundal also,
+
+    they sounded important.'
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35851dfd8754a74b333944d50d05bbd, type: 3}
+  m_Name: Dialogue_frog_boss_death
+  m_EditorClassIdentifier: 
+  _nodes:
+  - {fileID: 619372026975994970}
+  - {fileID: 2194654167064668965}
+  - {fileID: 507770178599888800}
+  - {fileID: -7617375844813663038}
+  - {fileID: 3661059248949586031}
+  root: {fileID: 619372026975994970}
+  scrollPosition: {x: 50472.5, y: 49835}
+--- !u!114 &507770178599888800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 7c27ad35-9fe8-4c25-8443-4d7ed78fb4bc
+  rect:
+    serializedVersion: 2
+    x: 50409
+    y: 50152
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: -7617375844813663038}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: "Who is talking now ha? \nAnd i am makar not a snake,\nnow I\u2019ll
+    take back my socks."
+--- !u!114 &619372026975994970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d8d0566afe4d5fa9596c80df966df6, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  _uniqueId: 1fe69fef-4d8e-4b17-87b4-35e3244f95b1
+  rect:
+    serializedVersion: 2
+    x: 50050
+    y: 50200
+    width: 100
+    height: 57
+  nodeTitle: 
+  children:
+  - {fileID: 2194654167064668965}
+  conditions: []
+  enterActions: []
+  exitActions: []
+--- !u!114 &2194654167064668965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: b772867e-46ac-41f9-9c86-d333f489e570
+  rect:
+    serializedVersion: 2
+    x: 50181
+    y: 50155
+    width: 200
+    height: 142
+  nodeTitle: 
+  children:
+  - {fileID: 507770178599888800}
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: "take that you green, poison spitting, \nson of a... toad or frog or
+    whatever you are."
+--- !u!114 &3661059248949586031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f157564dbc846468ec0ac2b6f7d545e, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _uniqueId: 577cadad-6272-4598-ad5f-03b185034989
+  rect:
+    serializedVersion: 2
+    x: 50879
+    y: 50151
+    width: 200
+    height: 142
+  nodeTitle: 
+  children: []
+  conditions: []
+  enterActions: []
+  exitActions: []
+  choices: []
+  actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
+  dialogue: 'Now where should I go?
+
+    Oh yeah that door, where is it now?'

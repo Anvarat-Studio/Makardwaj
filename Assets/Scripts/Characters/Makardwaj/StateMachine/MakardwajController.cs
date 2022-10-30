@@ -23,6 +23,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         [SerializeField] private MakardwajData m_data;
         [Header("Position Markers")]
         [SerializeField] private Transform m_groundCheck;
+        [SerializeField] private Transform m_bubbleCheck;
         [SerializeField] private Transform m_mouthPosition;
         [SerializeField] private Bubble m_bubblePrefab;
         [SerializeField] private GameObject m_speechBubble;
@@ -144,7 +145,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
             {
                 //Destroy(collectible.gameObject, 0);
                 collectible.Collect();
-                SoundManager.Instance.PlaySFX(MixerPlayer.Movement, "collect", 1, false);
+                SoundManager.Instance.PlaySFX(MixerPlayer.Movement, "collect");
             }
             else
             {
@@ -211,7 +212,16 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         public bool CheckIfGrounded()
         {
             var groundLayerMask = m_data.groundLayer;
-            return Physics2D.OverlapCircle(m_groundCheck.position, m_data.groundCheckRadius, groundLayerMask);
+            var bubbleObject = Physics2D.OverlapBox(m_bubbleCheck.position, new Vector2(m_data.bubbleCheckWidth, m_data.bubbleCheckHeight), 0, m_data.bubbleLayer);
+            if (bubbleObject)
+            {
+                bubbleObject.GetComponent<Bubble>().Burst();
+                return true;
+            }
+            else
+            {
+                return Physics2D.OverlapCircle(m_groundCheck.position, m_data.groundCheckRadius, groundLayerMask);
+            }
         }
 
         public void CheckIfShouldFlip(int xInput)
@@ -313,6 +323,7 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         {
             _sr.enabled = false;
             _collider.enabled = false;
+            IsDead = false;
             _rigidbody.isKinematic = true;
         }
 
@@ -488,6 +499,12 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         {
             m_speechBubble.SetActive(false);
         }
+
+        public void SetInteracting(DialogueZone dialogueZone)
+        {
+            InteractiveItemNearby = dialogueZone;
+            _stateMachine.ChangeState(InteractionState);
+        }
         #endregion
 
         #region Gizmos
@@ -495,6 +512,12 @@ namespace Makardwaj.Characters.Makardwaj.FiniteStateMachine
         {
             if(m_groundCheck)
                 Gizmos.DrawWireSphere(m_groundCheck.position, m_data.groundCheckRadius);
+
+            if (m_bubbleCheck)
+            {
+                Gizmos.color = Color.grey;
+                Gizmos.DrawWireCube(m_bubbleCheck.position, new Vector2(m_data.bubbleCheckWidth, m_data.bubbleCheckHeight));
+            }
         }
         #endregion
     }

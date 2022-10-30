@@ -1,4 +1,3 @@
-using Makardwaj.Bosses;
 using Makardwaj.Common;
 using Makardwaj.Common.FiniteStateMachine;
 
@@ -13,6 +12,17 @@ namespace Makardwaj.Bosses
         {
             _frogBoss = controller as FrogBoss;
             _frogBossData = playerData as FrogBossData;
+        }
+
+        public override void LogicUpdate()
+        {
+            base.LogicUpdate();
+
+            if(!_frogBoss.IsDead && !stateMachine.CurrentState.Equals(_frogBoss.InteractionState) &&
+                _frogBoss.IsInteracting)
+            {
+                stateMachine.ChangeState(_frogBoss.InteractionState);
+            }
         }
     }
 }

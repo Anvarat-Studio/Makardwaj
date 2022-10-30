@@ -29,8 +29,6 @@ namespace Makardwaj.Characters.Makardwaj.States
         {
             base.Exit();
 
-            player.ResetSpeechBubbleRotation();
-
             if (_dialogueZone)
             {
                 _dialogueZone.dialogueChange -= player.OnDialogueChange;
@@ -42,7 +40,8 @@ namespace Makardwaj.Characters.Makardwaj.States
         {
             base.LogicUpdate();
 
-            player.SetVelocityZero();
+            player.SetVelocityX(0);
+            player.ResetSpeechBubbleRotation();
 
             if (player.InputHandler.PrimaryAttackInput)
             {
@@ -52,7 +51,7 @@ namespace Makardwaj.Characters.Makardwaj.States
 
             if (!isExitingState)
             {
-                if (!player.InteractiveItemNearby.IsInteracting)
+                if (player.InteractiveItemNearby == null || !player.InteractiveItemNearby.IsInteracting)
                 {
                     isAbilityDone = true;
                 }

@@ -17,6 +17,7 @@ namespace Makardwaj.Collectibles
         private void OnEnable()
         {
             EventHandler.LevelChangeStarted += DisableAllCollectibles;
+            EventHandler.heavenActivated += DisableAllCollectibles;
         }
 
         private void Awake()
@@ -27,6 +28,7 @@ namespace Makardwaj.Collectibles
         private void OnDisable()
         {
             EventHandler.LevelChangeStarted -= DisableAllCollectibles;
+            EventHandler.heavenActivated -= DisableAllCollectibles;
         }
 
         public void InitializePool()

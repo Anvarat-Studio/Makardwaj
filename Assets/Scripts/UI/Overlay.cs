@@ -49,6 +49,8 @@ public class Overlay : MonoBehaviour
         StopFadeInCoroutine();
         StopFadeOutCoroutine();
 
+        gameObject.SetActive(true);
+
         _fadeOutCoroutine = StartCoroutine(IE_FadeOut(fadeOutComplete));
     }
 
@@ -89,5 +91,14 @@ public class Overlay : MonoBehaviour
         gameObject.SetActive(false);
 
         fadeoutComplete?.Invoke();
+    }
+
+    public void SetLayoutColor(Color color)
+    {
+        if (!_overlayImage)
+        {
+            _overlayImage = GetComponent<Image>();
+        }
+        _overlayImage.color = color;
     }
 }

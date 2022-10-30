@@ -14,6 +14,8 @@ namespace Makardwaj.UI
         [SerializeField] private Transform m_livesParent;
         [SerializeField] private PauseMenuHandler m_pauseMenu;
         [SerializeField] private Text m_levelIndexText;
+        [SerializeField] private Slider m_bossHealthSlider;
+        [SerializeField] private GameObject m_gameCompleteScreen;
         
 
         private List<GameObject> m_lifeIcons;
@@ -24,6 +26,8 @@ namespace Makardwaj.UI
             EventHandler.PlayerLiveLost += OnLifeLost;
             EventHandler.ResetLives += ResetLives;
             EventHandler.LevelComplete += OnLevelComplete;
+            EventHandler.bossTookDamage += OnBossTakeDamage;
+            EventHandler.gameComplete += OnGameComplete;
         }
 
         private void OnDisable()
@@ -32,6 +36,8 @@ namespace Makardwaj.UI
             EventHandler.PlayerLiveLost -= OnLifeLost;
             EventHandler.ResetLives = ResetLives;
             EventHandler.LevelComplete -= OnLevelComplete;
+            EventHandler.bossTookDamage -= OnBossTakeDamage;
+            EventHandler.gameComplete -= OnGameComplete;
         }
 
         private void InstantiateLives(int lives)
@@ -74,9 +80,11 @@ namespace Makardwaj.UI
             m_pauseMenu.SetActive(true);
         }
 
-        private void OnLevelComplete(string levelName)
+        private void OnLevelComplete(string levelName, bool isBossLevel)
         {
             m_levelIndexText.text = levelName;
+
+            m_bossHealthSlider.gameObject.SetActive(isBossLevel);
 
             FadeInLevelText();
         }
@@ -90,6 +98,7 @@ namespace Makardwaj.UI
                 FadeLevelText(false, onComplete: () =>
                 {
                     m_levelIndexText.gameObject.SetActive(false);
+                    EventHandler.LevelTextDisabled?.Invoke();
                 });
             });
         }
@@ -131,7 +140,21 @@ namespace Makardwaj.UI
 
         public void PlayClickSound()
         {
-            SoundManager.Instance.PlaySFX(MixerPlayer.UI, "click", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.UI, "click");
+        }
+
+        private void OnBossTakeDamage(int currentHealth)
+        {
+            if(currentHealth > m_bossHealthSlider.maxValue)
+            {
+                m_bossHealthSlider.maxValue = currentHealth;
+            }
+            m_bossHealthSlider.value = currentHealth;
+        }
+
+        private void OnGameComplete()
+        {
+            m_gameCompleteScreen?.SetActive(true);
         }
     }
 }

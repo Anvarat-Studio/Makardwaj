@@ -16,11 +16,13 @@ namespace Makardwaj.Utils
     {
         [SerializeField] private List<Transform> m_enemySpawnPoints;
         [SerializeField] private List<Transform> m_poisonSpawnPoints;
+        [SerializeField] private List<GameObject> m_enemyIndicators;
         public Transform m_bossPitInPosition;
         public float m_bossPitOutPositionY = -4;
         [SerializeField] private BaseEnemyController m_enemyPrefab;
         [SerializeField] private Transform m_enemyParent;
         [SerializeField] private int m_maxAllowedEnemiesOnScreen = 5;
+        [SerializeField] private float m_indicatorDisplayTime = 2f;
         [SerializeField] private float m_dropSpeed = 2f;
         [SerializeField] private float m_endYPos = -4.5f;
         [SerializeField] private int m_initialEnemyCount = 5;
@@ -52,14 +54,14 @@ namespace Makardwaj.Utils
 
 
         private Coroutine _dropPoisonCoroutine;
-        public void DropPoison(int enemyCount, float delay)
+        public void DropPoison(int poisonCount, float delay)
         {
             if (_dropPoisonCoroutine != null)
             {
                 StopCoroutine(_dropPoisonCoroutine);
             }
 
-            _dropPoisonCoroutine = StartCoroutine(IE_DropPoison(enemyCount, delay));
+            _dropPoisonCoroutine = StartCoroutine(IE_DropPoison(poisonCount, delay));
         }
 
         private IEnumerator IE_DropPoison(int poisonCount, float delay)
@@ -80,15 +82,27 @@ namespace Makardwaj.Utils
             _poisonPool.DropPoison(_workspace, m_dropSpeed);
         }
 
-        private Coroutine _spawnEnemyCoroutine;
-        public void SpawnEnemies(int enemyCount, float delay)
+        public void RemovePoison()
         {
+            _poisonPool.RemoveAllPoison();
+        }
+
+        private Coroutine _spawnEnemyCoroutine;
+        public bool SpawnEnemies(int enemyCount, float delay)
+        {
+            if(_currentEnemyCount != 0)
+            {
+                return false;
+            }
+
             if(_spawnEnemyCoroutine != null)
             {
                 StopCoroutine(_spawnEnemyCoroutine);
+                m_enemyIndicators.ForEach(i => i.SetActive(false));
             }
 
             _spawnEnemyCoroutine = StartCoroutine(IE_SpawnEnemies(enemyCount, delay));
+            return true;
         }
 
         private IEnumerator IE_SpawnEnemies(int enemyCount, float delay)
@@ -105,6 +119,11 @@ namespace Makardwaj.Utils
             for(int i = 0; i < enemyCount; i++)
             {
                 int j = i % m_enemySpawnPoints.Count;
+
+                m_enemyIndicators[j].SetActive(true);
+                yield return new WaitForSeconds(m_indicatorDisplayTime);
+                m_enemyIndicators[j].SetActive(false);
+
                 _workspace = m_enemySpawnPoints[j].position;
 
                 _enemyWorkspace = InstantiateEnemy();
@@ -163,6 +182,17 @@ namespace Makardwaj.Utils
             _enemyWorkspace.Respawn();
             return _enemyWorkspace;
         }
+
+        public void RemoveAllEnemies()
+        {
+            _enemyPool.ForEach(e => e.gameObject.SetActive(false));
+            m_enemyIndicators.ForEach(i => i.SetActive(false));
+            if (_spawnEnemyCoroutine != null)
+            {
+                StopCoroutine(_spawnEnemyCoroutine);
+            }
+
+        }
         #endregion
     }
 
@@ -179,6 +209,7 @@ namespace Makardwaj.Utils
 
             if(GUILayout.Button("Drop Poison"))
             {
+                Debug.Log("Dropping Poison");
                 _enemySpawner.DropPoison();
             }
 

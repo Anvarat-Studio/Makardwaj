@@ -6,6 +6,7 @@ namespace Makardwaj.Bosses
     [CreateAssetMenu(fileName = "FrogBossData", menuName = "Data/Characters/FrogBoss")]
     public class FrogBossData : BaseData
     {
+        public int maxHealth = 200;
         public float outOfHoleSpeed = 10f;
         public float stunTime = 5f;
         public float stompHeight = 5f;
@@ -19,5 +20,12 @@ namespace Makardwaj.Bosses
         public float groundCheckRadius = 0.5f;
         public LayerMask groundLayer;
         public float waitBeforeEnteringPit = 1f;
+        public int poisonDartCount = 5;
+        public float poisonDartSpeed = 12f;
+        public int damageNormal = 2;
+        public int damageStunned = 10;
+        public float poisonCollectionTime = 3f;
+        public float warningTime = 2f;
+        public float deathWaitTime = 1f;
     }
 }

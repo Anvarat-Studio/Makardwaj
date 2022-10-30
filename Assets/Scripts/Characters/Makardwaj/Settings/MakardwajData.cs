@@ -13,7 +13,10 @@ namespace Makardwaj.Characters.Makardwaj.Data
 
         [Header("Ground Check")]
         public LayerMask groundLayer;
+        public LayerMask bubbleLayer;
         public float groundCheckRadius = 1f;
+        public float bubbleCheckWidth = 1f;
+        public float bubbleCheckHeight = 1f;
 
         [Header("In Air State")]
         public int amountOfJumps = 1;

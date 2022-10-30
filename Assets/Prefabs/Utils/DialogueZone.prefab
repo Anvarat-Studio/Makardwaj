@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1317478938409255151}
-  - component: {fileID: 1317478938409255150}
+  - component: {fileID: 8124653349388285617}
   m_Layer: 20
   m_Name: DialogueZone
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1317478938409255150
+--- !u!114 &8124653349388285617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,18 +42,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1317478938409255138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d5f9f60826c8495f9a3c6265b87fd71, type: 3}
+  m_Script: {fileID: 11500000, guid: 1eace1e57b65e47d48a6855e662c4746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canInteract: 0
-  m_interactionRadius: 14
+  m_dialogues: {fileID: 11400000, guid: 989696b0f20b44eb1afeef746161c8c1, type: 2}
+  m_interactionIcon: {fileID: 7579963620544479588}
   m_triggerArea: {x: 10, y: 19}
   m_playerLayer:
     serializedVersion: 2
     m_Bits: 128
   _makar: {fileID: 0}
-  m_dialogues: {fileID: 11400000, guid: 989696b0f20b44eb1afeef746161c8c1, type: 2}
-  m_interactionIcon: {fileID: 7579963620544479588}
+  m_firstVisitDialogueGraph: {fileID: 11400000, guid: 989696b0f20b44eb1afeef746161c8c1, type: 2}
+  m_secondVisitDialogueGraph: {fileID: 11400000, guid: 5951360d0df984d8aa452d3f5f78a98b, type: 2}
+  m_defaultDialogueGraph: {fileID: 11400000, guid: 1f23cd0b8c00c42a391d0ab788586fc3, type: 2}
+  _hasAlreadyVisitedHeaven: 0
 --- !u!1001 &6477527440228459923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64,6 +66,10 @@ PrefabInstance:
     - target: {fileID: 3518925544875468023, guid: d51f451deb8ec4400bd43fb6d1edbebe, type: 3}
       propertyPath: m_Name
       value: interactiveIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518925544875468023, guid: d51f451deb8ec4400bd43fb6d1edbebe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7473300166216278636, guid: d51f451deb8ec4400bd43fb6d1edbebe, type: 3}
       propertyPath: m_RootOrder

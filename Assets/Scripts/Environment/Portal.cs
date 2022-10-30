@@ -1,4 +1,5 @@
 using CCS.SoundPlayer;
+using Makardwaj.Utils;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +9,7 @@ namespace Makardwaj.Environment
     public class Portal : MonoBehaviour
     {
         [SerializeField] private Transform m_playerSpawnMarker;
+        [SerializeField] private GameObject m_interactiveIcon;
 
         private bool _isDoorOpen = false;
         public Vector2 PlayerPosition { get => m_playerSpawnMarker.position; }
@@ -19,13 +21,16 @@ namespace Makardwaj.Environment
         public UnityAction doorOpened;
         public UnityAction doorClosed;
 
-        public bool _enableEntering;
+        [ReadOnly]
+        [SerializeField]
+        private bool _enableEntering;
 
         private void Awake()
         {
             _animator = GetComponentInChildren<Animator>();
             _collider = GetComponent<Collider2D>();
             _collider.enabled = false;
+            m_interactiveIcon.SetActive(false);
         }
 
         public void Teleport(Vector2 position)
@@ -33,7 +38,7 @@ namespace Makardwaj.Environment
             transform.position = position;
         }
 
-        public void OpenAndCloseDoor()
+        public void OpenAndCloseDoor(UnityAction onComplete = null)
         {
             OpenDoor();
 
@@ -42,13 +47,15 @@ namespace Makardwaj.Environment
                 StopCoroutine(_coroutineCloseDoor);
             }
 
-            StartCoroutine(IE_CloseDoor());
+            StartCoroutine(IE_CloseDoor(onComplete));
         }
 
-        private IEnumerator IE_CloseDoor()
+        private IEnumerator IE_CloseDoor(UnityAction onComplete = null)
         {
             yield return new WaitWhile(() => !_isDoorOpen);
             CloseDoor();
+            yield return new WaitForSeconds(0.5f);
+            onComplete?.Invoke();
         }
 
 
@@ -57,8 +64,9 @@ namespace Makardwaj.Environment
             _animator.SetBool("open", true);
             _animator.SetBool("close", false);
             _collider.enabled = false;
+            m_interactiveIcon.SetActive(false);
             _enableEntering = enableEntering;
-            SoundManager.Instance.PlaySFX(MixerPlayer.Extra, "doorOpen", 0.5f, false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Extra, "doorOpen");
         }
 
         public void CloseDoor()
@@ -66,13 +74,15 @@ namespace Makardwaj.Environment
             _animator.SetBool("open", false);
             _animator.SetBool("close", true);
             _collider.enabled = false;
-            SoundManager.Instance.PlaySFX(MixerPlayer.Extra, "doorClose", 0.5f, false);
+            m_interactiveIcon.SetActive(false);
+            SoundManager.Instance.PlaySFX(MixerPlayer.Extra, "doorClose");
         }
 
         public void DoorOpenTrigger()
         {
             _isDoorOpen = true;
             _collider.enabled = _enableEntering;
+            m_interactiveIcon.SetActive(_enableEntering);
             doorOpened?.Invoke();
         }
 

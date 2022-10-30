@@ -10,25 +10,25 @@ namespace Makardwaj.InteractiveItems
 {
     public class DialogueZone : MonoBehaviour, InteractiveItem
     {
-        [SerializeField] private DialogueGraph m_dialogues;
-        [SerializeField] private GameObject m_interactionIcon;
+        [SerializeField] protected DialogueGraph m_dialogues;
+        [SerializeField] protected GameObject m_interactionIcon;
 
-        [SerializeField] private Vector2 m_triggerArea = new Vector2(10, 20);
-        [SerializeField] private LayerMask m_playerLayer;
+        [SerializeField] protected Vector2 m_triggerArea = new Vector2(10, 20);
+        [SerializeField] protected LayerMask m_playerLayer;
 
         [ReadOnly]
         [SerializeField]
-        private MakardwajController _makar;
+        protected MakardwajController _makar;
 
-        private DialogueController _controller;
-        private DatabaseInstance _database;
-        private Collider2D _makarCollider;
+        protected DialogueController _controller;
+        protected DatabaseInstance _database;
+        protected Collider2D _makarCollider;
         public bool IsInteracting { get; set ;}
 
         public UnityAction<IActor, string> dialogueChange;
         public UnityAction dialogueEnd;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _database = new DatabaseInstance();
             _controller = new DialogueController(_database);
@@ -38,7 +38,7 @@ namespace Makardwaj.InteractiveItems
             _controller.Events.End.AddListener(OnDialogueEnd);
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             _makarCollider = Physics2D.OverlapBox(transform.position, m_triggerArea, 0, m_playerLayer);
             if (_makarCollider)
@@ -59,13 +59,13 @@ namespace Makardwaj.InteractiveItems
             }
         }
 
-        private void OnSpeak(IActor actor, string dialogue)
+        protected virtual void OnSpeak(IActor actor, string dialogue)
         {
-            Debug.Log($"{actor.DisplayName}: {dialogue}");
-            dialogueChange?.Invoke(actor, dialogue.ToUpper());
+            //Debug.Log($"{actor.DisplayName}: {dialogue}");
+            dialogueChange?.Invoke(actor, dialogue);
         }
 
-        private void OnDialogueEnd()
+        protected virtual void OnDialogueEnd()
         {
             _controller.Stop();
             //_controller.Play(m_dialogues);
@@ -74,7 +74,7 @@ namespace Makardwaj.InteractiveItems
             dialogueEnd?.Invoke();
         }
 
-        public void PlayNextDialogue()
+        public virtual void PlayNextDialogue()
         {
             if (_controller.ActiveDialogue == null)
             {
@@ -86,19 +86,19 @@ namespace Makardwaj.InteractiveItems
             }
         }
 
-        protected void OnDrawGizmos()
+        protected virtual void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireCube(transform.position, m_triggerArea);
         }
 
-        public void OnPlayerEnter()
+        public virtual void OnPlayerEnter()
         {
             m_interactionIcon?.SetActive(true);
             _makar.InteractiveItemNearby = this;
         }
 
-        public void OnPlayerExit()
+        public virtual void OnPlayerExit()
         {
             m_interactionIcon?.SetActive(false);
             if (_makar)
@@ -107,7 +107,7 @@ namespace Makardwaj.InteractiveItems
             }
         }
 
-        public void Interact()
+        public virtual void Interact()
         {
             if (!IsInteracting)
             {
@@ -115,6 +115,11 @@ namespace Makardwaj.InteractiveItems
                 m_interactionIcon.SetActive(false);
             }
             PlayNextDialogue(); ;
+        }
+
+        public virtual void SetDialogues(DialogueGraph dialogueGraph)
+        {
+            m_dialogues = dialogueGraph;
         }
     }
 }

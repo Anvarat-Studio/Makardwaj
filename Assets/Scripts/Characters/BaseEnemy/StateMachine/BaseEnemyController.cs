@@ -193,11 +193,6 @@ namespace Makardwaj.Characters.Enemy.Base
             SetMoving();
         }
 
-        #region Triggers
-        public void AnimationFinishTrigger() => _stateMachine.CurrentState.AnimationFinishTrigger();
-        public void AnimationTrigger() => _stateMachine.CurrentState.AnimationTrigger();
-        #endregion
-
         #region Gizmos
         protected virtual void OnDrawGizmos()
         {

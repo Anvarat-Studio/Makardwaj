@@ -203,7 +203,7 @@ namespace CCS.SoundPlayer
             }
         }
 
-        public void PlayMusic(MixerPlayer player, string audioName, float pitch, bool enableLooping)
+        public void PlayMusic(MixerPlayer player, string audioName)
         {
             var sound = musicCollection.audioCollection.FirstOrDefault(s => s.assetName == audioName);
             foreach(Mixer m in mixers)
@@ -211,19 +211,19 @@ namespace CCS.SoundPlayer
                 if(EnumFlags<MixerPlayer>.HasFlag(m.player, player))
                 {
                     m.Pause();
-                    m.PlaySound(sound.asset, pitch, enableLooping);
+                    m.PlaySound(sound.asset, 1, true);
                 }
             }
         }
 
-        public void PlaySFX(MixerPlayer player, string audioName, float pitch, bool enableLooping)
+        public void PlaySFX(MixerPlayer player, string audioName)
         {
             var sound = sfxCollection.audioCollection.FirstOrDefault(s => s.assetName == audioName);
             foreach (Mixer m in mixers)
             {
                 if (EnumFlags<MixerPlayer>.HasFlag(m.player, player))
                 {
-                    m.PlaySound(sound.asset, pitch, enableLooping);
+                    m.PlaySound(sound.asset, 1, false);
                 }
             }
         }

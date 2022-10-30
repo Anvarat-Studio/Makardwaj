@@ -49,7 +49,7 @@ MonoBehaviour:
   - {fileID: -7617375844813663038}
   - {fileID: 3661059248949586031}
   root: {fileID: 619372026975994970}
-  scrollPosition: {x: 50472.5, y: 49835}
+  scrollPosition: {x: 49851.383, y: 49835}
 --- !u!114 &507770178599888800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,8 +77,8 @@ MonoBehaviour:
   exitActions: []
   choices: []
   actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
-  dialogue: "Who is talking now ha? \nAnd i am makar not a snake,\nnow I\u2019ll
-    take back my socks."
+  dialogue: "Who is talking now ha? \nAnd i am makar not a snake, now I\u2019ll take
+    back my socks."
 --- !u!114 &619372026975994970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   exitActions: []
   choices: []
   actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
-  dialogue: "take that you green, poison spitting, \nson of a... toad or frog or
+  dialogue: "take that you green, poison spitting, son of a... \ntoad or frog or
     whatever you are."
 --- !u!114 &3661059248949586031
 MonoBehaviour:

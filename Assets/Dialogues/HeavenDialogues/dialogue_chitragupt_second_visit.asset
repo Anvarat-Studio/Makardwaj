@@ -52,7 +52,7 @@ MonoBehaviour:
   exitActions: []
   choices: []
   actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
-  dialogue: "why am I back here, \nwhy did you summoned me?\nI was crushing them."
+  dialogue: "why am I back here? \nwhy did you summoned me?\nI was crushing them."
 --- !u!114 &-604330335958216058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,9 +80,8 @@ MonoBehaviour:
   exitActions: []
   choices: []
   actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
-  dialogue: "Oh! Being gatekeeper of the death\u2019s door \ndoes have its own merit,
-    \nso that is why you are immortal!! \nIs that kind of cheating? How old are you
-    BTW?"
+  dialogue: "Oh! Being gatekeeper of the death does have its own merit.\nSo that
+    is why you are immortal!! \nIsn't that kind of cheating? How old are you BTW?"
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +103,7 @@ MonoBehaviour:
   - {fileID: -604330335958216058}
   - {fileID: 8839195067782474685}
   root: {fileID: -4138799963296002229}
-  scrollPosition: {x: 50415.5, y: 49929}
+  scrollPosition: {x: 50705.5, y: 49929}
 --- !u!114 &1396659807026876451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,8 +131,10 @@ MonoBehaviour:
   exitActions: []
   choices: []
   actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
-  dialogue: "no, those makarkundals are\nmore \nimportant than your life, \nso, \nI
-    cannot let you pass unless you \nfetch them."
+  dialogue: 'no, those makarkundals are more important than your life.
+
+    so, I
+    cannot let you pass unless you fetch them.'
 --- !u!114 &4761999333414044541
 MonoBehaviour:
   m_ObjectHideFlags: 0

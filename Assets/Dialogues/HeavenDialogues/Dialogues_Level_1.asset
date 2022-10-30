@@ -55,9 +55,9 @@ MonoBehaviour:
   exitActions: []
   choices: []
   actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
-  dialogue: " I\u2019ll help you travel to these realms, just pass throug the travel
-    door and you will be teleported\nto the nearest realm where the piece might be.
-    Now go and get those pieces before you are\nsummoned for the hearing."
+  dialogue: "I\u2019ll help you travel to these realms,\njust pass throug the travel
+    door and you will be teleported to the nearest realm where one of the piece might
+    be.\nNow go and get those pieces before you are summoned for the hearing."
 --- !u!114 &-4905084486926239508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   choices: []
   actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
   dialogue: "Maybe, and a pair of my socks is also missing, \nbut how does these
-    kundals (earings)\nconcern me?"
+    kundals (earings) concern me?"
 --- !u!114 &-1314234902957379543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
   - {fileID: -6474489253317102213}
   - {fileID: -1163569512558874681}
   root: {fileID: 8367566865408849710}
-  scrollPosition: {x: 49355.5, y: 49662}
+  scrollPosition: {x: 51825.5, y: 49902}
 --- !u!114 &598768820419099864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,8 +281,8 @@ MonoBehaviour:
   exitActions: []
   choices: []
   actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
-  dialogue: "There is a report that one of the \nmakarkundala (makar shaped earring
-    of gods) has gone\nmissing!"
+  dialogue: "There is a report that one of the makarkundala \n(makar shaped earring
+    of gods) has gone missing!"
 --- !u!114 &5968775459973815965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,9 +311,9 @@ MonoBehaviour:
   choices: []
   actor: {fileID: 11400000, guid: 2c99653d1464f4dafbbb853e83cf6c5b, type: 2}
   dialogue: 'There is a case!! There will be punishment? Oh this is getting serious.
-    Where can i find them
 
-    i have no freaking Idea.'
+    Where
+    can i find them? I have no freaking Idea.'
 --- !u!114 &8344597224976785520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,8 +341,8 @@ MonoBehaviour:
   exitActions: []
   choices: []
   actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
-  dialogue: "Now its your duty to get them back, Fetch them and i\u2019ll present
-    your\ncase such that you get\nminimum possible punishment."
+  dialogue: "Now its your duty to get them back,\nFetch them and i\u2019ll present
+    your case such that you get,\nminimum possible punishment."
 --- !u!114 &8367566865408849710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +395,5 @@ MonoBehaviour:
   exitActions: []
   choices: []
   actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
-  dialogue: 'News is that the makarkundals were broken down into 10 pieces and are
-    now owned by
-
-    champions of different regions of different realms'
+  dialogue: "News is that the makarkundals were broken down into 10 pieces and \nare
+    now owned by champions of different regions of different realms"

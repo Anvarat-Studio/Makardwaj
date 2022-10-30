@@ -27,7 +27,7 @@ MonoBehaviour:
   choices: []
   actor: {fileID: 11400000, guid: f84d20247d4be43ceafd87ccfa7e3e89, type: 2}
   dialogue: "Still wasting time, dont you value your life? \nSadly I value those
-    makarkundal, \nmore than your life."
+    makarkundal, more than your life."
 --- !u!114 &-7697483725593463087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,4 +185,4 @@ MonoBehaviour:
   - {fileID: -7008726550812230112}
   - {fileID: -8057138722010409812}
   root: {fileID: -4138799963296002229}
-  scrollPosition: {x: 50570.5, y: 49832}
+  scrollPosition: {x: 49930.5, y: 49832}

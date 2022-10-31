@@ -1,6 +1,7 @@
 using CleverCrow.Fluid.Dialogues;
 using CleverCrow.Fluid.Dialogues.Graphs;
 using Makardwaj.Characters.Makardwaj.FiniteStateMachine;
+using Makardwaj.Environment;
 using Makardwaj.InteractiveItems;
 using Makardwaj.Managers;
 using Makardwaj.Projectiles;
@@ -24,7 +25,7 @@ namespace Makardwaj.Bosses
         [SerializeField] protected Text m_speechText;
         [SerializeField] protected string m_characterName = "Manduka";
         [SerializeField] protected Transform m_poisonCenter;
-        [SerializeField] protected GameObject m_poisonFlowVfx;
+        [SerializeField] protected PoisonRefill m_poisonFlowVfx;
         [SerializeField] protected DialogueGraph m_deathDialogues;
         [SerializeField] protected GameObject m_warningIndicator;
 
@@ -300,14 +301,14 @@ namespace Makardwaj.Bosses
         public void CollectPoison()
         {
             IsCollectingPoison = true;
-            m_poisonFlowVfx.SetActive(true);
+            m_poisonFlowVfx.Activate();
         }
 
         public void StopCollectingPoison()
         {
             IsCollectingPoison = false;
             HasPoison = true;
-            m_poisonFlowVfx.SetActive(false);
+            m_poisonFlowVfx.Deactivate();
         }
 
         public void SetNormal()

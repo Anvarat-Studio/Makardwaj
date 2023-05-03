@@ -193,7 +193,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -287,7 +287,6 @@ MonoBehaviour:
   m_eyePosition: {fileID: 1411233190}
   m_groundCheck: {fileID: 206932440}
   collectibleColorNotAllowed: 1
-  m_poisonPrefab: {fileID: -3350114249822604143, guid: 8b8c3dc41ec02447fb943f66b4210c45, type: 3}
   m_mouthPosition: {fileID: 391794785502599599}
 --- !u!50 &6052142340734338525
 Rigidbody2D:
